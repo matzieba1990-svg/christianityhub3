@@ -161,37 +161,51 @@ export default function CommunityDetailsPage() {
             </p>
           )}
 
-          <div className="mt-6 w-full max-w-xs mx-auto">
-            {isMember ? (
-              <button 
-                onClick={toggleMembership}
-                disabled={actionLoading}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-colors border border-border text-text-muted hover:bg-bg-primary"
-              >
-                <LogOut size={16} />
-                Opuść wspólnotę
-              </button>
-            ) : (
-              <button 
-                onClick={toggleMembership}
-                disabled={actionLoading}
-                className="btn-gold w-full flex items-center justify-center gap-2"
-              >
-                <UserPlus size={18} />
-                Dołącz do wspólnoty
-              </button>
-            )}
-          </div>
+          {/* Removed button from here */}
         </div>
 
         {/* Community Dashboard (Only if member or public) */}
         {(isMember || community.isPublic) && (
           <div className="space-y-4">
             
-            <h2 className="font-mystic text-lg font-bold text-gold-dark px-2">Tablica modlitwy</h2>
+            <h2 className="font-mystic text-lg font-bold text-gold-dark px-2">Modlitwy</h2>
             
+            {/* List of Requests */}
+            <div className="space-y-3">
+              {(!community.prayerRequests || community.prayerRequests.length === 0) ? (
+                <div className="card p-5 bg-white border border-dashed border-gold/40 text-center py-8 mb-4">
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
+                    <MessageCircle size={20} />
+                  </div>
+                  <h3 className="font-bold text-sm text-text-main mb-1">Brak intencji</h3>
+                  <p className="text-xs text-text-muted max-w-xs mx-auto">
+                    Nikt jeszcze nie dodał intencji w tej wspólnocie. Bądź pierwszy!
+                  </p>
+                </div>
+              ) : (
+                community.prayerRequests.map((req: any) => (
+                  <div key={req.id} className="card p-4 bg-white mb-3">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h4 className="font-semibold text-sm text-text-main">{req.title}</h4>
+                        <p className="text-[10px] text-text-muted flex items-center gap-1 mt-1">
+                          Od: {req.isAnonymous || !req.user ? 'Anonimowo' : req.user.name} 
+                          <span className="mx-1">•</span> 
+                          {new Date(req.createdAt).toLocaleDateString('pl-PL')}
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-bold text-gold bg-gold/10 px-2 py-1 rounded-md">
+                        {req._count?.acceptances || 0} modli się
+                      </span>
+                    </div>
+                    <p className="text-xs text-text-muted leading-relaxed whitespace-pre-wrap">{req.content}</p>
+                  </div>
+                ))
+              )}
+            </div>
+
             {isMember && (
-              <div className="card p-4 bg-white mb-4">
+              <div className="card p-4 bg-white mt-6 mb-4">
                 <h3 className="text-sm font-bold text-text-main mb-3 flex items-center gap-2">
                   <Heart size={16} className="text-gold" /> Dodaj intencję do wspólnoty
                 </h3>
@@ -221,40 +235,6 @@ export default function CommunityDetailsPage() {
               </div>
             )}
 
-            {/* List of Requests */}
-            <div className="space-y-3">
-              {(!community.prayerRequests || community.prayerRequests.length === 0) ? (
-                <div className="card p-5 bg-white border border-dashed border-gold/40 text-center py-8">
-                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
-                    <MessageCircle size={20} />
-                  </div>
-                  <h3 className="font-bold text-sm text-text-main mb-1">Brak intencji</h3>
-                  <p className="text-xs text-text-muted max-w-xs mx-auto">
-                    Nikt jeszcze nie dodał intencji w tej wspólnocie. Bądź pierwszy!
-                  </p>
-                </div>
-              ) : (
-                community.prayerRequests.map((req: any) => (
-                  <div key={req.id} className="card p-4 bg-white">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h4 className="font-semibold text-sm text-text-main">{req.title}</h4>
-                        <p className="text-[10px] text-text-muted flex items-center gap-1 mt-1">
-                          Od: {req.isAnonymous || !req.user ? 'Anonimowo' : req.user.name} 
-                          <span className="mx-1">•</span> 
-                          {new Date(req.createdAt).toLocaleDateString('pl-PL')}
-                        </p>
-                      </div>
-                      <span className="text-[10px] font-bold text-gold bg-gold/10 px-2 py-1 rounded-md">
-                        {req._count?.acceptances || 0} modli się
-                      </span>
-                    </div>
-                    <p className="text-xs text-text-muted leading-relaxed whitespace-pre-wrap">{req.content}</p>
-                  </div>
-                ))
-              )}
-            </div>
-
             <h2 className="font-mystic text-lg font-bold text-gold-dark px-2 mt-6">Członkowie ({community.members.length})</h2>
             <div className="card bg-white p-2">
               {community.members.map((member: any) => (
@@ -278,6 +258,29 @@ export default function CommunityDetailsPage() {
 
           </div>
         )}
+
+        <div className="mt-8 mb-4 w-full max-w-xs mx-auto">
+          {isMember ? (
+            <button 
+              onClick={toggleMembership}
+              disabled={actionLoading}
+              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-semibold transition-colors border border-[rgba(239,68,68,0.2)] text-[#ef4444] bg-white hover:bg-red-50 shadow-sm"
+            >
+              <LogOut size={18} />
+              Opuść wspólnotę
+            </button>
+          ) : (
+            <button 
+              onClick={toggleMembership}
+              disabled={actionLoading}
+              className="btn-gold w-full flex items-center justify-center gap-2 py-4 shadow-md text-sm"
+            >
+              <UserPlus size={18} />
+              Dołącz do wspólnoty
+            </button>
+          )}
+        </div>
+
       </div>
     </div>
   )
