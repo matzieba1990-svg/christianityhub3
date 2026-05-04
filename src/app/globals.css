@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0f0720;
+  --bg-card: #1a0f35;
+  --bg-card2: #1f1245;
+  --gold: #c9a227;
+  --gold-light: #e8c547;
+  --purple: #7c3aed;
+  --purple-light: #a855f7;
+  --cream: #fdf6e3;
+  --text-main: #f0e6d3;
+  --text-muted: #9e8fbb;
+  --border: #2d1f5e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-main);
+  min-height: 100dvh;
+  overscroll-behavior: none;
+}
+
+/* Mobile safe areas */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Card glassmorphism */
+.card {
+  background: linear-gradient(135deg, rgba(28,15,60,0.9), rgba(15,7,32,0.95));
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.card-gold {
+  border-color: rgba(201,162,39,0.3);
+  background: linear-gradient(135deg, rgba(40,25,10,0.9), rgba(20,12,5,0.95));
+}
+
+/* Glow effects */
+.glow-gold { box-shadow: 0 0 20px rgba(201,162,39,0.15); }
+.glow-purple { box-shadow: 0 0 20px rgba(124,58,237,0.15); }
+
+/* Bottom nav */
+.bottom-nav {
+  background: linear-gradient(180deg, rgba(15,7,32,0.0), rgba(15,7,32,0.98) 20%);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(124,58,237,0.15);
+}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+@keyframes pulse-gold { 0%,100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.4); } 50% { box-shadow: 0 0 0 8px rgba(201,162,39,0); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.animate-fade-in { animation: fadeIn 0.4s ease both; }
+.animate-pulse-gold { animation: pulse-gold 2s ease infinite; }
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #c9a227, #e8c547, #c9a227);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Prayer card hover */
+.prayer-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.prayer-card:active { transform: scale(0.98); }
+
+/* Input styles */
+.inp {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text-main);
+  font-size: 16px; /* prevents zoom on iOS */
+  outline: none;
+  transition: border-color 0.2s;
+}
+.inp:focus { border-color: var(--purple-light); }
+.inp::placeholder { color: var(--text-muted); }
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+
+.btn-gold {
+  background: linear-gradient(135deg, #c9a227, #e8c547);
+  color: #1a0a00;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.btn-gold:active { opacity: 0.85; transform: scale(0.98); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(124,58,237,0.4);
+  border-radius: 14px;
+  padding: 12px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-outline:active { background: rgba(124,58,237,0.1); }
+
+/* Category pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Cross decoration */
+.cross-bg {
+  position: absolute;
+  opacity: 0.03;
+  pointer-events: none;
+  user-select: none;
+}

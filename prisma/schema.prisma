@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  bio           String?
+  parish        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts        Account[]
+  sessions        Session[]
+  prayerRequests  PrayerRequest[]
+  acceptedPrayers PrayerAcceptance[]
+  communityMembers CommunityMember[]
+  prayerProgress  PrayerProgress[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PrayerRequest {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  category    String   @default("general")
+  isAnonymous Boolean  @default(false)
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  acceptances PrayerAcceptance[]
+}
+
+model PrayerAcceptance {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  userId    String
+  requestId String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  request   PrayerRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  @@unique([userId, requestId])
+}
+
+model Community {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  image       String?
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  members     CommunityMember[]
+}
+
+model CommunityMember {
+  id          String    @id @default(cuid())
+  role        String    @default("member")
+  joinedAt    DateTime  @default(now())
+  userId      String
+  communityId String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  community   Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  @@unique([userId, communityId])
+}
+
+model PrayerProgress {
+  id          String   @id @default(cuid())
+  prayerId    String
+  dayNumber   Int
+  completedAt DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId, prayerId, dayNumber])
+}
