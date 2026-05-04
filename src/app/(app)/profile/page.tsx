@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
 import { LogOut, ChevronRight, BookOpen, HandHeart, Users, Settings } from 'lucide-react'
+import { PRAYERS } from '@/lib/prayers'
 
 export default function ProfilePage() {
   const { data: session } = useSession()
