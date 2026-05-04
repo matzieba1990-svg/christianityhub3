@@ -27,23 +27,23 @@ export default function CookieBanner() {
   if (!show) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 p-4 z-50 animate-fade-in" style={{ background: 'var(--bg-primary)' }}>
-      <div className="max-w-4xl mx-auto card bg-white border border-border shadow-lg p-5 flex flex-col sm:flex-row gap-4 items-center justify-between rounded-2xl">
+    <div className="fixed bottom-0 left-0 right-0 p-4 sm:p-6 z-50 animate-fade-in pointer-events-none">
+      <div className="max-w-4xl mx-auto card bg-white border border-border shadow-2xl p-5 sm:p-6 flex flex-col md:flex-row gap-5 items-center justify-between rounded-2xl pointer-events-auto">
         <div className="text-sm text-text-main flex-1">
           <p className="font-bold mb-1" style={{ color: 'var(--gold-dark)' }}>Szanujemy Twoją prywatność</p>
           Nasza strona używa plików cookies w celach analitycznych i do prawidłowego działania funkcji takich jak logowanie. 
           Dowiedz się więcej w naszym <Link href="/rodo" className="underline font-semibold" style={{ color: 'var(--gold)' }}>Regulaminie i polityce RODO</Link>.
         </div>
-        <div className="flex gap-3 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto mt-2 md:mt-0">
           <button 
             onClick={handleReject}
-            className="btn-outline whitespace-nowrap flex-1 sm:flex-none text-sm px-6 py-2"
+            className="btn-outline w-full sm:w-auto whitespace-nowrap text-sm px-6 py-2.5 flex-1"
           >
             Odrzuć
           </button>
           <button 
             onClick={handleAccept}
-            className="btn-gold whitespace-nowrap flex-1 sm:flex-none text-sm px-6 py-2"
+            className="btn-gold w-full sm:w-auto whitespace-nowrap text-sm px-6 py-2.5 flex-1"
           >
             Akceptuję
           </button>
