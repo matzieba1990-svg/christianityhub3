@@ -1,13 +1,14 @@
 'use client'
 import PageHeader from '@/components/PageHeader'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useSession } from 'next-auth/react'
 import { PRAYERS } from '@/lib/prayers'
+import Link from 'next/link'
+import { ChevronRight, Check } from 'lucide-react'
 
 const MONTHS = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień']
 const DAYS_SHORT = ['Nd','Pn','Wt','Śr','Cz','Pt','Sb']
 
-// Główne święta katolickie 2026 - zweryfikowane
 const FEASTS: Record<string, { name: string; type: 'solemnity'|'feast'|'memorial'|'sunday' }> = {
   '2026-01-01': { name: 'Uroczystość Świętej Bożej Rodzicielki', type: 'solemnity' },
   '2026-01-06': { name: 'Objawienie Pańskie (Trzech Króli)', type: 'solemnity' },
@@ -52,6 +53,7 @@ export default function CalendarPage() {
   const [year, setYear] = useState(now.getFullYear())
   const [month, setMonth] = useState(now.getMonth())
   const [history, setHistory] = useState<PrayerHistoryItem[]>([])
+  const [selectedDate, setSelectedDate] = useState<string>(now.toISOString().split('T')[0])
 
   useEffect(() => {
     if (session) {
@@ -62,43 +64,68 @@ export default function CalendarPage() {
     }
   }, [session])
 
+  const plan = useMemo(() => {
+    const p: Record<string, { prayerId: string; day: number; type: 'done' | 'planned' }[]> = {}
+    
+    // Add completed days
+    history.forEach(h => {
+      if (!p[h.date]) p[h.date] = []
+      p[h.date].push({ prayerId: h.prayerId, day: h.dayNumber, type: 'done' })
+    })
+
+    // Calculate planned days for multi-day prayers
+    const multiDayPrayers = PRAYERS.filter(pr => pr.days)
+    multiDayPrayers.forEach(pr => {
+      const userProgress = history.filter(h => h.prayerId === pr.id)
+      if (userProgress.length > 0) {
+        const lastEntry = [...userProgress].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
+        const lastDate = new Date(lastEntry.date)
+        const lastDay = lastEntry.dayNumber
+
+        // Project next days
+        for (let i = 1; i <= (pr.days! - lastDay); i++) {
+          const nextDate = new Date(lastDate)
+          nextDate.setDate(lastDate.getDate() + i)
+          const dateStr = nextDate.toISOString().split('T')[0]
+          if (!p[dateStr]) p[dateStr] = []
+          p[dateStr].push({ prayerId: pr.id, day: lastDay + i, type: 'planned' })
+        }
+      }
+    })
+    return p
+  }, [history])
+
   const firstDay = new Date(year, month, 1).getDay()
   const daysInMonth = new Date(year, month + 1, 0).getDate()
   const startOffset = firstDay === 0 ? 6 : firstDay - 1
-
   const pad = (n: number) => String(n).padStart(2, '0')
-  const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+  const today = now.toISOString().split('T')[0]
 
-  const prevMonth = () => { if (month === 0) { setMonth(11); setYear(y => y - 1) } else setMonth(m => m - 1) }
-  const nextMonth = () => { if (month === 11) { setMonth(0); setYear(y => y + 1) } else setMonth(m => m + 1) }
-
-  const monthFeasts = Object.entries(FEASTS)
-    .filter(([d]) => d.startsWith(`${year}-${pad(month + 1)}`))
-    .sort((a, b) => a[0].localeCompare(b[0]))
+  const dayEvents = plan[selectedDate] || []
+  const selectedFeast = FEASTS[selectedDate]
 
   return (
     <div className="pb-6">
-      <PageHeader title="Kalendarz liturgiczny" subtitle="Rok kościelny 2026" />
+      <PageHeader title="Kalendarz" subtitle="Moja droga modlitwy" />
 
       <div className="px-4">
         {/* Month nav */}
         <div className="flex items-center justify-between mb-5">
-          <button onClick={prevMonth} className="w-10 h-10 rounded-full flex items-center justify-center text-xl transition-active"
-            style={{ background: 'white', border: '1px solid var(--border)', color: 'var(--gold)' }}>‹</button>
+          <button onClick={() => { if (month === 0) { setMonth(11); setYear(y => y - 1) } else setMonth(m => m - 1) }}
+            className="w-10 h-10 rounded-full flex items-center justify-center text-xl bg-white border border-border text-gold">‹</button>
           <div className="text-center">
-            <p className="font-bold text-lg font-mystic" style={{ color: 'var(--gold-dark)' }}>{MONTHS[month]}</p>
-            <p className="text-xs uppercase tracking-widest font-bold opacity-60" style={{ color: 'var(--text-muted)' }}>{year}</p>
+            <p className="font-bold text-lg font-mystic text-gold-dark">{MONTHS[month]}</p>
+            <p className="text-xs font-bold opacity-60 text-text-muted uppercase">{year}</p>
           </div>
-          <button onClick={nextMonth} className="w-10 h-10 rounded-full flex items-center justify-center text-xl transition-active"
-            style={{ background: 'white', border: '1px solid var(--border)', color: 'var(--gold)' }}>›</button>
+          <button onClick={() => { if (month === 11) { setMonth(0); setYear(y => y + 1) } else setMonth(m => m + 1) }}
+            className="w-10 h-10 rounded-full flex items-center justify-center text-xl bg-white border border-border text-gold">›</button>
         </div>
 
         {/* Calendar grid */}
-        <div className="card p-4 mb-6 shadow-sm" style={{ background: 'white' }}>
+        <div className="card p-4 mb-6 bg-white shadow-sm">
           <div className="grid grid-cols-7 mb-2">
             {DAYS_SHORT.map(d => (
-              <div key={d} className="text-center text-[10px] font-black uppercase tracking-tighter py-1"
-                style={{ color: d === 'Nd' ? 'var(--gold)' : 'var(--text-muted)' }}>{d}</div>
+              <div key={d} className="text-center text-[10px] font-black uppercase text-text-muted">{d}</div>
             ))}
           </div>
           <div className="grid grid-cols-7 gap-y-2">
@@ -106,71 +133,78 @@ export default function CalendarPage() {
             {Array.from({ length: daysInMonth }).map((_, i) => {
               const day = i + 1
               const dateStr = `${year}-${pad(month + 1)}-${pad(day)}`
-              const feast = FEASTS[dateStr]
+              const isSelected = dateStr === selectedDate
               const isToday = dateStr === today
-              const isSunday = (startOffset + i) % 7 === 6
-              
-              const completedOnThisDay = history.filter(h => h.date === dateStr)
+              const hasEvents = !!plan[dateStr]
+              const feast = FEASTS[dateStr]
 
               return (
-                <div key={day} className="flex flex-col items-center py-1 relative">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all relative z-10"
+                <button key={day} onClick={() => setSelectedDate(dateStr)}
+                  className="flex flex-col items-center py-1 relative">
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all relative z-10 ${isSelected ? 'ring-2 ring-gold ring-offset-2' : ''}`}
                     style={{
-                      background: isToday ? 'var(--gold)' : feast ? `${feastColor[feast.type]}15` : 'transparent',
-                      color: isToday ? 'white' : feast ? feastColor[feast.type] : isSunday ? 'var(--gold)' : 'var(--text-main)',
-                      border: feast ? `1px solid ${feastColor[feast.type]}40` : 'none',
+                      background: isToday ? 'var(--gold)' : feast ? '#FAF6F0' : 'transparent',
+                      color: isToday ? 'white' : feast ? 'var(--gold-dark)' : 'var(--text-main)',
+                      border: feast ? '1px solid var(--gold-light)' : isSelected ? '1px solid var(--gold)' : 'none'
                     }}>
                     {day}
                   </div>
-                  
-                  {/* Progress Indicators */}
-                  {completedOnThisDay.length > 0 && (
+                  {hasEvents && (
                     <div className="flex gap-0.5 mt-1">
-                      {completedOnThisDay.map((h, idx) => {
-                        const p = PRAYERS.find(pr => pr.id === h.prayerId)
-                        return (
-                          <div key={idx} className="w-1.5 h-1.5 rounded-full" 
-                            style={{ background: 'var(--gold)', border: '1px solid white' }}
-                            title={p?.name || 'Modlitwa'} />
-                        )
-                      })}
+                      {plan[dateStr].slice(0,3).map((e, idx) => (
+                        <div key={idx} className="w-1.5 h-1.5 rounded-full" 
+                          style={{ background: e.type === 'done' ? 'var(--gold)' : 'var(--border)', border: '1px solid white' }} />
+                      ))}
                     </div>
                   )}
-                </div>
+                </button>
               )
             })}
           </div>
         </div>
 
-        {/* Feasts this month */}
-        {monthFeasts.length > 0 && (
-          <>
-            <h2 className="text-[10px] font-black uppercase tracking-widest mb-3 opacity-60" style={{ color: 'var(--text-muted)' }}>
-              Uroczystości i święta
+        {/* Selected Day Details */}
+        <div className="space-y-4 animate-fade-in">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xs font-black uppercase tracking-widest opacity-60 text-text-muted">
+              {selectedDate === today ? 'Dzisiaj' : selectedDate}
             </h2>
-            <div className="space-y-2">
-              {monthFeasts.map(([date, feast]) => {
-                const d = parseInt(date.split('-')[2])
-                return (
-                  <div key={date} className="card p-4 flex items-center gap-4 bg-white border-gold/10">
-                    <div className="w-10 h-10 rounded-full flex flex-col items-center justify-center flex-shrink-0"
-                      style={{ background: '#FAF6F0', border: `1px solid ${feastColor[feast.type]}40` }}>
-                      <span className="text-sm font-black" style={{ color: feastColor[feast.type] }}>{d}</span>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-[10px] font-black uppercase tracking-tighter mb-0.5" style={{ color: feastColor[feast.type] }}>
-                        {feastLabel[feast.type]}
-                      </p>
-                      <p className="text-sm font-bold" style={{ color: 'var(--text-main)' }}>{feast.name}</p>
-                    </div>
-                  </div>
-                )
-              })}
+            {selectedFeast && (
+               <span className="pill text-[10px]" style={{ color: feastColor[selectedFeast.type], background: 'white', border: `1px solid ${feastColor[selectedFeast.type]}` }}>
+                 {selectedFeast.name}
+               </span>
+            )}
+          </div>
+
+          {dayEvents.length === 0 && !selectedFeast && (
+            <div className="card p-8 text-center bg-white/50 border-dashed">
+              <p className="text-sm text-text-muted italic">Brak zaplanowanych modlitw na ten dzień.</p>
             </div>
-          </>
-        )}
+          )}
+
+          {dayEvents.map((ev, i) => {
+            const p = PRAYERS.find(pr => pr.id === ev.prayerId)
+            if (!p) return null
+            return (
+              <Link key={i} href={`/prayers/${p.id}`} 
+                className="card p-4 flex items-center gap-4 bg-white hover:bg-gold/5 transition-colors">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#FAF6F0]" style={{ color: ev.type === 'done' ? 'var(--gold)' : 'var(--text-muted)' }}>
+                  {ev.type === 'done' ? <Check size={20} /> : <div className="text-xs font-black">{ev.day}</div>}
+                </div>
+                <div className="flex-1">
+                  <p className="text-[10px] font-black uppercase tracking-tighter mb-0.5" style={{ color: 'var(--gold-dark)' }}>
+                    {ev.type === 'done' ? 'Ukończono' : `Dzień ${ev.day}`}
+                  </p>
+                  <p className="text-sm font-bold text-text-main">{p.name}</p>
+                </div>
+                <ChevronRight size={16} className="text-text-muted" />
+              </Link>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
 }
+
 
