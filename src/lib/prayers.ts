@@ -170,6 +170,31 @@ export const PRAYERS = [
     ],
     mysteries: []
   },
+  {
+    id: 'nowenna-pompejanska',
+    name: 'Nowenna Pompejańska',
+    category: 'nowenna',
+    emoji: '🌹',
+    description: 'Modlitwa różańcowa zwana "nowenną nie do odparcia" (54 dni)',
+    duration: '3x Różaniec/dzień',
+    days: 54,
+    intro: 'Nowenna Pompejańska to potężna modlitwa różańcowa trwająca 54 dni. Podzielona jest na dwie części: błagalną (27 dni) i dziękczynną (27 dni). Codziennie odmawia się 3 lub 4 części Różańca.',
+    parts: [
+      {
+        title: 'Część błagalna (Dni 1-27)',
+        text: 'Codziennie odmawiasz minimum 3 części Różańca (Radosną, Bolesną i Chwalebną). Na koniec różańca odmawiasz krótką modlitwę błagalną:\n\n"Pomnij, o miłosierna Panno Różańcowa z Pompejów, jako nigdy jeszcze nie słyszano, aby ktokolwiek z Twoich czcicieli, z Różańcem Twoim pomocy Twojej wzywający, miał być przez Ciebie opuszczony. Ach, nie gardź prośbą moją, o Matko Słowa Przedwiecznego, ale przez święty Twój Różaniec i przez upodobanie, jakie okazujesz dla Twojej świątyni w Pompejach, wysłuchaj mnie dobrotliwie. Amen."'
+      },
+      {
+        title: 'Część dziękczynna (Dni 28-54)',
+        text: 'Codziennie odmawiasz minimum 3 części Różańca. Na koniec różańca odmawiasz krótką modlitwę dziękczynną:\n\n"Cóż Ci dać mogę, o Królowo pełna miłości? Życie moje poświęcam Tobie. Ile mi sił starczy, będę rozszerzać cześć Twoją, o Dziewico Różańca Świętego z Pompejów, bo gdy Twojej pomocy wezwałem, nawiedziła mnie łaska Boża. Wszędzie będę opowiadać o miłosierdziu, które mi wyświadczyłaś. O ile zdołam, będę rozszerzać nabożeństwo do Różańca Świętego. Wszystkim głosić będę, jak dobrotliwie obeszłaś się ze mną, aby i niegodni, tak jak i ja, grzesznicy, z zaufaniem do Ciebie się udawali. O, gdyby cały świat wiedział, jak jesteś dobra, jak litościwa dla cierpiących, wszystkie stworzenia uciekałyby się do Ciebie. Amen."'
+      },
+      {
+        title: 'Modlitwa na zakończenie każdego dnia (Pod Twoją Obronę)',
+        text: 'Pod Twoją obronę uciekamy się, Święta Boża Rodzicielko, naszymi prośbami racz nie gardzić w potrzebach naszych, ale od wszelakich złych przygód racz nas zawsze wybawiać, Panno chwalebna i błogosławiona. O Pani nasza, Orędowniczko nasza, Pośredniczko nasza, Pocieszycielko nasza. Z Synem swoim nas pojednaj, Synowi swojemu nas polecaj, Synowi swojemu nas oddawaj. Amen.'
+      }
+    ],
+    mysteries: []
+  }
 ]
 
 export const CATEGORIES = [
