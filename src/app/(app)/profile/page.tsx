@@ -192,23 +192,6 @@ export default function ProfilePage() {
             <ChevronRight size={16} className="text-text-muted" />
           </Link>
         </div>
-
-        {/* Big Logout Button */}
-        <div className="mt-8 mb-4">
-          <button onClick={() => signOut({ callbackUrl: '/login' })}
-            className="w-full card p-4 flex items-center justify-center gap-2 text-sm font-bold"
-            style={{ color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)', background: 'white' }}>
-            <LogOut size={18} />
-            Wyloguj się z urządzenia
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-
-
         {/* Big Logout Button */}
         <div className="mt-8 mb-4">
           <button onClick={() => signOut({ callbackUrl: '/login' })}
