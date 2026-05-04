@@ -3,7 +3,17 @@ import { prisma } from '@/lib/db'
 import bcrypt from 'bcryptjs'
 
 export async function POST(req: NextRequest) {
-  const { name, email, password } = await req.json()
+  const { name, email, password, website, timeToFill } = await req.json()
+
+  // Anti-bot: Honeypot check
+  if (website) {
+    return NextResponse.json({ error: 'Wykryto niedozwoloną aktywność (Honeypot)' }, { status: 400 })
+  }
+
+  // Anti-bot: Time-to-fill check (mniej niż 3 sekundy to na pewno bot)
+  if (!timeToFill || timeToFill < 3000) {
+    return NextResponse.json({ error: 'Formularz wypełniono zbyt szybko. Spróbuj ponownie.' }, { status: 400 })
+  }
 
   if (!name || !email || !password) {
     return NextResponse.json({ error: 'Wszystkie pola są wymagane' }, { status: 400 })

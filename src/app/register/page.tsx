@@ -8,6 +8,8 @@ export default function RegisterPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [website, setWebsite] = useState('') // Honeypot
+  const [mountTime] = useState(Date.now())
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -16,10 +18,11 @@ export default function RegisterPage() {
     setLoading(true)
     setError('')
     try {
+      const timeToFill = Date.now() - mountTime
       const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ name, email, password, website, timeToFill })
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error || 'Błąd rejestracji'); return }
@@ -58,6 +61,12 @@ export default function RegisterPage() {
           <div>
             <label className="text-xs font-semibold uppercase tracking-wide mb-1 block" style={{ color: 'var(--text-muted)' }}>Hasło</label>
             <input type="password" className="inp" placeholder="Min. 8 znaków" value={password} onChange={e => setPassword(e.target.value)} required minLength={8} />
+          </div>
+
+          {/* Honeypot field - invisible to users, filled by bots */}
+          <div style={{ display: 'none' }} aria-hidden="true">
+            <label>Strona WWW</label>
+            <input type="text" value={website} onChange={e => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" />
           </div>
 
           {error && (
