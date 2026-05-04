@@ -10,8 +10,12 @@ export default function ProfilePage() {
   const [stats, setStats] = useState({ prayers: 0, requests: 0, communities: 0 })
   const [loading, setLoading] = useState(true)
 
+  const [activePrayers, setActivePrayers] = useState<any[]>([])
+  const [showActive, setShowActive] = useState(false)
+
   useEffect(() => {
     if (session) {
+      // Stats
       fetch('/api/user/stats')
         .then(res => res.json())
         .then(data => {
@@ -19,6 +23,14 @@ export default function ProfilePage() {
         })
         .catch(console.error)
         .finally(() => setLoading(false))
+      
+      // Active Prayers
+      fetch('/api/user/active-prayers')
+        .then(res => res.json())
+        .then(data => {
+          if (data.activePrayers) setActivePrayers(data.activePrayers)
+        })
+        .catch(console.error)
     }
   }, [session])
 
@@ -51,13 +63,6 @@ export default function ProfilePage() {
     { label: 'Wspólnoty', value: stats.communities, icon: Users, color: 'var(--gold)' },
   ]
 
-  const menuItems = [
-    { href: '/requests', icon: HandHeart, label: 'Moje prośby o modlitwę', desc: `${stats.requests} aktywnych` },
-    { href: '/prayers', icon: BookOpen, label: 'Moja droga modlitwy', desc: 'Historia i plan' },
-    { href: '/community', icon: Users, label: 'Moje wspólnoty', desc: `${stats.communities} grup` },
-    { href: '/settings', icon: Settings, label: 'Ustawienia', desc: 'Powiadomienia, prywatność' },
-  ]
-
   return (
     <div className="pb-6">
       <PageHeader title="Profil" />
@@ -86,23 +91,102 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        {/* Menu */}
+        {/* Menu & Active Prayers */}
         <div className="space-y-2">
-          {menuItems.map(({ href, icon: Icon, label, desc }) => (
-            <Link key={href} href={href}
-              className="card prayer-card flex items-center gap-4 p-4 bg-white">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
-                <Icon size={18} />
+          {/* Active Prayers Dropdown */}
+          <div className="card overflow-hidden bg-white">
+            <button 
+              onClick={() => setShowActive(!showActive)}
+              className="w-full flex items-center gap-4 p-4 text-left transition-colors hover:bg-gold/5"
+            >
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
+                <BookOpen size={18} />
               </div>
               <div className="flex-1">
-                <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>{label}</p>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{desc}</p>
+                <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Moja droga modlitwy</p>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                  {activePrayers.length > 0 ? `${activePrayers.length} aktywnych modlitw` : 'Brak aktywnych modlitw'}
+                </p>
               </div>
-              <ChevronRight size={16} style={{ color: 'var(--text-muted)' }} />
-            </Link>
-          ))}
+              <div className={`transition-transform duration-300 ${showActive ? 'rotate-180' : ''}`}>
+                <ChevronRight size={16} className="text-text-muted" />
+              </div>
+            </button>
+
+            {showActive && (
+              <div className="px-4 pb-4 border-t border-border animate-fade-in">
+                {activePrayers.length === 0 ? (
+                  <div className="py-4 text-center">
+                    <p className="text-xs text-text-muted italic mb-3">Nie masz jeszcze żadnych aktywnych modlitw wielodniowych.</p>
+                    <Link href="/prayers" className="text-xs font-bold text-gold underline">Przejdź do biblioteki</Link>
+                  </div>
+                ) : (
+                  <div className="space-y-3 pt-4">
+                    {activePrayers.map((ap: any) => {
+                      const p = PRAYERS.find(pr => pr.id === ap.prayerId)
+                      if (!p) return null
+                      return (
+                        <Link key={ap.prayerId} href={`/prayers/${p.id}`} className="block p-3 rounded-xl border border-border hover:border-gold/30 transition-colors">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-bold text-text-main">{p.name}</span>
+                            <span className="text-[10px] font-black text-gold uppercase">Dzień {ap.lastDay}</span>
+                          </div>
+                          {/* Progress Dots */}
+                          <div className="flex flex-wrap gap-1">
+                            {Array.from({ length: p.days || 1 }).map((_, i) => (
+                              <div 
+                                key={i} 
+                                className="w-2 h-2 rounded-full" 
+                                style={{ 
+                                  background: ap.completedDays.includes(i + 1) ? 'var(--gold)' : 'var(--bg-primary)',
+                                  border: '1px solid var(--border)'
+                                }} 
+                              />
+                            ))}
+                          </div>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          <Link href="/requests" className="card prayer-card flex items-center gap-4 p-4 bg-white">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
+              <HandHeart size={18} />
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Moje prośby o modlitwę</p>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{stats.requests} aktywnych</p>
+            </div>
+            <ChevronRight size={16} className="text-text-muted" />
+          </Link>
+
+          <Link href="/community" className="card prayer-card flex items-center gap-4 p-4 bg-white">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
+              <Users size={18} />
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Moje wspólnoty</p>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{stats.communities} grup</p>
+            </div>
+            <ChevronRight size={16} className="text-text-muted" />
+          </Link>
+
+          <Link href="/settings" className="card prayer-card flex items-center gap-4 p-4 bg-white">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
+              <Settings size={18} />
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Ustawienia</p>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Powiadomienia, prywatność</p>
+            </div>
+            <ChevronRight size={16} className="text-text-muted" />
+          </Link>
         </div>
+
 
         {/* Big Logout Button */}
         <div className="mt-8 mb-4">
