@@ -3,6 +3,22 @@ import { HandHeart, Users, Heart, Plus } from 'lucide-react'
 import Link from 'next/link'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/db'
+import { revalidatePath } from 'next/cache'
+
+async function deleteRequest(formData: FormData) {
+  'use server'
+  const session = await auth()
+  if (!session?.user?.id) return
+
+  const reqId = formData.get('reqId') as string
+  if (!reqId) return
+
+  const request = await prisma.prayerRequest.findUnique({ where: { id: reqId } })
+  if (!request || request.userId !== session.user.id) return
+
+  await prisma.prayerRequest.delete({ where: { id: reqId } })
+  revalidatePath('/requests')
+}
 
 const CAT_COLORS: Record<string, string> = {
   zdrowie: '#ef4444',
@@ -86,8 +102,10 @@ export default async function RequestsPage() {
           </div>
         ) : (
           <div className="space-y-3">
-            {requests.map(req => (
-              <div key={req.id} className="card p-4 prayer-card">
+            {requests.map(req => {
+              const reqId = req.id
+              return (
+              <div key={reqId} className="card p-4 prayer-card">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
                     style={{ background: `${CAT_COLORS[req.category] || CAT_COLORS.inne}15`, border: `1px solid ${CAT_COLORS[req.category] || CAT_COLORS.inne}33` }}>
@@ -112,9 +130,21 @@ export default async function RequestsPage() {
                       </button>
                     </div>
                   </div>
+                  {(req.userId === session?.user?.id) && (
+                    <form action={deleteRequest} className="flex justify-end border-t border-border pt-2 mt-2">
+                      <input type="hidden" name="reqId" value={reqId} />
+                      <button 
+                        type="submit"
+                        className="text-[10px] text-red-500 hover:text-red-700 uppercase font-bold tracking-wider"
+                      >
+                        Usuń intencję
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         )}
 

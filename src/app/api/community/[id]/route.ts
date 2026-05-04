@@ -48,15 +48,51 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     }
 
     // Check visibility
-    const isMember = session?.user?.id ? community.members.some(m => m.userId === session.user.id) : false
+    const memberRecord = session?.user?.id ? community.members.find(m => m.userId === session.user.id) : null
+    const isMember = !!memberRecord
+    const isAdmin = memberRecord?.role === 'admin'
+
     if (!community.isPublic && !isMember) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
-    return NextResponse.json({ community, isMember })
+    return NextResponse.json({ community, isMember, isAdmin })
   } catch (error) {
     console.error('Failed to fetch community:', error)
     return NextResponse.json({ error: 'Failed to fetch community' }, { status: 500 })
+  }
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const session = await auth()
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { id } = await params
+
+    const membership = await prisma.communityMember.findUnique({
+      where: {
+        userId_communityId: {
+          userId: session.user.id,
+          communityId: id
+        }
+      }
+    })
+
+    if (!membership || membership.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden. Only admins can delete the community.' }, { status: 403 })
+    }
+
+    await prisma.community.delete({
+      where: { id }
+    })
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Failed to delete community:', error)
+    return NextResponse.json({ error: 'Failed to delete community' }, { status: 500 })
   }
 }
 

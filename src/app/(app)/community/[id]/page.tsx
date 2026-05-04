@@ -12,6 +12,7 @@ export default function CommunityDetailsPage() {
   
   const [community, setCommunity] = useState<any>(null)
   const [isMember, setIsMember] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [loading, setLoading] = useState(true)
   const [actionLoading, setActionLoading] = useState(false)
 
@@ -22,6 +23,7 @@ export default function CommunityDetailsPage() {
         if (data.community) {
           setCommunity(data.community)
           setIsMember(data.isMember)
+          setIsAdmin(data.isAdmin)
         }
       })
       .catch(console.error)
@@ -101,6 +103,40 @@ export default function CommunityDetailsPage() {
       setFormError('Błąd połączenia')
     } finally {
       setSubmitLoading(false)
+    }
+  }
+
+  async function handleDeleteCommunity() {
+    if (!confirm('Czy na pewno chcesz bezpowrotnie usunąć tę wspólnotę?')) return
+    setActionLoading(true)
+    try {
+      const res = await fetch(`/api/community/${id}`, { method: 'DELETE' })
+      if (res.ok) {
+        router.push('/community')
+      } else {
+        alert('Wystąpił błąd podczas usuwania.')
+        setActionLoading(false)
+      }
+    } catch (err) {
+      alert('Wystąpił błąd połączenia.')
+      setActionLoading(false)
+    }
+  }
+
+  async function handleDeleteRequest(reqId: string) {
+    if (!confirm('Czy na pewno chcesz usunąć tę intencję?')) return
+    try {
+      const res = await fetch(`/api/requests/${reqId}`, { method: 'DELETE' })
+      if (res.ok) {
+        setCommunity({
+          ...community,
+          prayerRequests: community.prayerRequests.filter((r: any) => r.id !== reqId)
+        })
+      } else {
+        alert('Wystąpił błąd podczas usuwania intencji.')
+      }
+    } catch (err) {
+      alert('Błąd połączenia.')
     }
   }
 
@@ -198,7 +234,17 @@ export default function CommunityDetailsPage() {
                         {req._count?.acceptances || 0} modli się
                       </span>
                     </div>
-                    <p className="text-xs text-text-muted leading-relaxed whitespace-pre-wrap">{req.content}</p>
+                    <p className="text-xs text-text-muted leading-relaxed whitespace-pre-wrap mb-2">{req.content}</p>
+                    {(req.userId === session?.user?.id || isAdmin) && (
+                      <div className="flex justify-end border-t border-border pt-2 mt-2">
+                        <button 
+                          onClick={() => handleDeleteRequest(req.id)}
+                          className="text-[10px] text-red-500 hover:text-red-700 uppercase font-bold tracking-wider"
+                        >
+                          Usuń intencję
+                        </button>
+                      </div>
+                    )}
                   </div>
                 ))
               )}
@@ -259,8 +305,18 @@ export default function CommunityDetailsPage() {
           </div>
         )}
 
-        <div className="mt-8 mb-4 w-full max-w-xs mx-auto">
-          {isMember ? (
+        <div className="mt-8 mb-4 w-full max-w-xs mx-auto space-y-3">
+          {isAdmin && (
+            <button 
+              onClick={handleDeleteCommunity}
+              disabled={actionLoading}
+              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-bold transition-colors border border-red-500 text-white bg-red-500 hover:bg-red-600 shadow-sm uppercase tracking-wider"
+            >
+              Usuń wspólnotę
+            </button>
+          )}
+
+          {isMember && !isAdmin && (
             <button 
               onClick={toggleMembership}
               disabled={actionLoading}
@@ -269,7 +325,9 @@ export default function CommunityDetailsPage() {
               <LogOut size={18} />
               Opuść wspólnotę
             </button>
-          ) : (
+          )}
+          
+          {!isMember && (
             <button 
               onClick={toggleMembership}
               disabled={actionLoading}
