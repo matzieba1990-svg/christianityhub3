@@ -32,5 +32,20 @@ export async function POST(req: NextRequest) {
     data: { name, email, password: hashed }
   })
 
-  return NextResponse.json({ ok: true, userId: user.id }, { status: 201 })
+  // Generuj token weryfikacyjny
+  const { randomBytes } = await import('crypto')
+  const token = randomBytes(32).toString('hex')
+  const expires = new Date()
+  expires.setHours(expires.getHours() + 24) // 24h na weryfikację
+
+  await prisma.verificationToken.create({
+    data: { email, token, expires }
+  })
+
+  // Wyślij e-mail
+  const { sendVerificationEmail } = await import('@/lib/mail')
+  const origin = req.headers.get('origin') || process.env.NEXTAUTH_URL || new URL(req.url).origin
+  await sendVerificationEmail(email, token, origin)
+
+  return NextResponse.json({ ok: true, requiresVerification: true }, { status: 201 })
 }

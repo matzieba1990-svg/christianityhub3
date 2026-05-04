@@ -26,8 +26,16 @@ export default function RegisterPage() {
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error || 'Błąd rejestracji'); return }
-      const { signIn } = await import('next-auth/react')
-      await signIn('credentials', { email, password, callbackUrl: '/dashboard' })
+      
+      // Pokazujemy komunikat o weryfikacji zamiast od razu logować
+      if (data.requiresVerification) {
+        alert('Konto zostało utworzone! Wysłaliśmy link aktywacyjny na Twój adres e-mail. Sprawdź pocztę (również folder SPAM).')
+        router.push('/login')
+        return
+      }
+      
+      // Fallback
+      router.push('/login')
     } catch {
       setError('Błąd sieciowy. Sprawdź połączenie.')
     } finally {
