@@ -46,6 +46,7 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
             )}
           </div>
         </div>
+        </div>
 
         {/* Parts */}
         <h2 className="text-sm font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
