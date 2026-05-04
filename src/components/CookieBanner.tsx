@@ -18,6 +18,12 @@ export default function CookieBanner() {
     setShow(false)
   }
 
+  const handleReject = () => {
+    localStorage.setItem('christianityhub_cookies', 'rejected')
+    setShow(false)
+    window.history.back()
+  }
+
   if (!show) return null
 
   return (
@@ -29,6 +35,12 @@ export default function CookieBanner() {
           Dowiedz się więcej w naszym <Link href="/rodo" className="underline font-semibold" style={{ color: 'var(--gold)' }}>Regulaminie i polityce RODO</Link>.
         </div>
         <div className="flex gap-3 w-full sm:w-auto">
+          <button 
+            onClick={handleReject}
+            className="btn-outline whitespace-nowrap flex-1 sm:flex-none text-sm px-6 py-2"
+          >
+            Odrzuć
+          </button>
           <button 
             onClick={handleAccept}
             className="btn-gold whitespace-nowrap flex-1 sm:flex-none text-sm px-6 py-2"

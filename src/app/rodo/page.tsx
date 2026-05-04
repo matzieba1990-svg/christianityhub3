@@ -1,6 +1,17 @@
+'use client'
 import PageHeader from '@/components/PageHeader'
 
 export default function RodoPage() {
+  const handleAccept = () => {
+    localStorage.setItem('christianityhub_cookies', 'accepted')
+    window.history.back()
+  }
+
+  const handleReject = () => {
+    localStorage.setItem('christianityhub_cookies', 'rejected')
+    window.history.back()
+  }
+
   return (
     <div className="pb-10 bg-bg-primary min-h-dvh">
       <PageHeader title="Polityka Prywatności i RODO" />
@@ -64,10 +75,24 @@ export default function RodoPage() {
             </p>
           </section>
 
-          <div className="pt-6 border-t border-border">
-            <p className="text-xs text-text-muted italic text-center">
-              Ostatnia aktualizacja: Maj 2026 r.
+          <div className="pt-6 border-t border-border flex flex-col gap-3">
+            <p className="text-xs text-text-muted italic text-center mb-2">
+              Wybierz swoje preferencje dotyczące plików cookies, aby kontynuować.
             </p>
+            <div className="flex gap-3 w-full sm:w-auto mx-auto">
+              <button 
+                onClick={handleReject}
+                className="btn-outline whitespace-nowrap px-6 py-2 text-sm"
+              >
+                Odrzuć cookies
+              </button>
+              <button 
+                onClick={handleAccept}
+                className="btn-gold whitespace-nowrap px-6 py-2 text-sm"
+              >
+                Akceptuję cookies
+              </button>
+            </div>
           </div>
         </div>
       </div>
