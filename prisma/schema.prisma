@@ -98,12 +98,13 @@ model CommunityMember {
 }
 
 model PrayerProgress {
-  id          String   @id @default(cuid())
-  prayerId    String
-  dayNumber   Int
-  completedAt DateTime @default(now())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String   @id @default(cuid())
+  userId     String
+  prayerId   String
+  dayNumber  Int
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([userId, prayerId, dayNumber])
 }
 

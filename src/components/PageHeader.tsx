@@ -1,27 +1,27 @@
 'use client'
-import { useRouter } from 'next/navigation'
 import { ChevronLeft, LogOut } from 'lucide-react'
 import { useSession, signOut } from 'next-auth/react'
+import Link from 'next/link'
 
 interface Props {
   title: string
   subtitle?: string
   back?: boolean
+  backHref?: string
   right?: React.ReactNode
 }
 
-export default function PageHeader({ title, subtitle, back, right }: Props) {
-  const router = useRouter()
+export default function PageHeader({ title, subtitle, back, backHref, right }: Props) {
   const { data: session } = useSession()
 
   return (
     <header className="flex items-center gap-3 px-4 py-4 sticky top-0 z-40"
-      style={{ background: 'linear-gradient(180deg, rgba(250,246,240,1) 80%, rgba(250,246,240,0))', backdropFilter: 'blur(8px)', borderBottom: '1px solid var(--border)' }}>
+      style={{ background: 'rgba(250,246,240,0.98)', backdropFilter: 'blur(8px)', borderBottom: '1px solid var(--border)' }}>
       {back && (
-        <button onClick={() => router.back()} className="w-9 h-9 flex items-center justify-center rounded-full"
+        <Link href={backHref || '..'} className="w-9 h-9 flex items-center justify-center rounded-full"
           style={{ background: 'var(--bg-card)', color: 'var(--text-main)', border: '1px solid var(--border)' }}>
           <ChevronLeft size={20} />
-        </button>
+        </Link>
       )}
       <div className="flex-1 min-w-0">
         <h1 className="font-bold text-xl truncate font-mystic" style={{ color: 'var(--gold-dark)' }}>{title}</h1>

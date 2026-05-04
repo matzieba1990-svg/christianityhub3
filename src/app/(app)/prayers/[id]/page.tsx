@@ -1,10 +1,11 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { PRAYERS } from '@/lib/prayers'
-import { notFound } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
 import PageHeader from '@/components/PageHeader'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp, CheckCircle2, Circle } from 'lucide-react'
 import { use } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function PrayerDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -15,37 +16,112 @@ export default function PrayerDetailPage({ params }: { params: Promise<{ id: str
 }
 
 function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
+  const { data: session } = useSession()
   const [openPart, setOpenPart] = useState<number | null>(0)
   const [openMystery, setOpenMystery] = useState<number | null>(null)
+  const [completedDays, setCompletedDays] = useState<number[]>([])
+  const [loading, setLoading] = useState(false)
+
+  // Fetch progress if logged in
+  useEffect(() => {
+    if (session && prayer.days) {
+      fetch(`/api/prayers/progress?prayerId=${prayer.id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.completedDays) setCompletedDays(data.completedDays)
+        })
+        .catch(console.error)
+    }
+  }, [session, prayer.id, prayer.days])
+
+  const toggleDay = async (day: number) => {
+    if (!session) {
+      alert('Zaloguj się, aby zapisywać postępy modlitwy.')
+      return
+    }
+    
+    setLoading(true)
+    const isCompleted = completedDays.includes(day)
+    const newDays = isCompleted 
+      ? completedDays.filter(d => d !== day)
+      : [...completedDays, day]
+    
+    setCompletedDays(newDays)
+
+    try {
+      await fetch('/api/prayers/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prayerId: prayer.id, dayNumber: day, completed: !isCompleted })
+      })
+    } catch (err) {
+      console.error(err)
+      // Rollback on error
+      setCompletedDays(completedDays)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="pb-8">
-      <PageHeader title={prayer.name} back />
+      <PageHeader title={prayer.name} back backHref="/prayers" />
 
       <div className="px-4">
         {/* Hero */}
-        {/* Hero */}
-        <div className="card card-gold glow-gold p-5 mb-6 text-center overflow-hidden">
+        <div className="card card-gold glow-gold p-6 mb-6 text-center overflow-hidden">
           <div className="p-0">
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-main)' }}>{prayer.intro}</p>
-            <div className="flex items-center justify-center gap-4 mt-4">
-            <span className="pill" style={{ background: 'rgba(201,162,39,0.15)', color: 'var(--gold)', border: '1px solid rgba(201,162,39,0.3)' }}>
-              ⏱ {prayer.duration}
-            </span>
-            {prayer.days && (
-              <span className="pill" style={{ background: 'rgba(124,58,237,0.15)', color: '#a855f7', border: '1px solid rgba(124,58,237,0.3)' }}>
-                📅 {prayer.days} dni
+            <h3 className="font-mystic text-lg font-bold mb-2" style={{ color: 'var(--gold-dark)' }}>{prayer.description}</h3>
+            <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-main)' }}>{prayer.intro}</p>
+            <div className="flex items-center justify-center gap-4">
+              <span className="pill" style={{ background: 'white', color: 'var(--gold)', border: '1px solid var(--gold)' }}>
+                ⏱ {prayer.duration}
               </span>
-            )}
+              {prayer.days && (
+                <span className="pill" style={{ background: 'var(--gold)', color: 'white', border: 'none' }}>
+                   {prayer.days} dni
+                </span>
+              )}
+            </div>
           </div>
         </div>
-        </div>
+
+        {/* Progress Tracker (only for multi-day prayers) */}
+        {prayer.days && (
+          <div className="mb-8">
+            <h2 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: 'var(--text-muted)' }}>
+              Twój postęp ({completedDays.length}/{prayer.days} dni)
+            </h2>
+            <div className="grid grid-cols-6 gap-2">
+              {Array.from({ length: prayer.days }).map((_, i) => {
+                const day = i + 1
+                const isDone = completedDays.includes(day)
+                return (
+                  <button
+                    key={day}
+                    onClick={() => toggleDay(day)}
+                    disabled={loading}
+                    className="aspect-square flex flex-col items-center justify-center rounded-xl border transition-all active:scale-90"
+                    style={{
+                      background: isDone ? 'var(--gold)' : 'white',
+                      borderColor: isDone ? 'var(--gold)' : 'var(--border)',
+                      color: isDone ? 'white' : 'var(--text-muted)'
+                    }}
+                  >
+                    <span className="text-[10px] font-bold uppercase mb-0.5 opacity-60">Dzień</span>
+                    <span className="text-sm font-black">{day}</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Parts */}
-        <h2 className="text-sm font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
+        <h2 className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
           Tekst modlitwy
         </h2>
-        <div className="space-y-2 mb-6">
+        <div className="space-y-2 mb-8">
           {prayer.parts.map((part, i) => (
             <div key={i} className="card overflow-hidden">
               <button className="w-full flex items-center justify-between p-4 text-left"
@@ -57,7 +133,7 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
                 }
               </button>
               {openPart === i && (
-                <div className="px-4 pb-5" style={{ borderTop: '1px solid rgba(124,58,237,0.15)' }}>
+                <div className="px-4 pb-5" style={{ borderTop: '1px solid var(--border)' }}>
                   <p className="text-sm leading-relaxed whitespace-pre-line pt-4"
                     style={{ color: 'var(--text-main)', lineHeight: '1.8' }}>
                     {part.text}
@@ -71,7 +147,7 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
         {/* Mysteries (for Rosary) */}
         {prayer.mysteries.length > 0 && (
           <>
-            <h2 className="text-sm font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
+            <h2 className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
               Tajemnice różańcowe
             </h2>
             <div className="space-y-2">
@@ -79,14 +155,14 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
                 <div key={i} className="card overflow-hidden">
                   <button className="w-full flex items-center justify-between p-4 text-left"
                     onClick={() => setOpenMystery(openMystery === i ? null : i)}>
-                    <span className="font-semibold text-sm" style={{ color: 'var(--gold)' }}>{mystery.name}</span>
+                    <span className="font-semibold text-sm" style={{ color: 'var(--gold-dark)' }}>{mystery.name}</span>
                     {openMystery === i
                       ? <ChevronUp size={16} style={{ color: 'var(--text-muted)' }} />
                       : <ChevronDown size={16} style={{ color: 'var(--text-muted)' }} />
                     }
                   </button>
                   {openMystery === i && (
-                    <div className="px-4 pb-4" style={{ borderTop: '1px solid rgba(201,162,39,0.15)' }}>
+                    <div className="px-4 pb-4" style={{ borderTop: '1px solid var(--border)' }}>
                       <ol className="mt-3 space-y-2">
                         {mystery.items.map((item, j) => (
                           <li key={j} className="flex gap-3 text-sm" style={{ color: 'var(--text-main)' }}>
