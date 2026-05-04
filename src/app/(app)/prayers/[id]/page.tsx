@@ -24,10 +24,18 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
 
       <div className="px-4">
         {/* Hero */}
-        <div className="card card-gold glow-gold p-5 mb-6 text-center">
-          <div className="text-5xl mb-3">{prayer.emoji}</div>
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-main)' }}>{prayer.intro}</p>
-          <div className="flex items-center justify-center gap-4 mt-4">
+        <div className="card card-gold glow-gold p-0 mb-6 text-center overflow-hidden">
+          {prayer.image ? (
+            <div className="w-full aspect-square relative overflow-hidden">
+              <img src={prayer.image} alt={prayer.name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#FAF6F0] via-transparent to-transparent opacity-60"></div>
+            </div>
+          ) : (
+            <div className="text-5xl my-6">{prayer.emoji}</div>
+          )}
+          <div className="p-5 pt-2">
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-main)' }}>{prayer.intro}</p>
+            <div className="flex items-center justify-center gap-4 mt-4">
             <span className="pill" style={{ background: 'rgba(201,162,39,0.15)', color: 'var(--gold)', border: '1px solid rgba(201,162,39,0.3)' }}>
               ⏱ {prayer.duration}
             </span>

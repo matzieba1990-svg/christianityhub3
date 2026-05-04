@@ -3,6 +3,7 @@ export const PRAYERS = [
     id: 'rozaniec',
     name: 'Różaniec Święty',
     category: 'rozaniec',
+    image: '/images/rozaniec.jpg',
     emoji: '📿',
     description: 'Pełne rozważanie 20 tajemnic różańcowych',
     duration: '20-45 min',
