@@ -261,16 +261,131 @@ export const PRAYERS = [
       }
     ],
     mysteries: []
+  },
+  {
+    id: 'michal-archaniol',
+    name: 'Modlitwa do św. Michała Archanioła',
+    category: 'inne',
+    emoji: '🛡️',
+    description: 'Potężna modlitwa o ochronę przed złem (Papieża Leona XIII)',
+    duration: '1 min',
+    days: null,
+    intro: 'Modlitwa ta jest wzywaniem potężnego wodza zastępów anielskich do walki z nieprzyjacielem duszy.',
+    parts: [
+      {
+        title: 'Modlitwa',
+        text: 'Święty Michale Archaniele, wspomagaj nas w walce, a przeciw niegodziwości i zasadzkom złego ducha bądź naszą obroną. Oby go Bóg pogromić raczył, pokornie o to prosimy, a Ty, Wodzu niebieskich zastępów, szatana i inne duchy złe, które na zgubę dusz ludzkich po tym świecie krążą, mocą Bożą strąć do piekła. Amen.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'litania-serce-jezusa',
+    name: 'Litania do Serca Pana Jezusa',
+    category: 'litania',
+    emoji: '❤️',
+    description: 'Litania do Najświętszego Serca Pana Jezusa',
+    duration: '12 min',
+    days: null,
+    intro: 'Litania ta jest centralną modlitwą kultu Najświętszego Serca, odmawianą szczególnie w czerwcu.',
+    parts: [
+      {
+        title: 'Litania',
+        text: 'Kyrie elejson. Chryste elejson. Kyrie elejson.\nChryste usłysz nas. Chryste wysłuchaj nas.\nOjcze z nieba Boże – zmiłuj się nad nami.\nSynu Odkupicielu świata Boże – zmiłuj się nad nami.\nDuchu Święty Boże – zmiłuj się nad nami.\nŚwięta Trójco Jedyny Boże – zmiłuj się nad nami.\n\nSerce Jezusa, Syna Ojca Przedwiecznego – zmiłuj się nad nami.\nSerce Jezusa, w łonie Matki Dziewicy przez Ducha Świętego utworzone – zmiłuj się nad nami.\nSerce Jezusa, ze Słowem Bożym istotowo zjednoczone – zmiłuj się nad nami.\nSerce Jezusa, nieskończonego majestatu – zmiłuj się nad nami.\nSerce Jezusa, przybytku Boga najwyższego – zmiłuj się nad nami.\nSerce Jezusa, domie Boży i bramo niebios – zmiłuj się nad nami.\nSerce Jezusa, ognisko miłości gorejące – zmiłuj się nad nami.\nSerce Jezusa, sprawiedliwości i miłości skarbnico – zmiłuj się nad nami.\nSerce Jezusa, dobroci i miłości pełne – zmiłuj się nad nami.\nSerce Jezusa, cnót wszystkich bezdenna głębino – zmiłuj się nad nami.\nSerce Jezusa, wszelkiej chwały najgodniejsze – zmiłuj się nad nami.\nSerce Jezusa, królu i zjednoczenie serc wszystkich – zmiłuj się nad nami.\nSerce Jezusa, w którym są wszystkie skarby mądrości i umiejętności – zmiłuj się nad nami.\nSerce Jezusa, w którym mieszka cała pełnia Bóstwa – zmiłuj się nad nami.\nSerce Jezusa, w którym Sobie Ojciec bardzo upodobał – zmiłuj się nad nami.\nSerce Jezusa, z którego pełni wszyscyśmy otrzymali – zmiłuj się nad nami.\nSerce Jezusa, odwieczne upragnienie świata – zmiłuj się nad nami.\nSerce Jezusa, cierpliwe i wielkiego miłosierdzia – zmiłuj się nad nami.\nSerce Jezusa, hojne dla wszystkich, którzy Cię wzywają – zmiłuj się nad nami.\nSerce Jezusa, źródło życia i świętości – zmiłuj się nad nami.\nSerce Jezusa, przebłaganie za grzechy nasze – zmiłuj się nad nami.\nSerce Jezusa, zelżywością napełnione – zmiłuj się nad nami.\nSerce Jezusa, dla nieprawości naszych starte – zmiłuj się nad nami.\nSerce Jezusa, aż do śmierci posłuszne – zmiłuj się nad nami.\nSerce Jezusa, włócznią przebite – zmiłuj się nad nami.\nSerce Jezusa, źródło wszelkiej pociechy – zmiłuj się nad nami.\nSerce Jezusa, życie i zmartwychwstanie nasze – zmiłuj się nad nami.\nSerce Jezusa, pokoju i pojednanie nasze – zmiłuj się nad nami.\nSerce Jezusa, krwawa ofiaro grzeszników – zmiłuj się nad nami.\nSerce Jezusa, zbawienie ufających Tobie – zmiłuj się nad nami.\nSerce Jezusa, nadziejo w Tobie umierających – zmiłuj się nad nami.\nSerce Jezusa, rozkoszy wszystkich Świętych – zmiłuj się nad nami.\n\nBaranku Boży, który gładzisz grzechy świata – przepuść nam Panie.\nBaranku Boży, który gładzisz grzechy świata – wysłuchaj nas Panie.\nBaranku Boży, który gładzisz grzechy świata – zmiłuj się nad nami.\n\nV. Jezu cichy i pokornego Serca.\nR. Uczyń serca nasze według Serca Twego.\n\nMódlmy się: Wszechmogący, wieczny Boże, wejrzyj na Serce najmilszego Syna swego i na chwałę i zadośćuczynienie, jakie w imieniu grzeszników Ci składa; daj się przebłagać tym, którzy żebrzą Twego miłosierdzia i racz udzielić przebaczenia w imię tegoż Syna swego, Jezusa Chrystusa, który z Tobą żyje i króluje na wieki wieków. Amen.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'litania-jozef',
+    name: 'Litania do św. Józefa',
+    category: 'litania',
+    emoji: '🔨',
+    description: 'Modlitwa do Opiekuna Zbawiciela i Patrona Kościoła',
+    duration: '8 min',
+    days: null,
+    intro: 'Święty Józef jest potężnym orędownikiem w sprawach rodzinnych, pracy i w godzinie śmierci.',
+    parts: [
+      {
+        title: 'Litania',
+        text: 'Kyrie elejson. Chryste elejson. Kyrie elejson.\nChryste usłysz nas. Chryste wysłuchaj nas.\nOjcze z nieba Boże – zmiłuj się nad nami.\nSynu Odkupicielu świata Boże – zmiłuj się nad nami.\nDuchu Święty Boże – zmiłuj się nad nami.\nŚwięta Trójco Jedyny Boże – zmiłuj się nad nami.\n\nŚwięta Maryjo – módl się za nami.\nŚwięty Józefie – módl się za nami.\nPrzesławny potomku Dawida – módl się za nami.\nŚwiatło Patriarchów – módl się za nami.\nOblubieńcze Bogarodzicy – módl się za nami.\nPrzeczysty Stróżu Dziewicy – módl się za nami.\nŻywicielu Syna Bożego – módl się za nami.\nTroskliwy Obrońco Chrystusa – módl się za nami.\nGłowo Najświętszej Rodziny – módl się za nami.\nJózefie najsprawiedliwszy – módl się za nami.\nJózefie najczystszy – módl się za nami.\nJózefie najroztropniejszy – módl się za nami.\nJózefie najmężniejszy – módl się za nami.\nJózefie najposłuszniejszy – módl się za nami.\nJózefie najwierniejszy – módl się za nami.\nZwierciadło cierpliwości – módl się za nami.\nMiłośniku ubóstwa – módl się za nami.\nWzorze pracujących – módl się za nami.\nOzdobo życia rodzinnego – módl się za nami.\nOpiekunie dziewic – módl się za nami.\nPodporo rodzin – módl się za nami.\nPociecho nieszczęśliwych – módl się za nami.\nNadziejo chorych – módl się za nami.\nPatronie umierających – módl się za nami.\nPostrachu duchów piekielnych – módl się za nami.\nOpiekunie Kościoła świętego – módl się za nami.\n\nBaranku Boży, który gładzisz grzechy świata – przepuść nam Panie.\nBaranku Boży, który gładzisz grzechy świata – wysłuchaj nas Panie.\nBaranku Boży, który gładzisz grzechy świata – zmiłuj się nad nami.\n\nV. Ustanowił go panem domu swego.\nR. I rządcą wszystkich posiadłości swoich.\n\nMódlmy się: Boże, Ty w niewysłowionej Opatrzności wybrałeś świętego Józefa na Oblubieńca Najświętszej Rodzicielki Twojego Syna, spraw, prosimy, abyśmy zasłużyli na jego orędownictwo w niebie, gdy jako opiekuna czcimy go na ziemi. Który żyjesz i królujesz na wieki wieków. Amen.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'litania-duch-swiety',
+    name: 'Litania do Ducha Świętego',
+    category: 'litania',
+    emoji: '🕊️',
+    description: 'Modlitwa o dary i owoce Ducha Świętego',
+    duration: '10 min',
+    days: null,
+    intro: 'Wzywanie Trzeciej Osoby Boskiej o światło, moc i uświęcenie.',
+    parts: [
+      {
+        title: 'Litania',
+        text: 'Kyrie elejson. Chryste elejson. Kyrie elejson.\nChryste usłysz nas. Chryste wysłuchaj nas.\nOjcze z nieba Boże – zmiłuj się nad nami.\nSynu Odkupicielu świata Boże – zmiłuj się nad nami.\nDuchu Święty Boże – zmiłuj się nad nami.\nŚwięta Trójco Jedyny Boże – zmiłuj się nad nami.\n\nDuchu Święty, który od Ojca i Syna pochodzisz – zmiłuj się nad nami.\nDuchu Święty, który z Ojcem i Synem wspólnie jesteś uwielbiany i chwalony – zmiłuj się nad nami.\nObietnico Boga Ojca – zmiłuj się nad nami.\nŹródło światłości niebieskiej – zmiłuj się nad nami.\nDawco wszelkich łask – zmiłuj się nad nami.\nSkarbnico darów wiecznych – zmiłuj się nad nami.\nOgniu miłości – zmiłuj się nad nami.\nSłodyczy duchowa – zmiłuj się nad nami.\nDuchu prawdy i miłości – zmiłuj się nad nami.\nDuchu mądrości i rozumu – zmiłuj się nad nami.\nDuchu rady i męstwa – zmiłuj się nad nami.\nDuchu umiejętności i pobożności – zmiłuj się nad nami.\nDuchu bojaźni Pańskiej – zmiłuj się nad nami.\nDuchu pokoju i łagodności – zmiłuj się nad nami.\nDuchu czystości i niewinności – zmiłuj się nad nami.\nDuchu Pocieszycielu – zmiłuj się nad nami.\nDuchu uświęcicielu – zmiłuj się nad nami.\nDuchu prowadzący Kościół – zmiłuj się nad nami.\nDuchu napełniający wszechświat – zmiłuj się nad nami.\nDuchu adoptujący nas za synów Bożych – zmiłuj się nad nami.\n\nBądź nam miłościw – przepuść nam Duchu Święty.\nBądź nam miłościw – wysłuchaj nas Duchu Święty.\n\nOd wszelkiego złego – wybaw nas Duchu Święty.\nOd każdego grzechu – wybaw nas Duchu Święty.\nOd pokus szatańskich – wybaw nas Duchu Święty.\nOd wszelkiej nieufności – wybaw nas Duchu Święty.\nOd oporu wobec prawdy objawionej – wybaw nas Duchu Święty.\nOd nieczystości duszy i ciała – wybaw nas Duchu Święty.\nOd zaniedbania natchnień Twoich – wybaw nas Duchu Święty.\nW godzinę śmierci – wybaw nas Duchu Święty.\n\nMy grzeszni, Ciebie prosimy – wysłuchaj nas Duchu Święty.\nAbyś rządził i uświęcał Kościół Twój święty – wysłuchaj nas Duchu Święty.\nAbyś nas w wierze utwierdzał – wysłuchaj nas Duchu Święty.\nAbyś nam daru modlitwy udzielał – wysłuchaj nas Duchu Święty.\nAbyś nam miłości Bożej użyczał – wysłuchaj nas Duchu Święty.\nAbyś nas do nieba doprowadził – wysłuchaj nas Duchu Święty.\n\nBaranku Boży... (3 razy)\n\nMódlmy się: Boże, któryś serca wiernych światłem Ducha Świętego oświecił, daj nam w tymże Duchu poznać co jest prawe i Jego pociechą zawsze się weselić. Przez Chrystusa Pana naszego. Amen.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'modlitwa-poranna',
+    name: 'Modlitwy poranne',
+    category: 'inne',
+    emoji: '☀️',
+    description: 'Zbiór podstawowych modlitw na początek dnia',
+    duration: '5 min',
+    days: null,
+    intro: 'Ofiarowanie dnia Panu Bogu zaraz po przebudzeniu.',
+    parts: [
+      {
+        title: 'Kiedy rano wstaję',
+        text: 'Kiedy rano wstaję, Tobie Boże serce moje oddaję. Tobie Boże duszę moją, pod opiekę oddaję Twoją.\n\nBoże mój, dziękuję Ci za noc dzisiejszą, za sen spokojny i proszę Cię: błogosław mi w tym dniu, aby każda moja myśl, słowo i uczynek były na Twoją chwałę. Amen.'
+      },
+      {
+        title: 'Akt wiary, nadziei i miłości',
+        text: 'Wierzę w Ciebie, Boże żywy, w Trójcy jedyny, prawdziwy. Wierzę, coś objawił Boże, Twe słowo mylić nie może.\n\nUfam Tobie, boś Ty wierny, wszechmogący i miłosierny. Dasz mi grzechów odpuszczenie, łaskę i wieczne zbawienie.\n\nBoże, choć Cię nie pojmuję, nad wszystko Cię miłuję. Nad wszystko, co jest stworzone, boś Ty dobro nieskończone. A jako siebie samego, czczę bliźniego dla Boga mego.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'modlitwa-wieczorna',
+    name: 'Modlitwy wieczorne',
+    category: 'inne',
+    emoji: '🌙',
+    description: 'Rachunek sumienia i podziękowanie za przeżyty dzień',
+    duration: '5 min',
+    days: null,
+    intro: 'Spokojne zakończenie dnia w obecności Bożej.',
+    parts: [
+      {
+        title: 'Wszystkie nasze dzienne sprawy',
+        text: 'Wszystkie nasze dzienne sprawy przyjm łaskawie, Boże prawy. A gdy będziem zasypiali, niech Cię nasze serca chwalą.\n\nDziękuję Ci, Panie, za wszystkie dobrodziejstwa dzisiejszego dnia. Przepraszam Cię za wszystkie moje grzechy i zaniedbania (chwila na rachunek sumienia). Przebacz mi je dla miłosierdzia Twego.'
+      },
+      {
+        title: 'Akt żalu',
+        text: 'Ach, żałuję za me złości, jedynie dla Twej miłości. Bądź miłościw mnie grzesznemu, dla Ciebie Stworzycielowi memu.'
+      },
+      {
+        title: 'Pod Twoją Obronę',
+        text: 'Pod Twoją obronę uciekamy się, Święta Boża Rodzicielko, naszymi prośbami racz nie gardzić w potrzebach naszych, ale od wszelakich złych przygód racz nas zawsze wybawiać, Panno chwalebna i błogosławiona. O Pani nasza, Orędowniczko nasza, Pośredniczko nasza, Pocieszycielko nasza. Z Synem swoim nas pojednaj, Synowi swojemu nas polecaj, Synowi swojemu nas oddawaj. Amen.'
+      }
+    ],
+    mysteries: []
   }
 ]
 
 export const CATEGORIES = [
-  { id: 'all', label: 'Wszystkie', emoji: '' },
-  { id: 'rozaniec', label: 'Różaniec', emoji: '' },
-  { id: 'koronka', label: 'Koronka', emoji: '' },
-  { id: 'maryjna', label: 'Maryjna', emoji: '' },
-  { id: 'litania', label: 'Litania', emoji: '' },
-  { id: 'nowenna', label: 'Nowenna', emoji: '' },
-  { id: 'pasja', label: 'Pasja', emoji: '' },
-  { id: 'liturgia-godzin', label: 'Liturgia Godzin', emoji: '' },
+  { id: 'all', label: 'Wszystkie', emoji: '✨' },
+  { id: 'rozaniec', label: 'Różaniec', emoji: '📿' },
+  { id: 'koronka', label: 'Koronka', emoji: '💎' },
+  { id: 'maryjna', label: 'Maryjna', emoji: '🌹' },
+  { id: 'litania', label: 'Litania', emoji: '📜' },
+  { id: 'nowenna', label: 'Nowenna', emoji: '🔥' },
+  { id: 'pasja', label: 'Pasja', emoji: '✝️' },
+  { id: 'liturgia-godzin', label: 'Liturgia Godzin', emoji: '📖' },
+  { id: 'inne', label: 'Inne / Codzienne', emoji: '🙏' },
 ]
