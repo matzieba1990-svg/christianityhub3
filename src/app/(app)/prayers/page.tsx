@@ -22,11 +22,12 @@ export default function PrayersPage() {
               className="flex-shrink-0 pill transition-all"
               style={{
                 scrollSnapAlign: 'start',
-                background: cat === c.id ? 'linear-gradient(135deg,#7c3aed,#a855f7)' : 'rgba(255,255,255,0.06)',
+                background: cat === c.id ? 'var(--gold)' : 'white',
                 color: cat === c.id ? 'white' : 'var(--text-muted)',
-                border: cat === c.id ? 'none' : '1px solid rgba(255,255,255,0.08)',
+                border: cat === c.id ? 'none' : '1px solid var(--border)',
                 padding: '8px 14px',
                 fontSize: '13px',
+                boxShadow: cat === c.id ? '0 4px 14px rgba(201,162,39,0.2)' : 'none'
               }}>
               {c.emoji} {c.label}
             </button>

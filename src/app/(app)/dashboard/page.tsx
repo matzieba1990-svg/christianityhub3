@@ -1,7 +1,7 @@
 'use client'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
-import { HandHeart, BookOpen, Calendar, Users, ChevronRight, Cross } from 'lucide-react'
+import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut } from 'lucide-react'
 
 const QUOTE_OF_DAY = {
   text: '"Proście, a będzie wam dane; szukajcie, a znajdziecie; kołaczcie, a otworzą wam."',
@@ -29,10 +29,14 @@ export default function DashboardPage() {
           <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>{greeting},</p>
           <h1 className="text-2xl font-bold font-mystic" style={{ color: 'var(--gold-dark)' }}>{name}</h1>
         </div>
-        <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
-          style={{ background: 'white', color: 'var(--gold)', border: '1px solid var(--gold)', boxShadow: '0 2px 10px rgba(201,162,39,0.1)' }}>
-          ✝
-        </div>
+        <button 
+          onClick={() => signOut({ callbackUrl: '/login' })}
+          className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+          style={{ background: 'white', color: 'var(--text-muted)', border: '1px solid var(--border)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}
+          title="Wyloguj się"
+        >
+          <LogOut size={16} />
+        </button>
       </div>
 
       {/* Quote card */}
