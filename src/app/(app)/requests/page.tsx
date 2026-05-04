@@ -1,11 +1,8 @@
-'use client'
 import PageHeader from '@/components/PageHeader'
 import { HandHeart, Users, Heart, Plus } from 'lucide-react'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
-
-// Mock data — w produkcji zastąpić API
-const MOCK_REQUESTS: any[] = []
+import { auth } from '@/lib/auth'
+import { prisma } from '@/lib/db'
 
 const CAT_COLORS: Record<string, string> = {
   zdrowie: '#ef4444',
@@ -25,19 +22,40 @@ const CAT_LABELS: Record<string, string> = {
   inne: '✝️ Inne',
 }
 
-export default function RequestsPage() {
-  const { data: session } = useSession()
+const CAT_EMOJIS: Record<string, string> = {
+  zdrowie: '🏥',
+  nawrocenie: '🕊️',
+  dziekczynienie: '🎉',
+  rodzina: '👨‍👩‍👧',
+  praca: '💼',
+  inne: '✝️',
+}
+
+export const revalidate = 0 // Disable cache to always see new requests
+
+export default async function RequestsPage() {
+  const session = await auth()
+
+  const requests = await prisma.prayerRequest.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: {
+      user: { select: { name: true } },
+      _count: { select: { acceptances: true } }
+    }
+  })
+
+  const totalAcceptances = requests.reduce((sum, req) => sum + req._count.acceptances, 0)
 
   return (
     <div className="pb-6">
       <PageHeader
         title="Prośby o modlitwę"
-        subtitle={`${MOCK_REQUESTS.reduce((s, r) => s + r.acceptances, 0)} modlitw złożonych`}
+        subtitle={`${totalAcceptances} modlitw podjętych`}
         right={
           session ? (
             <Link href="/requests/new"
               className="w-9 h-9 flex items-center justify-center rounded-full"
-              style={{ background: 'linear-gradient(135deg,#7c3aed,#a855f7)' }}>
+              style={{ background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))' }}>
               <Plus size={18} color="white" />
             </Link>
           ) : null
@@ -48,9 +66,9 @@ export default function RequestsPage() {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3 mb-5">
           {[
-            { icon: HandHeart, value: MOCK_REQUESTS.length, label: 'Prośby', color: '#c9a227' },
-            { icon: Heart, value: MOCK_REQUESTS.reduce((s, r) => s + r.acceptances, 0), label: 'Modlitw', color: '#ef4444' },
-            { icon: Users, value: '24', label: 'Modlących', color: '#7c3aed' },
+            { icon: HandHeart, value: requests.length, label: 'Prośby', color: '#c9a227' },
+            { icon: Heart, value: totalAcceptances, label: 'Modlitw', color: '#ef4444' },
+            { icon: Users, value: '∞', label: 'Modlących', color: '#7c3aed' },
           ].map(({ icon: Icon, value, label, color }) => (
             <div key={label} className="card p-3 text-center">
               <Icon size={18} style={{ color, margin: '0 auto 4px' }} />
@@ -61,37 +79,45 @@ export default function RequestsPage() {
         </div>
 
         {/* Prayer requests */}
-        <div className="space-y-3">
-          {MOCK_REQUESTS.map(req => (
-            <div key={req.id} className="card p-4 prayer-card">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-                  style={{ background: `${CAT_COLORS[req.category]}15`, border: `1px solid ${CAT_COLORS[req.category]}33` }}>
-                  {req.emoji}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="pill text-xs"
-                      style={{ background: `${CAT_COLORS[req.category]}15`, color: CAT_COLORS[req.category], border: `1px solid ${CAT_COLORS[req.category]}30` }}>
-                      {CAT_LABELS[req.category]}
-                    </span>
+        {requests.length === 0 ? (
+          <div className="card p-8 text-center mt-4">
+            <p className="text-3xl mb-2">🕊️</p>
+            <p className="font-semibold mb-1" style={{ color: 'var(--text-main)' }}>Brak aktywnych próśb</p>
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Bądź pierwszą osobą, która poprosi wspólnotę o modlitwę.</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {requests.map(req => (
+              <div key={req.id} className="card p-4 prayer-card">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                    style={{ background: `${CAT_COLORS[req.category] || CAT_COLORS.inne}15`, border: `1px solid ${CAT_COLORS[req.category] || CAT_COLORS.inne}33` }}>
+                    {CAT_EMOJIS[req.category] || CAT_EMOJIS.inne}
                   </div>
-                  <h3 className="font-semibold text-sm mb-1" style={{ color: 'var(--text-main)' }}>{req.title}</h3>
-                  <p className="text-xs line-clamp-2 mb-2" style={{ color: 'var(--text-muted)' }}>{req.content}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                      {req.isAnonymous ? '🙏 Anonimowo' : `✝ ${req.author}`}
-                    </span>
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95"
-                      style={{ background: 'rgba(201,162,39,0.12)', color: 'var(--gold)', border: '1px solid rgba(201,162,39,0.25)' }}>
-                      🙏 {req.acceptances} modlitw
-                    </button>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="pill text-xs"
+                        style={{ background: `${CAT_COLORS[req.category] || CAT_COLORS.inne}15`, color: CAT_COLORS[req.category] || CAT_COLORS.inne, border: `1px solid ${CAT_COLORS[req.category] || CAT_COLORS.inne}30` }}>
+                        {CAT_LABELS[req.category] || CAT_LABELS.inne}
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-sm mb-1" style={{ color: 'var(--text-main)' }}>{req.title}</h3>
+                    <p className="text-xs line-clamp-2 mb-2" style={{ color: 'var(--text-muted)' }}>{req.content}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                        {req.isAnonymous ? '🙏 Anonimowo' : `✝ ${req.user.name || 'Pielgrzym'}`}
+                      </span>
+                      <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95"
+                        style={{ background: 'rgba(201,162,39,0.12)', color: 'var(--gold-dark)', border: '1px solid rgba(201,162,39,0.25)' }}>
+                        🙏 {req._count.acceptances} modlitw
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {!session && (
           <div className="card mt-6 p-5 text-center" style={{ borderColor: 'rgba(201,162,39,0.3)' }}>
