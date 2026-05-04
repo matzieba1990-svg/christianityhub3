@@ -3,12 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import { Users, Plus, ChevronRight, Lock, Globe } from 'lucide-react'
 import Link from 'next/link'
 
-const MOCK_COMMUNITIES = [
-  { id: '1', name: 'Parafia Wniebowzięcia NMP Kraków', description: 'Wspólnota parafialna ul. Długa. Zapraszamy wszystkich!', members: 234, isPublic: true, emoji: '⛪' },
-  { id: '2', name: 'Żywy Różaniec – Małopolska', description: 'Różańcowa wspólnota modlitewna dla wszystkich grup wiekowych.', members: 89, isPublic: true, emoji: '📿' },
-  { id: '3', name: 'Wspólnota Odnowy w Duchu Świętym', description: 'Modlitwa charyzmatyczna, uwielbienie, lectio divina.', members: 47, isPublic: true, emoji: '🕊️' },
-  { id: '4', name: 'Oaza Rodzin – Diecezja Krakowska', description: 'Ruch Światło-Życie dla rodzin.', members: 156, isPublic: false, emoji: '👨‍👩‍👧' },
-]
+const MOCK_COMMUNITIES: any[] = []
 
 export default function CommunityPage() {
   return (

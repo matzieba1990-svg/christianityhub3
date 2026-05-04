@@ -5,12 +5,7 @@ import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
 // Mock data — w produkcji zastąpić API
-const MOCK_REQUESTS = [
-  { id: '1', title: 'Za zdrowie mojej mamy', content: 'Proszę o modlitwę za moją mamę, która zmaga się z chorobą nowotworową. Dziękuję z całego serca.', category: 'zdrowie', author: 'Anna K.', isAnonymous: false, acceptances: 47, createdAt: '2026-05-03', emoji: '🏥' },
-  { id: '2', title: 'Za nawrócenie mojego brata', content: 'Brat odszedł od wiary. Proszę o modlitwę w jego intencji.', category: 'nawrocenie', author: 'Anonimowo', isAnonymous: true, acceptances: 23, createdAt: '2026-05-04', emoji: '🕊️' },
-  { id: '3', title: 'Dziękczynienie za zdany egzamin', content: 'Dziękuję Bogu i Was proszę o wspólne dziękczynienie!', category: 'dziekczynienie', author: 'Paweł M.', isAnonymous: false, acceptances: 89, createdAt: '2026-05-04', emoji: '🎉' },
-  { id: '4', title: 'Za pokój na świecie', content: 'W intencji pokoju, szczególnie dla rodzin dotkniętych wojną.', category: 'inne', author: 'Maria W.', isAnonymous: false, acceptances: 156, createdAt: '2026-05-02', emoji: '✝️' },
-]
+const MOCK_REQUESTS: any[] = []
 
 const CAT_COLORS: Record<string, string> = {
   zdrowie: '#ef4444',
