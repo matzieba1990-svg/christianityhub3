@@ -33,21 +33,21 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-dvh flex flex-col px-6 py-10"
-      style={{ background: 'linear-gradient(180deg, #0f0720 0%, #1a0f35 100%)' }}>
+      style={{ background: 'var(--bg-primary)' }}>
 
       {/* Logo */}
       <div className="flex flex-col items-center mb-10 mt-8">
         <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-4xl mb-4"
-          style={{ background: 'linear-gradient(135deg,#7c3aed,#c9a227)', boxShadow: '0 0 40px rgba(124,58,237,0.4)' }}>
+          style={{ background: 'linear-gradient(135deg, #FFF, #FDF9F3)', border: '1px solid var(--gold)', boxShadow: '0 4px 20px rgba(201,162,39,0.15)' }}>
           ✝
         </div>
-        <h1 className="text-3xl font-black text-gold-gradient">ChristianityHub</h1>
+        <h1 className="text-3xl font-mystic text-gold-gradient">ChristianityHub</h1>
         <p className="text-sm mt-2" style={{ color: 'var(--text-muted)' }}>Wspólnota Katolicka</p>
       </div>
 
       {/* Form */}
       <div className="card p-6 mb-4">
-        <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--text-main)' }}>Zaloguj się</h2>
+        <h2 className="text-xl font-mystic font-bold mb-6 text-center" style={{ color: 'var(--text-main)' }}>Zaloguj się</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-xs font-semibold uppercase tracking-wide mb-1 block"

@@ -60,7 +60,7 @@ export default function ProfilePage() {
         {/* Avatar & name */}
         <div className="flex flex-col items-center mb-6 animate-fade-in">
           <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-black mb-3"
-            style={{ background: 'linear-gradient(135deg,#7c3aed,#c9a227)', color: 'white' }}>
+            style={{ background: 'linear-gradient(135deg, var(--gold), var(--gold-dark))', color: 'white', boxShadow: '0 4px 15px rgba(201,162,39,0.3)' }}>
             {session.user?.image
               ? <img src={session.user.image} className="w-full h-full rounded-full object-cover" alt="" />
               : initials}
@@ -100,8 +100,8 @@ export default function ProfilePage() {
             <Link key={href} href={href}
               className="card prayer-card flex items-center gap-4 p-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                style={{ background: 'rgba(124,58,237,0.1)' }}>
-                <Icon size={18} style={{ color: 'var(--purple-light)' }} />
+                style={{ background: 'rgba(201,162,39,0.1)' }}>
+                <Icon size={18} style={{ color: 'var(--gold-dark)' }} />
               </div>
               <div className="flex-1">
                 <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>{label}</p>
@@ -110,6 +110,16 @@ export default function ProfilePage() {
               <ChevronRight size={16} style={{ color: 'var(--text-muted)' }} />
             </Link>
           ))}
+        </div>
+
+        {/* Big Logout Button */}
+        <div className="mt-8 mb-4">
+          <button onClick={() => signOut({ callbackUrl: '/login' })}
+            className="w-full card p-4 flex items-center justify-center gap-2 text-sm font-bold"
+            style={{ color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.03)' }}>
+            <LogOut size={18} />
+            Wyloguj się z urządzenia
+          </button>
         </div>
       </div>
     </div>

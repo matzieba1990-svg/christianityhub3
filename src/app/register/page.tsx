@@ -34,18 +34,18 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-dvh flex flex-col px-6 py-10"
-      style={{ background: 'linear-gradient(180deg, #0f0720 0%, #1a0f35 100%)' }}>
+      style={{ background: 'var(--bg-primary)' }}>
 
       <div className="flex flex-col items-center mb-8 mt-6">
         <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-3"
-          style={{ background: 'linear-gradient(135deg,#7c3aed,#c9a227)', boxShadow: '0 0 30px rgba(124,58,237,0.3)' }}>
+          style={{ background: 'linear-gradient(135deg, #FFF, #FDF9F3)', border: '1px solid var(--gold)', boxShadow: '0 4px 20px rgba(201,162,39,0.15)' }}>
           ✝
         </div>
-        <h1 className="text-2xl font-black text-gold-gradient">ChristianityHub</h1>
+        <h1 className="text-2xl font-mystic font-black text-gold-gradient">ChristianityHub</h1>
       </div>
 
       <div className="card p-6 mb-4">
-        <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--text-main)' }}>Utwórz konto</h2>
+        <h2 className="text-xl font-mystic font-bold mb-6 text-center" style={{ color: 'var(--text-main)' }}>Utwórz konto</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="text-xs font-semibold uppercase tracking-wide mb-1 block" style={{ color: 'var(--text-muted)' }}>Imię i nazwisko</label>

@@ -1,19 +1,24 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist } from 'next/font/google'
+import { Inter, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 
-const geist = Geist({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const cormorant = Cormorant_Garamond({ 
+  subsets: ['latin'], 
+  weight: ['400', '600', '700'],
+  variable: '--font-cormorant' 
+})
 
 export const metadata: Metadata = {
   title: 'ChristianityHub – Wspólnota Katolicka',
   description: 'Portal łączący katolików. Prośby o modlitwę, biblioteka modlitw, kalendarz liturgiczny.',
   manifest: '/manifest.json',
-  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: 'ChristianityHub' },
+  appleWebApp: { capable: true, statusBarStyle: 'default', title: 'ChristianityHub' },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1a0a2e',
+  themeColor: '#FAF6F0',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -21,8 +26,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl" className="dark">
-      <body className={geist.className}>
+    <html lang="pl" className={`${inter.variable} ${cormorant.variable}`}>
+      <body className="font-sans">
         <Providers>{children}</Providers>
       </body>
     </html>

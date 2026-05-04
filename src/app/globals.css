@@ -1,17 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #0f0720;
-  --bg-card: #1a0f35;
-  --bg-card2: #1f1245;
-  --gold: #c9a227;
-  --gold-light: #e8c547;
-  --purple: #7c3aed;
-  --purple-light: #a855f7;
-  --cream: #fdf6e3;
-  --text-main: #f0e6d3;
-  --text-muted: #9e8fbb;
-  --border: #2d1f5e;
+  --bg-primary: #FAF6F0; /* jasny beż */
+  --bg-card: #FFFFFF;    /* czysta biel */
+  --bg-card2: #FDF9F3;
+  --gold: #C9A227;
+  --gold-light: #E5C354;
+  --gold-dark: #A5831C;
+  --text-main: #2C2621;  /* głęboki, mistyczny brąz */
+  --text-muted: #857A70;
+  --border: #E8DFD3;
 }
 
 * { box-sizing: border-box; }
@@ -21,6 +19,11 @@ body {
   color: var(--text-main);
   min-height: 100dvh;
   overscroll-behavior: none;
+  font-family: var(--font-inter), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-mystic {
+  font-family: var(--font-cormorant), serif;
 }
 
 /* Mobile safe areas */
@@ -32,79 +35,88 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-/* Card glassmorphism */
+/* Card styles for light theme */
 .card {
-  background: linear-gradient(135deg, rgba(28,15,60,0.9), rgba(15,7,32,0.95));
-  border: 1px solid rgba(124,58,237,0.2);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 20px;
-  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
 }
 
 .card-gold {
   border-color: rgba(201,162,39,0.3);
-  background: linear-gradient(135deg, rgba(40,25,10,0.9), rgba(20,12,5,0.95));
+  background: linear-gradient(135deg, #FFFCF5, #FDF9F3);
+  box-shadow: 0 4px 20px rgba(201,162,39,0.08);
 }
 
 /* Glow effects */
-.glow-gold { box-shadow: 0 0 20px rgba(201,162,39,0.15); }
-.glow-purple { box-shadow: 0 0 20px rgba(124,58,237,0.15); }
+.glow-gold { box-shadow: 0 0 20px rgba(201,162,39,0.25); }
 
 /* Bottom nav */
 .bottom-nav {
-  background: linear-gradient(180deg, rgba(15,7,32,0.0), rgba(15,7,32,0.98) 20%);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(124,58,237,0.15);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.02);
 }
 
 /* Animations */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-@keyframes pulse-gold { 0%,100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.4); } 50% { box-shadow: 0 0 0 8px rgba(201,162,39,0); } }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse-gold { 0%,100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.2); } 50% { box-shadow: 0 0 0 10px rgba(201,162,39,0); } }
 
 .animate-fade-in { animation: fadeIn 0.4s ease both; }
-.animate-pulse-gold { animation: pulse-gold 2s ease infinite; }
+.animate-pulse-gold { animation: pulse-gold 2.5s ease infinite; }
 
 /* Gold gradient text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #c9a227, #e8c547, #c9a227);
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 3s linear infinite;
+  animation: shimmer 4s linear infinite;
 }
 
 /* Prayer card hover */
 .prayer-card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
-.prayer-card:active { transform: scale(0.98); }
+.prayer-card:active { 
+  transform: scale(0.98); 
+  border-color: var(--gold-light);
+}
 
 /* Input styles */
 .inp {
   width: 100%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(124,58,237,0.3);
+  background: #FFFFFF;
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 12px 16px;
   color: var(--text-main);
-  font-size: 16px; /* prevents zoom on iOS */
+  font-size: 16px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
 }
-.inp:focus { border-color: var(--purple-light); }
-.inp::placeholder { color: var(--text-muted); }
+.inp:focus { 
+  border-color: var(--gold); 
+  box-shadow: 0 0 0 3px rgba(201,162,39,0.1);
+}
+.inp::placeholder { color: var(--text-muted); opacity: 0.7; }
 
 /* Button styles */
 .btn-primary {
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
-  color: white;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #FFFFFF;
   border: none;
   border-radius: 14px;
   padding: 14px 24px;
   font-size: 16px;
   font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(201,162,39,0.3);
   cursor: pointer;
   width: 100%;
   transition: opacity 0.2s, transform 0.1s;
@@ -112,30 +124,31 @@ body {
 .btn-primary:active { opacity: 0.85; transform: scale(0.98); }
 
 .btn-gold {
-  background: linear-gradient(135deg, #c9a227, #e8c547);
-  color: #1a0a00;
-  border: none;
+  background: #FFFFFF;
+  color: var(--gold-dark);
+  border: 1px solid var(--gold);
   border-radius: 14px;
   padding: 14px 24px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   width: 100%;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(201,162,39,0.1);
 }
-.btn-gold:active { opacity: 0.85; transform: scale(0.98); }
+.btn-gold:active { background: #FAFAFA; transform: scale(0.98); }
 
 .btn-outline {
   background: transparent;
-  color: var(--text-main);
-  border: 1px solid rgba(124,58,237,0.4);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 12px 20px;
   font-size: 15px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
-.btn-outline:active { background: rgba(124,58,237,0.1); }
+.btn-outline:active { background: rgba(0,0,0,0.02); color: var(--text-main); }
 
 /* Category pills */
 .pill {
@@ -147,12 +160,16 @@ body {
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
+  background: #FDF9F3;
+  color: var(--gold-dark);
+  border: 1px solid rgba(201,162,39,0.2);
 }
 
 /* Cross decoration */
 .cross-bg {
   position: absolute;
-  opacity: 0.03;
+  opacity: 0.04;
   pointer-events: none;
   user-select: none;
+  filter: invert(1);
 }
