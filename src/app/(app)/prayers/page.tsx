@@ -48,12 +48,12 @@ export default function PrayersPage() {
       <PageHeader title="Biblioteka modlitw" subtitle="Pełna operacyjność duchowa" />
 
       <div className="px-4 space-y-4 mb-6">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" size={18} />
+        <div className="relative max-w-md">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" size={15} />
           <input 
             type="text"
-            placeholder="Szukaj modlitwy, historii lub intencji..."
-            className="inp pl-10 py-3"
+            placeholder="Szukaj modlitwy..."
+            className="inp !pl-12 py-2 text-sm"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -68,8 +68,8 @@ export default function PrayersPage() {
                 background: selectedCat === c.id ? 'var(--gold)' : 'white',
                 color: selectedCat === c.id ? 'white' : 'var(--text-muted)',
                 border: selectedCat === c.id ? 'none' : '1px solid var(--border)',
-                padding: '8px 14px',
-                fontSize: '13px',
+                padding: '6px 12px',
+                fontSize: '12px',
                 boxShadow: selectedCat === c.id ? '0 4px 14px rgba(201,162,39,0.2)' : 'none'
               }}>
               {c.label}
@@ -84,7 +84,7 @@ export default function PrayersPage() {
           
           <div className="flex flex-wrap gap-2">
             <select 
-              className="flex-1 min-w-[120px] text-xs p-2 rounded-lg border border-border bg-white outline-none text-text-main"
+              className="flex-1 min-w-[110px] text-[11px] p-1.5 rounded-lg border border-border bg-white outline-none text-text-main"
               value={lengthFilter}
               onChange={(e) => setLengthFilter(e.target.value)}
             >
@@ -95,7 +95,7 @@ export default function PrayersPage() {
             </select>
 
             <select 
-              className="flex-1 min-w-[120px] text-xs p-2 rounded-lg border border-border bg-white outline-none text-text-main"
+              className="flex-1 min-w-[110px] text-[11px] p-1.5 rounded-lg border border-border bg-white outline-none text-text-main"
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
             >
@@ -105,7 +105,7 @@ export default function PrayersPage() {
             </select>
 
             <select 
-              className="w-full text-xs p-2 rounded-lg border border-border bg-white outline-none text-text-main capitalize"
+              className="w-full text-[11px] p-1.5 rounded-lg border border-border bg-white outline-none text-text-main capitalize"
               value={intentionFilter}
               onChange={(e) => setIntentionFilter(e.target.value)}
             >

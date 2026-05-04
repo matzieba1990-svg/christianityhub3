@@ -32,8 +32,9 @@ export default function PageHeader({ title, subtitle, back, backHref, right }: P
         {right && <div>{right}</div>}
         
         {session && (
-          <button onClick={() => signOut({ callbackUrl: '/login' })} className="w-9 h-9 flex items-center justify-center rounded-full"
-            style={{ background: '#FFF', color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)' }}
+          <button onClick={() => signOut({ callbackUrl: '/login' })} 
+            className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+            style={{ background: 'white', color: 'var(--text-muted)', border: '1px solid var(--border)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}
             title="Wyloguj się">
             <LogOut size={16} />
           </button>
