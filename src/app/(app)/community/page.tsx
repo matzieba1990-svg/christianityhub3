@@ -2,10 +2,30 @@
 import PageHeader from '@/components/PageHeader'
 import { Users, Plus, ChevronRight, Lock, Globe } from 'lucide-react'
 import Link from 'next/link'
-
-const MOCK_COMMUNITIES: any[] = []
+import { useState, useEffect } from 'react'
 
 export default function CommunityPage() {
+  const [communities, setCommunities] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    fetch('/api/community')
+      .then(res => res.json())
+      .then(data => {
+        if (data.communities) {
+          setCommunities(data.communities)
+        }
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  const filteredCommunities = communities.filter(c => 
+    c.name.toLowerCase().includes(search.toLowerCase()) || 
+    (c.description && c.description.toLowerCase().includes(search.toLowerCase()))
+  )
+
   return (
     <div className="pb-6">
       <PageHeader
@@ -22,32 +42,43 @@ export default function CommunityPage() {
 
       <div className="px-4">
         {/* Search */}
-        <input className="inp mb-4" placeholder="Szukaj wspólnoty..." />
+        <input 
+          className="inp mb-4" 
+          placeholder="Szukaj wspólnoty..." 
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
 
         {/* Communities */}
         <div className="space-y-3">
-          {MOCK_COMMUNITIES.map(c => (
-            <Link key={c.id} href={`/community/${c.id}`}
-              className="card prayer-card flex items-center gap-4 p-4">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-                style={{ background: 'rgba(124,58,237,0.1)', border: '1px solid rgba(124,58,237,0.2)' }}>
-                {c.emoji}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <p className="font-semibold text-sm truncate" style={{ color: 'var(--text-main)' }}>{c.name}</p>
-                  {!c.isPublic && <Lock size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
-                  {c.isPublic && <Globe size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
+          {loading ? (
+            <div className="text-center py-8 text-text-muted text-sm">Ładowanie wspólnot...</div>
+          ) : filteredCommunities.length === 0 ? (
+            <div className="text-center py-8 text-text-muted text-sm">Nie znaleziono żadnych wspólnot.</div>
+          ) : (
+            filteredCommunities.map(c => (
+              <Link key={c.id} href={`/community/${c.id}`}
+                className="card prayer-card flex items-center gap-4 p-4">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+                  style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)', color: 'var(--gold)' }}>
+                  <Users size={24} />
                 </div>
-                <p className="text-xs line-clamp-2 mb-2" style={{ color: 'var(--text-muted)' }}>{c.description}</p>
-                <div className="flex items-center gap-1">
-                  <Users size={11} style={{ color: 'var(--gold)' }} />
-                  <span className="text-xs font-semibold" style={{ color: 'var(--gold)' }}>{c.members} członków</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <p className="font-semibold text-sm truncate" style={{ color: 'var(--text-main)' }}>{c.name}</p>
+                    {!c.isPublic && <Lock size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
+                    {c.isPublic && <Globe size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
+                  </div>
+                  <p className="text-xs line-clamp-2 mb-2" style={{ color: 'var(--text-muted)' }}>{c.description}</p>
+                  <div className="flex items-center gap-1">
+                    <Users size={11} style={{ color: 'var(--gold)' }} />
+                    <span className="text-xs font-semibold" style={{ color: 'var(--gold)' }}>{c.membersCount || 1} członków</span>
+                  </div>
                 </div>
-              </div>
-              <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
-            </Link>
-          ))}
+                <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+              </Link>
+            ))
+          )}
         </div>
 
         {/* Create CTA */}
@@ -57,7 +88,9 @@ export default function CommunityPage() {
           </div>
           <p className="font-semibold text-sm mb-1" style={{ color: 'var(--text-main)' }}>Nie ma Twojej wspólnoty?</p>
           <p className="text-xs mb-4" style={{ color: 'var(--text-muted)' }}>Załóż grupę dla swojej parafii lub ruchu modlitewnego</p>
-          <button className="btn-outline" style={{ fontSize: '14px', padding: '10px' }}>+ Utwórz wspólnotę</button>
+          <Link href="/community/new" className="btn-outline inline-block" style={{ fontSize: '14px', padding: '10px 20px' }}>
+            + Utwórz wspólnotę
+          </Link>
         </div>
       </div>
     </div>
