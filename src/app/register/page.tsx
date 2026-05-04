@@ -37,8 +37,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col px-6 py-10"
+    <div className="min-h-dvh flex flex-col justify-center items-center px-6 py-10 w-full"
       style={{ background: 'var(--bg-primary)' }}>
+      <div className="w-full max-w-sm flex flex-col justify-center">
 
       <div className="flex flex-col items-center mb-8 mt-6">
         <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-3"
@@ -87,6 +88,7 @@ export default function RegisterPage() {
         Masz już konto?{' '}
         <Link href="/login" className="font-semibold" style={{ color: 'var(--gold-light)' }}>Zaloguj się</Link>
       </p>
+      </div>
     </div>
   )
 }

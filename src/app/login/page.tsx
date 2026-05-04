@@ -32,8 +32,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-dvh flex flex-col px-6 py-10"
+    <div className="min-h-dvh flex flex-col justify-center items-center px-6 py-10 w-full"
       style={{ background: 'var(--bg-primary)' }}>
+      <div className="w-full max-w-sm flex flex-col justify-center">
 
       {/* Logo */}
       <div className="flex flex-col items-center mb-10 mt-8">
@@ -91,6 +92,7 @@ export default function LoginPage() {
       <p className="text-center text-xs mt-10 opacity-50" style={{ color: 'var(--text-muted)' }}>
         ✝ W Imię Ojca i Syna i Ducha Świętego
       </p>
+      </div>
     </div>
   )
 }

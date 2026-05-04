@@ -24,11 +24,14 @@ export const viewport: Viewport = {
   maximumScale: 1,
 }
 
+import CookieBanner from '@/components/CookieBanner'
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pl" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans">
         <Providers>{children}</Providers>
+        <CookieBanner />
       </body>
     </html>
   )
