@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Nie jesteś zalogowany' }, { status: 401 })
     }
 
-    const { title, content, category, isAnonymous } = await req.json()
+    const { title, content, category, isAnonymous, communityId } = await req.json()
 
     if (!title || !content) {
       return NextResponse.json({ error: 'Tytuł i treść są wymagane' }, { status: 400 })
@@ -21,7 +21,8 @@ export async function POST(req: NextRequest) {
         content,
         category: category || 'inne',
         isAnonymous: Boolean(isAnonymous),
-        userId: session.user.id
+        userId: session.user.id,
+        ...(communityId ? { communityId } : {})
       }
     })
 

@@ -60,6 +60,50 @@ export default function CommunityDetailsPage() {
     }
   }
 
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
+  const [category, setCategory] = useState('inne')
+  const [isAnonymous, setIsAnonymous] = useState(false)
+  const [submitLoading, setSubmitLoading] = useState(false)
+  const [formError, setFormError] = useState('')
+
+  async function handleAddIntent(e: React.FormEvent) {
+    e.preventDefault()
+    if (!title || !content) return
+
+    setSubmitLoading(true)
+    setFormError('')
+
+    try {
+      const res = await fetch('/api/requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, content, category, isAnonymous, communityId: id })
+      })
+
+      if (res.ok) {
+        const { request } = await res.json()
+        // Optimistically add the new request to the top of the list
+        const newRequest = {
+          ...request,
+          user: isAnonymous ? null : { name: session?.user?.name, image: session?.user?.image },
+          _count: { acceptances: 0 }
+        }
+        setCommunity({ ...community, prayerRequests: [newRequest, ...(community.prayerRequests || [])] })
+        setTitle('')
+        setContent('')
+        setIsAnonymous(false)
+      } else {
+        const data = await res.json()
+        setFormError(data.error || 'Błąd dodawania intencji')
+      }
+    } catch (err) {
+      setFormError('Błąd połączenia')
+    } finally {
+      setSubmitLoading(false)
+    }
+  }
+
   if (loading) {
     return (
       <div className="pb-6 min-h-dvh">
@@ -146,19 +190,68 @@ export default function CommunityDetailsPage() {
             
             <h2 className="font-mystic text-lg font-bold text-gold-dark px-2">Tablica modlitwy</h2>
             
-            <div className="card p-5 bg-white border border-dashed border-gold/40 text-center py-8">
-              <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
-                <MessageCircle size={20} />
+            {isMember && (
+              <div className="card p-4 bg-white mb-4">
+                <h3 className="text-sm font-bold text-text-main mb-3 flex items-center gap-2">
+                  <Heart size={16} className="text-gold" /> Dodaj intencję do wspólnoty
+                </h3>
+                <form onSubmit={handleAddIntent} className="space-y-3">
+                  <input 
+                    className="inp text-sm py-2" 
+                    placeholder="W jakiej intencji się modlimy?" 
+                    value={title} onChange={e => setTitle(e.target.value)} required 
+                  />
+                  <textarea 
+                    className="inp text-sm min-h-[60px] py-2" 
+                    placeholder="Opisz intencję, nowennę..." 
+                    value={content} onChange={e => setContent(e.target.value)} required 
+                  />
+                  
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-center gap-2 text-xs text-text-muted cursor-pointer">
+                      <input type="checkbox" checked={isAnonymous} onChange={e => setIsAnonymous(e.target.checked)} className="rounded border-border text-gold focus:ring-gold" />
+                      Dodaj anonimowo
+                    </label>
+                    <button type="submit" className="btn-gold text-xs py-1.5 px-4" disabled={submitLoading}>
+                      {submitLoading ? 'Dodawanie...' : 'Dodaj'}
+                    </button>
+                  </div>
+                  {formError && <p className="text-xs text-red-500">{formError}</p>}
+                </form>
               </div>
-              <h3 className="font-bold text-sm text-text-main mb-1">Miejsce na Wasze intencje</h3>
-              <p className="text-xs text-text-muted max-w-xs mx-auto">
-                Wkrótce członkowie będą mogli dodawać tutaj wspólne intencje, organizować nowenny i wspierać się w modlitwie.
-              </p>
-              {isMember && (
-                <button className="btn-outline mt-4 text-xs py-2 px-4 inline-flex items-center gap-2 opacity-50 cursor-not-allowed">
-                  <Heart size={14} />
-                  Dodaj intencję
-                </button>
+            )}
+
+            {/* List of Requests */}
+            <div className="space-y-3">
+              {(!community.prayerRequests || community.prayerRequests.length === 0) ? (
+                <div className="card p-5 bg-white border border-dashed border-gold/40 text-center py-8">
+                  <div className="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
+                    <MessageCircle size={20} />
+                  </div>
+                  <h3 className="font-bold text-sm text-text-main mb-1">Brak intencji</h3>
+                  <p className="text-xs text-text-muted max-w-xs mx-auto">
+                    Nikt jeszcze nie dodał intencji w tej wspólnocie. Bądź pierwszy!
+                  </p>
+                </div>
+              ) : (
+                community.prayerRequests.map((req: any) => (
+                  <div key={req.id} className="card p-4 bg-white">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h4 className="font-semibold text-sm text-text-main">{req.title}</h4>
+                        <p className="text-[10px] text-text-muted flex items-center gap-1 mt-1">
+                          Od: {req.isAnonymous || !req.user ? 'Anonimowo' : req.user.name} 
+                          <span className="mx-1">•</span> 
+                          {new Date(req.createdAt).toLocaleDateString('pl-PL')}
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-bold text-gold bg-gold/10 px-2 py-1 rounded-md">
+                        {req._count?.acceptances || 0} modli się
+                      </span>
+                    </div>
+                    <p className="text-xs text-text-muted leading-relaxed whitespace-pre-wrap">{req.content}</p>
+                  </div>
+                ))
               )}
             </div>
 

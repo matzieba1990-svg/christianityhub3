@@ -62,7 +62,9 @@ model PrayerRequest {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   userId      String
+  communityId String?  // Optional: if set, it belongs to a community
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  community   Community? @relation(fields: [communityId], references: [id], onDelete: Cascade)
   acceptances PrayerAcceptance[]
 }
 
@@ -84,6 +86,7 @@ model Community {
   isPublic    Boolean  @default(true)
   createdAt   DateTime @default(now())
   members     CommunityMember[]
+  prayerRequests PrayerRequest[]
 }
 
 model CommunityMember {

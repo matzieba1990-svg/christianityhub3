@@ -23,6 +23,22 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
           orderBy: {
             joinedAt: 'asc'
           }
+        },
+        prayerRequests: {
+          include: {
+            user: {
+              select: {
+                name: true,
+                image: true
+              }
+            },
+            _count: {
+              select: { acceptances: true }
+            }
+          },
+          orderBy: {
+            createdAt: 'desc'
+          }
         }
       }
     })
