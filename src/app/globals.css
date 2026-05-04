@@ -31,9 +31,14 @@ h1, h2, h3, h4, h5, h6, .font-mystic {
 .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
 
 /* Scrollbars */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { 
+  background: var(--gold); 
+  border-radius: 10px;
+  border: 2px solid var(--bg-primary);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
 
 /* Card styles for light theme */
 .card {
