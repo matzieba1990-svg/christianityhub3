@@ -9,9 +9,11 @@ export default function ProfilePage() {
   const { data: session } = useSession()
   const [stats, setStats] = useState({ prayers: 0, requests: 0, communities: 0 })
   const [loading, setLoading] = useState(true)
-
   const [activePrayers, setActivePrayers] = useState<any[]>([])
   const [showActive, setShowActive] = useState(false)
+
+  // Force unique instance per session to kill sticky cache
+  const instanceKey = useMemo(() => session?.user?.id || 'guest', [session])
 
   useEffect(() => {
     if (session) {
@@ -36,7 +38,7 @@ export default function ProfilePage() {
 
   if (!session) {
     return (
-      <div className="pb-6">
+      <div className="pb-6" key="profile-guest">
         <PageHeader title="Profil" />
         <div className="px-4 flex flex-col items-center justify-center py-16 text-center">
           <div className="text-6xl mb-6 font-mystic text-gold-gradient">✝</div>
@@ -64,7 +66,7 @@ export default function ProfilePage() {
   ]
 
   return (
-    <div className="pb-6">
+    <div className="pb-6" key={`profile-${instanceKey}`}>
       <PageHeader title="Profil" />
 
       <div className="px-4">
@@ -91,13 +93,17 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        {/* Menu & Active Prayers */}
+        {/* Menu & Active Prayers Tracker */}
         <div className="space-y-2">
-          {/* Active Prayers Dropdown */}
-          <div className="card overflow-hidden bg-white">
+          {/* Active Prayers Dropdown (This is the section that was missing/cached) */}
+          <div className="card overflow-hidden bg-white border-gold/10">
             <button 
-              onClick={() => setShowActive(!showActive)}
+              onClick={(e) => {
+                e.preventDefault();
+                setShowActive(!showActive);
+              }}
               className="w-full flex items-center gap-4 p-4 text-left transition-colors hover:bg-gold/5"
+              id="prayer-path-toggle"
             >
               <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#FAF6F0', color: 'var(--gold)' }}>
                 <BookOpen size={18} />
@@ -114,7 +120,7 @@ export default function ProfilePage() {
             </button>
 
             {showActive && (
-              <div className="px-4 pb-4 border-t border-border animate-fade-in">
+              <div className="px-4 pb-4 border-t border-border animate-fade-in bg-gold/5">
                 {activePrayers.length === 0 ? (
                   <div className="py-4 text-center">
                     <p className="text-xs text-text-muted italic mb-3">Nie masz jeszcze żadnych aktywnych modlitw wielodniowych.</p>
@@ -126,7 +132,7 @@ export default function ProfilePage() {
                       const p = PRAYERS.find(pr => pr.id === ap.prayerId)
                       if (!p) return null
                       return (
-                        <Link key={ap.prayerId} href={`/prayers/${p.id}`} className="block p-3 rounded-xl border border-border hover:border-gold/30 transition-colors">
+                        <Link key={ap.prayerId} href={`/prayers/${p.id}`} className="block p-3 rounded-xl border border-border bg-white hover:border-gold/30 transition-colors">
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-sm font-bold text-text-main">{p.name}</span>
                             <span className="text-[10px] font-black text-gold uppercase">Dzień {ap.lastDay}</span>
@@ -186,6 +192,21 @@ export default function ProfilePage() {
             <ChevronRight size={16} className="text-text-muted" />
           </Link>
         </div>
+
+        {/* Big Logout Button */}
+        <div className="mt-8 mb-4">
+          <button onClick={() => signOut({ callbackUrl: '/login' })}
+            className="w-full card p-4 flex items-center justify-center gap-2 text-sm font-bold"
+            style={{ color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)', background: 'white' }}>
+            <LogOut size={18} />
+            Wyloguj się z urządzenia
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 
 
         {/* Big Logout Button */}
