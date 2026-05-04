@@ -14,15 +14,15 @@ export default function CommunityPage() {
         right={
           <Link href="/community/new"
             className="w-9 h-9 flex items-center justify-center rounded-full"
-            style={{ background: 'linear-gradient(135deg,#7c3aed,#a855f7)' }}>
-            <Plus size={18} color="white" />
+            style={{ background: 'white', border: '1px solid var(--gold)', color: 'var(--gold)' }}>
+            <Plus size={18} />
           </Link>
         }
       />
 
       <div className="px-4">
         {/* Search */}
-        <input className="inp mb-4" placeholder="🔍 Szukaj wspólnoty..." />
+        <input className="inp mb-4" placeholder="Szukaj wspólnoty..." />
 
         {/* Communities */}
         <div className="space-y-3">
@@ -51,8 +51,10 @@ export default function CommunityPage() {
         </div>
 
         {/* Create CTA */}
-        <div className="card mt-5 p-5 text-center" style={{ borderColor: 'rgba(124,58,237,0.3)', background: 'rgba(124,58,237,0.05)' }}>
-          <p className="text-2xl mb-2">⛪</p>
+        <div className="card mt-5 p-5 text-center" style={{ borderColor: 'var(--gold)', background: 'white' }}>
+          <div className="w-10 h-10 rounded-full bg-[#FAF6F0] flex items-center justify-center mx-auto mb-3" style={{ color: 'var(--gold)' }}>
+            <Users size={20} />
+          </div>
           <p className="font-semibold text-sm mb-1" style={{ color: 'var(--text-main)' }}>Nie ma Twojej wspólnoty?</p>
           <p className="text-xs mb-4" style={{ color: 'var(--text-muted)' }}>Załóż grupę dla swojej parafii lub ruchu modlitewnego</p>
           <button className="btn-outline" style={{ fontSize: '14px', padding: '10px' }}>+ Utwórz wspólnotę</button>

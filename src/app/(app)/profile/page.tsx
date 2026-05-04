@@ -12,8 +12,8 @@ export default function ProfilePage() {
       <div className="pb-6">
         <PageHeader title="Profil" />
         <div className="px-4 flex flex-col items-center justify-center py-16 text-center">
-          <div className="text-6xl mb-6">✝️</div>
-          <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-main)' }}>Witaj, Pielgrzymie</h2>
+          <div className="text-6xl mb-6 font-mystic text-gold-gradient">✝</div>
+          <h2 className="text-2xl font-bold mb-2 font-mystic" style={{ color: 'var(--gold-dark)' }}>Witaj, Pielgrzymie</h2>
           <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>
             Zaloguj się, aby mieć dostęp do swojego profilu, historii modlitw i prośb.
           </p>
@@ -31,9 +31,9 @@ export default function ProfilePage() {
   const initials = session.user?.name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '✝'
 
   const stats = [
-    { label: 'Modlitwy podjęte', value: '47', icon: HandHeart, color: '#c9a227' },
-    { label: 'Prośby złożone', value: '3', icon: BookOpen, color: '#7c3aed' },
-    { label: 'Wspólnoty', value: '2', icon: Users, color: '#059669' },
+    { label: 'Modlitwy podjęte', value: '47', icon: HandHeart, color: 'var(--gold)' },
+    { label: 'Prośby złożone', value: '3', icon: BookOpen, color: 'var(--gold)' },
+    { label: 'Wspólnoty', value: '2', icon: Users, color: 'var(--gold)' },
   ]
 
   const menuItems = [

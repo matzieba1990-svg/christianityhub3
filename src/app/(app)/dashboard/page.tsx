@@ -9,11 +9,11 @@ const QUOTE_OF_DAY = {
 }
 
 const quickLinks = [
-  { href: '/requests', icon: HandHeart, label: 'Prośby o modlitwę', desc: 'Złóż prośbę lub módl się za innych', color: '#c9a227' },
-  { href: '/prayers', icon: BookOpen, label: 'Biblioteka modlitw', desc: 'Różaniec, koronka, litanie…', color: '#7c3aed' },
-  { href: '/calendar', icon: Calendar, label: 'Kalendarz liturgiczny', desc: 'Patron dnia, okres roku kościelnego', color: '#059669' },
-  { href: '/community', icon: Users, label: 'Wspólnoty', desc: 'Grupy parafialne i dewocyjne', color: '#0ea5e9' },
-]
+    { href: '/requests', icon: HandHeart, label: 'Prośby o modlitwę', desc: 'Złóż prośbę lub módl się za innych', color: '#c9a227' },
+    { href: '/prayers', icon: BookOpen, label: 'Biblioteka modlitw', desc: 'Różaniec, koronka, litanie…', color: '#c9a227' },
+    { href: '/calendar', icon: Calendar, label: 'Kalendarz liturgiczny', desc: 'Patron dnia, okres roku kościelnego', color: '#c9a227' },
+    { href: '/community', icon: Users, label: 'Wspólnoty', desc: 'Grupy parafialne i dewocyjne', color: '#c9a227' },
+  ]
 
 export default function DashboardPage() {
   const { data: session } = useSession()
@@ -27,10 +27,10 @@ export default function DashboardPage() {
       <div className="flex items-start justify-between mb-6">
         <div>
           <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>{greeting},</p>
-          <h1 className="text-2xl font-bold" style={{ color: 'var(--text-main)' }}>{name} 🙏</h1>
+          <h1 className="text-2xl font-bold font-mystic" style={{ color: 'var(--gold-dark)' }}>{name}</h1>
         </div>
         <div className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
-          style={{ background: 'linear-gradient(135deg,#7c3aed,#c9a227)', color: 'white' }}>
+          style={{ background: 'white', color: 'var(--gold)', border: '1px solid var(--gold)', boxShadow: '0 2px 10px rgba(201,162,39,0.1)' }}>
           ✝
         </div>
       </div>
@@ -67,8 +67,10 @@ export default function DashboardPage() {
 
       {/* Prayer reminder */}
       <div className="card mt-6 p-4 flex items-center gap-3"
-        style={{ borderColor: 'rgba(124,58,237,0.4)', background: 'rgba(124,58,237,0.08)' }}>
-        <span className="text-2xl">🕐</span>
+        style={{ borderColor: 'var(--gold)', background: 'white' }}>
+        <div className="w-8 h-8 rounded-full bg-[#FAF6F0] flex items-center justify-center" style={{ color: 'var(--gold)' }}>
+          <Calendar size={18} />
+        </div>
         <div>
           <p className="text-sm font-semibold" style={{ color: 'var(--text-main)' }}>Czas na Anioł Pański</p>
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>12:00, 18:00 i 21:00 – chwila modlitwy</p>
