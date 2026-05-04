@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { PRAYERS } from '@/lib/prayers'
 import { notFound, useRouter } from 'next/navigation'
 import PageHeader from '@/components/PageHeader'
-import { ChevronDown, ChevronUp, CheckCircle2, Circle } from 'lucide-react'
+import { ChevronDown, ChevronUp, CheckCircle2, Circle, Clock, Calendar } from 'lucide-react'
 import { use } from 'react'
 import { useSession } from 'next-auth/react'
 
@@ -69,22 +69,59 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
 
       <div className="px-4">
         {/* Hero */}
-        <div className="card card-gold glow-gold p-6 mb-6 text-center overflow-hidden">
+        <div className="card card-gold glow-gold p-6 mb-6 overflow-hidden">
           <div className="p-0">
-            <h3 className="font-mystic text-lg font-bold mb-2" style={{ color: 'var(--gold-dark)' }}>{prayer.description}</h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-main)' }}>{prayer.intro}</p>
-            <div className="flex items-center justify-center gap-4">
-              <span className="pill" style={{ background: 'white', color: 'var(--gold)', border: '1px solid var(--gold)' }}>
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center border border-white/30">
+                {prayer.days ? <Calendar size={32} className="text-gold-dark" /> : <Clock size={32} className="text-gold-dark" />}
+              </div>
+            </div>
+            <h3 className="font-mystic text-xl font-black text-center mb-2" style={{ color: 'var(--gold-dark)' }}>{prayer.name}</h3>
+            <p className="text-sm leading-relaxed text-center mb-6 px-2" style={{ color: 'var(--text-main)' }}>
+              {prayer.description}
+            </p>
+            <div className="flex items-center justify-center gap-3">
+              <span className="pill shadow-sm" style={{ background: 'white', color: 'var(--gold)', border: '1px solid var(--gold)', fontSize: '11px' }}>
                 ⏱ {prayer.duration}
               </span>
               {prayer.days && (
-                <span className="pill" style={{ background: 'var(--gold)', color: 'white', border: 'none' }}>
-                   {prayer.days} dni
+                <span className="pill shadow-sm" style={{ background: 'var(--gold)', color: 'white', border: 'none', fontSize: '11px' }}>
+                   {prayer.days} DNI
                 </span>
               )}
             </div>
           </div>
         </div>
+
+        {/* History & Intentions Section */}
+        <div className="space-y-4 mb-8">
+          <div className="card p-5 border-l-4 border-gold">
+            <h2 className="text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: 'var(--gold-dark)' }}>
+              <CheckCircle2 size={14} /> Historia i pochodzenie
+            </h2>
+            <p className="text-sm leading-relaxed text-text-main">
+              {prayer.history}
+            </p>
+          </div>
+
+          <div className="card p-5">
+            <h2 className="text-xs font-black uppercase tracking-widest mb-3 flex items-center gap-2" style={{ color: 'var(--text-muted)' }}>
+              <Circle size={14} /> Zalecane intencje
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {prayer.intentions?.map(int => (
+                <span key={int} className="px-3 py-1 rounded-lg text-xs font-bold capitalize"
+                  style={{ background: 'rgba(0,0,0,0.03)', color: 'var(--text-main)', border: '1px solid var(--border)' }}>
+                  {int}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <p className="text-xs font-medium italic text-text-muted mb-6 px-2 leading-relaxed">
+          {prayer.intro}
+        </p>
 
         {/* Progress Tracker (only for multi-day prayers) */}
         {prayer.days && (
