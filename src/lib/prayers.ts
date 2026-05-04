@@ -174,7 +174,7 @@ export const PRAYERS = [
     id: 'nowenna-pompejanska',
     name: 'Nowenna Pompejańska',
     category: 'nowenna',
-    emoji: '',
+    emoji: '🌹',
     description: 'Modlitwa różańcowa zwana "nowenną nie do odparcia" (54 dni)',
     duration: '3x Różaniec/dzień',
     days: 54,
@@ -191,6 +191,73 @@ export const PRAYERS = [
       {
         title: 'Modlitwa na zakończenie każdego dnia (Pod Twoją Obronę)',
         text: 'Pod Twoją obronę uciekamy się, Święta Boża Rodzicielko, naszymi prośbami racz nie gardzić w potrzebach naszych, ale od wszelakich złych przygód racz nas zawsze wybawiać, Panno chwalebna i błogosławiona. O Pani nasza, Orędowniczko nasza, Pośredniczko nasza, Pocieszycielko nasza. Z Synem swoim nas pojednaj, Synowi swojemu nas polecaj, Synowi swojemu nas oddawaj. Amen.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'rita-beznadziejne',
+    name: 'Modlitwa do św. Rity',
+    category: 'inne',
+    emoji: '🌹',
+    description: 'W sprawach trudnych i beznadziejnych',
+    duration: '5 min',
+    days: null,
+    intro: 'Święta Rita jest patronką spraw beznadziejnych. Modlitwa ta jest pełna ufności w jej przemożne wstawiennictwo.',
+    parts: [
+      {
+        title: 'Modlitwa',
+        text: 'O potężna i sławna święta Rito, oto u Twoich stóp nędzna dusza potrzebująca pomocy, zwraca się do Ciebie z nadzieją, że zostanie wysłuchana. Ponieważ jestem niegodny z tytułu niewierności mojej, nie śmiem spodziewać się, że moje prośby będą zdolne ubłagać Boga. Dlatego wyczuwam potrzebę, aby mieć za sobą potężną orędowniczkę, więc Ciebie wybieram sobie, święta Rito, ponieważ Ty właśnie jesteś niezrównaną świętą od spraw trudnych i beznadziejnych.\n\nO droga święta, weź do serca moją sprawę, wstaw się do Boga, aby uprosić mi łaskę, której tak bardzo potrzebuję i o którą tak gorąco proszę: (wymień prośbę). Nie pozwól mi odejść od Ciebie, nie będąc wysłuchanym.\n\nJeżeli jest we mnie coś, co byłoby przeszkodą w otrzymaniu łaski, o którą proszę, pomóż mi usunąć tę przeszkodę: poprzyj moją prośbę swymi cennymi zasługami i przedstaw ją swemu niebieskiemu Oblubieńcowi, łącząc ją z Twoją prośbą. Ty odczuwałaś boleść Jego męki, jak mógłby On odrzucić Twoją prośbę i nie wysłuchać jej? Cała moja nadzieja jest więc w Tobie i za Twoim pośrednictwem czekam ze spokojnym sercem na spełnienie moich życzeń.\n\nO droga święta Rito, spraw, aby moja ufność i moja nadzieja nie zostały zawiedzione, aby moja prośba nie była odrzucona. Uproś mi u Boga to, o co proszę, a postaram się, aby wszyscy poznali dobroć Twego serca i wielką potęgę Twego wstawiennictwa. Amen.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'juda-tadeusz',
+    name: 'Modlitwa do św. Judy Tadeusza',
+    category: 'inne',
+    emoji: '🙏',
+    description: 'Patron spraw beznadziejnych i opuszczonych',
+    duration: '5 min',
+    days: null,
+    intro: 'Święty Juda Tadeusz, jeden z dwunastu Apostołów, jest wzywany w sytuacjach, gdy wszelka inna nadzieja wydaje się zawodzić.',
+    parts: [
+      {
+        title: 'Modlitwa',
+        text: 'Święty Judo Tadeuszu, potężny mój Opiekunie, w Twoje ręce oddaję moją sprawę beznadziejną. Proszę Cię, wstaw się za mną u Pana naszego Jezusa Chrystusa, aby raczył mi udzielić łaski, o którą tak gorąco proszę. Ty, któryś przez swoją wierność i oddanie zyskał miano Patrona spraw najtrudniejszych, nie opuszczaj mnie w tej ciężkiej chwili.\n\nBłagam Cię, przyjdź mi z pomocą w moim utrapieniu i spraw, bym otrzymał pociechę i wsparcie z Nieba we wszystkich moich potrzebach, cierpieniach i troskach, a szczególnie w tej sprawie: (wymień prośbę). Obiecuję Ci, o święty Judo, zawsze pamiętać o tej wielkiej łasce i czcić Cię jako mojego szczególnego patrona. Amen.'
+      }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'koronka-lzy-maryi',
+    name: 'Koronka do Krwawych Łez',
+    category: 'koronka',
+    emoji: '💧',
+    description: 'Koronka do Krwawych Łez Matki Bożej',
+    duration: '15 min',
+    days: null,
+    intro: 'Ta modlitwa kruszy moc szatana i wyprasza wielkie łaski przez współcierpienie Maryi z Jezusem.',
+    parts: [
+      {
+        title: 'Modlitwa na rozpoczęcie',
+        text: 'O Jezu, przybity do krzyża! Padamy do Twoich stóp i składamy Ci w ofierze Krwawe Łzy Tej, która z największą miłością współbolała z Tobą, towarzysząc Ci na Twej bolesnej drodze krzyżowej. Spraw, o Dobry Mistrzu, abyśmy z miłością pojęli wymowę Krwawych Łez Twojej Najświętszej Matki, a pełniąc Twą Świętą Wolę tu na ziemi, stali się godnymi wielbić Cię i czcić przez całą wieczność w Niebie. Amen.'
+      },
+      {
+        title: 'Na dużych paciorkach',
+        text: 'O Jezu, spójrz na Krwawe Łzy Tej, która umiłowała Cię najmocniej tu na ziemi i nadal najgoręcej miłuje Cię w Niebie.'
+      },
+      {
+        title: 'Na małych paciorkach (7 razy)',
+        text: 'O Jezu, wysłuchaj prośby nasze – przez Krwawe Łzy Twojej Najświętszej Matki.'
+      },
+      {
+        title: 'Modlitwa końcowa',
+        text: 'O Maryjo, Matko Boleści, Matko Litości, Matko Miłosierdzia! Zjednocz nasze prośby ze swoimi prośbami, aby Twój Boski Syn Jezus, którego wzywamy, wysłuchał nasze wołanie, a przez przyczynę Twoich Matczynych Krwawych Łez, udzielił nam łask, o które Go błagamy i doprowadził nas do szczęścia wiecznego. Amen.'
+      },
+      {
+        title: 'Akt końcowy',
+        text: 'Twoje Krwawe Łzy, o Matko Bolesna, kruszą moc szatana! O Jezu, zakuty w kajdany, przez Twoją Boską łagodność uchroń świat przed zagładą! Amen.'
       }
     ],
     mysteries: []
