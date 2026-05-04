@@ -28,10 +28,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           user.password
         )
         if (!ok) return null
-        
-        if (!user.emailVerified) {
-          throw new Error('Musisz najpierw zweryfikować swój adres email. Sprawdź skrzynkę odbiorczą.')
-        }
 
         return { id: user.id, name: user.name, email: user.email, image: user.image }
       },

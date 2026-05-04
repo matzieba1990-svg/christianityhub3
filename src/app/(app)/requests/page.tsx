@@ -14,21 +14,21 @@ const CAT_COLORS: Record<string, string> = {
 }
 
 const CAT_LABELS: Record<string, string> = {
-  zdrowie: '🏥 Zdrowie',
-  nawrocenie: '🕊️ Nawrócenie',
-  dziekczynienie: '🙏 Dziękczynienie',
-  rodzina: '👨‍👩‍👧 Rodzina',
-  praca: '💼 Praca',
-  inne: '✝️ Inne',
+  zdrowie: 'Zdrowie',
+  nawrocenie: 'Nawrócenie',
+  dziekczynienie: 'Dziękczynienie',
+  rodzina: 'Rodzina',
+  praca: 'Praca',
+  inne: 'Inne',
 }
 
 const CAT_EMOJIS: Record<string, string> = {
-  zdrowie: '🏥',
-  nawrocenie: '🕊️',
-  dziekczynienie: '🎉',
-  rodzina: '👨‍👩‍👧',
-  praca: '💼',
-  inne: '✝️',
+  zdrowie: '',
+  nawrocenie: '',
+  dziekczynienie: '',
+  rodzina: '',
+  praca: '',
+  inne: '',
 }
 
 export const revalidate = 0 // Disable cache to always see new requests
@@ -81,7 +81,6 @@ export default async function RequestsPage() {
         {/* Prayer requests */}
         {requests.length === 0 ? (
           <div className="card p-8 text-center mt-4">
-            <p className="text-3xl mb-2">🕊️</p>
             <p className="font-semibold mb-1" style={{ color: 'var(--text-main)' }}>Brak aktywnych próśb</p>
             <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Bądź pierwszą osobą, która poprosi wspólnotę o modlitwę.</p>
           </div>
@@ -105,11 +104,11 @@ export default async function RequestsPage() {
                     <p className="text-xs line-clamp-2 mb-2" style={{ color: 'var(--text-muted)' }}>{req.content}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                        {req.isAnonymous ? '🙏 Anonimowo' : `✝ ${req.user.name || 'Pielgrzym'}`}
+                        {req.isAnonymous ? 'Anonimowo' : `${req.user.name || 'Pielgrzym'}`}
                       </span>
                       <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95"
                         style={{ background: 'rgba(201,162,39,0.12)', color: 'var(--gold-dark)', border: '1px solid rgba(201,162,39,0.25)' }}>
-                        🙏 {req._count.acceptances} modlitw
+                        {req._count.acceptances} modlitw
                       </button>
                     </div>
                   </div>
@@ -121,7 +120,6 @@ export default async function RequestsPage() {
 
         {!session && (
           <div className="card mt-6 p-5 text-center" style={{ borderColor: 'rgba(201,162,39,0.3)' }}>
-            <p className="text-lg mb-2">🙏</p>
             <p className="font-semibold text-sm mb-1" style={{ color: 'var(--text-main)' }}>Dołącz do wspólnoty modlitwy</p>
             <p className="text-xs mb-4" style={{ color: 'var(--text-muted)' }}>Zaloguj się, aby złożyć prośbę lub podjąć modlitwę za innych</p>
             <Link href="/login" className="btn-gold text-center block" style={{ borderRadius: '12px', padding: '10px', fontSize: '14px' }}>

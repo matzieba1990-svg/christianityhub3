@@ -57,12 +57,12 @@ export default function NewRequestPage() {
           <div>
             <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Kategoria</label>
             <select className="inp" value={category} onChange={e => setCategory(e.target.value)}>
-              <option value="zdrowie">🏥 Zdrowie</option>
-              <option value="nawrocenie">🕊️ Nawrócenie</option>
-              <option value="dziekczynienie">🙏 Dziękczynienie</option>
-              <option value="rodzina">👨‍👩‍👧 Rodzina</option>
-              <option value="praca">💼 Praca</option>
-              <option value="inne">✝️ Inne</option>
+              <option value="zdrowie">Zdrowie</option>
+              <option value="nawrocenie">Nawrócenie</option>
+              <option value="dziekczynienie">Dziękczynienie</option>
+              <option value="rodzina">Rodzina</option>
+              <option value="praca">Praca</option>
+              <option value="inne">Inne</option>
             </select>
           </div>
           
