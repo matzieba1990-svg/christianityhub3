@@ -65,7 +65,7 @@ export default function CommunityDetailsPage() {
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [suggestedPrayerId, setSuggestedPrayerId] = useState('')
+  const [suggestedPrayerId, setSuggestedPrayerId] = useState('ogolna')
   const [isAnonymous, setIsAnonymous] = useState(false)
   const [submitLoading, setSubmitLoading] = useState(false)
   const [formError, setFormError] = useState('')
@@ -292,7 +292,7 @@ export default function CommunityDetailsPage() {
                     value={suggestedPrayerId} 
                     onChange={e => setSuggestedPrayerId(e.target.value)}
                   >
-                    <option value="">Ogólna (Domyślna)</option>
+                    <option value="ogolna">Ogólna (Domyślna)</option>
                     {PRAYERS.map(p => (
                       <option key={p.id} value={p.id}>{p.name}</option>
                     ))}
