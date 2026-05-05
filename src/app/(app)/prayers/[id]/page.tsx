@@ -93,7 +93,7 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
               )}
             </div>
 
-            {(prayer.id.toLowerCase() === 'rozaniec' || prayer.id.toLowerCase() === 'koronka') && (
+            {(['rozaniec', 'koronka', 'litania', 'pasja'].includes(prayer.category.toLowerCase()) || prayer.id.toLowerCase() === 'aniol-panski') && (
               <button 
                 onClick={() => setShowMode(true)}
                 className="btn-primary w-full mt-6 py-5 flex items-center justify-center gap-3 animate-pulse-gold"

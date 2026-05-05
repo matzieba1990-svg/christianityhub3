@@ -134,7 +134,7 @@ export default function PrayersPage() {
                       <p className="font-bold text-sm leading-tight text-text-main">
                         {prayer.name}
                       </p>
-                      {(prayer.id === 'rozaniec' || prayer.id === 'koronka') && (
+                      {(['rozaniec', 'koronka', 'litania', 'pasja'].includes(prayer.category.toLowerCase()) || prayer.id.toLowerCase() === 'aniol-panski') && (
                         <span className="text-[8px] font-black bg-gold text-white px-1.5 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1">
                           <Smartphone size={8} /> Interaktywna
                         </span>
