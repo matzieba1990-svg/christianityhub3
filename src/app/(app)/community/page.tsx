@@ -3,8 +3,10 @@ import PageHeader from '@/components/PageHeader'
 import { Users, Plus, ChevronRight, Lock, Globe } from 'lucide-react'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 
 export default function CommunityPage() {
+  const { data: session } = useSession()
   const [communities, setCommunities] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -25,6 +27,26 @@ export default function CommunityPage() {
     c.name.toLowerCase().includes(search.toLowerCase()) || 
     (c.description && c.description.toLowerCase().includes(search.toLowerCase()))
   )
+
+  const isAdmin = (session?.user as any)?.role === 'admin'
+
+  async function handleDelete(id: string, e: React.MouseEvent) {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!confirm('Czy na pewno chcesz usunąć tę wspólnotę?')) return
+
+    try {
+      const res = await fetch(`/api/community?id=${id}`, { method: 'DELETE' })
+      if (res.ok) {
+        setCommunities(communities.filter(c => c.id !== id))
+      } else {
+        alert('Błąd podczas usuwania wspólnoty')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Wystąpił błąd')
+    }
+  }
 
   return (
     <div className="pb-6">
@@ -57,26 +79,39 @@ export default function CommunityPage() {
             <div className="text-center py-8 text-text-muted text-sm">Nie znaleziono żadnych wspólnot.</div>
           ) : (
             filteredCommunities.map(c => (
-              <Link key={c.id} href={`/community/${c.id}`}
-                className="card prayer-card flex items-center gap-4 p-4">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-                  style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)', color: 'var(--gold)' }}>
-                  <Users size={24} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="font-semibold text-sm truncate" style={{ color: 'var(--text-main)' }}>{c.name}</p>
-                    {!c.isPublic && <Lock size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
-                    {c.isPublic && <Globe size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
+              <div key={c.id} className="relative group">
+                <Link href={`/community/${c.id}`}
+                  className="card prayer-card flex items-center gap-4 p-4">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+                    style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)', color: 'var(--gold)' }}>
+                    <Users size={24} />
                   </div>
-                  <p className="text-xs line-clamp-2 mb-2" style={{ color: 'var(--text-muted)' }}>{c.description}</p>
-                  <div className="flex items-center gap-1">
-                    <Users size={11} style={{ color: 'var(--gold)' }} />
-                    <span className="text-xs font-semibold" style={{ color: 'var(--gold)' }}>{c.membersCount || 1} członków</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <p className="font-semibold text-sm truncate" style={{ color: 'var(--text-main)' }}>{c.name}</p>
+                      {!c.isPublic && <Lock size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
+                      {c.isPublic && <Globe size={12} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
+                    </div>
+                    <p className="text-xs line-clamp-2 mb-2" style={{ color: 'var(--text-muted)' }}>{c.description}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1">
+                        <Users size={11} style={{ color: 'var(--gold)' }} />
+                        <span className="text-xs font-semibold" style={{ color: 'var(--gold)' }}>{c.membersCount || 1} członków</span>
+                      </div>
+                      
+                      {isAdmin && (
+                        <button 
+                          onClick={(e) => handleDelete(c.id, e)}
+                          className="text-[10px] text-red-500 font-bold uppercase tracking-wider hover:bg-red-50 px-2 py-1 rounded"
+                        >
+                          Usuń
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
-              </Link>
+                  <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
+                </Link>
+              </div>
             ))
           )}
         </div>

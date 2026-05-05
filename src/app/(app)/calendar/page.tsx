@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useSession } from 'next-auth/react'
 import { PRAYERS } from '@/lib/prayers'
 import Link from 'next/link'
-import { ChevronRight, Check } from 'lucide-react'
+import { ChevronRight, Check, Heart } from 'lucide-react'
 
 const MONTHS = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień']
 const DAYS_SHORT = ['Nd','Pn','Wt','Śr','Cz','Pt','Sb']
@@ -45,6 +45,8 @@ interface PrayerHistoryItem {
   prayerId: string
   dayNumber: number
   date: string
+  type: 'progress' | 'intention'
+  title?: string
 }
 
 export default function CalendarPage() {
@@ -65,18 +67,23 @@ export default function CalendarPage() {
   }, [session])
 
   const plan = useMemo(() => {
-    const p: Record<string, { prayerId: string; day: number; type: 'done' | 'planned' }[]> = {}
+    const p: Record<string, { prayerId: string; day: number; type: 'done' | 'planned' | 'intention'; title?: string }[]> = {}
     
-    // Add completed days
+    // Add completed days and intentions
     history.forEach(h => {
       if (!p[h.date]) p[h.date] = []
-      p[h.date].push({ prayerId: h.prayerId, day: h.dayNumber, type: 'done' })
+      p[h.date].push({ 
+        prayerId: h.prayerId, 
+        day: h.dayNumber, 
+        type: h.type === 'intention' ? 'intention' : 'done',
+        title: h.title 
+      })
     })
 
     // Calculate planned days for multi-day prayers
     const multiDayPrayers = PRAYERS.filter(pr => pr.days)
     multiDayPrayers.forEach(pr => {
-      const userProgress = history.filter(h => h.prayerId === pr.id)
+      const userProgress = history.filter(h => h.prayerId === pr.id && h.type === 'progress')
       if (userProgress.length > 0) {
         const lastEntry = [...userProgress].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0]
         const lastDate = new Date(lastEntry.date)
@@ -184,20 +191,23 @@ export default function CalendarPage() {
 
           {dayEvents.map((ev, i) => {
             const p = PRAYERS.find(pr => pr.id === ev.prayerId)
-            if (!p) return null
+            const isIntention = ev.type === 'intention'
+            
             return (
-              <Link key={i} href={`/prayers/${p.id}`} 
+              <Link key={i} href={p ? `/prayers/${p.id}` : '#'} 
                 className="card p-4 flex items-center gap-4 bg-white hover:bg-gold/5 transition-colors">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#FAF6F0]" style={{ color: ev.type === 'done' ? 'var(--gold)' : 'var(--text-muted)' }}>
-                  {ev.type === 'done' ? <Check size={20} /> : <div className="text-xs font-black">{ev.day}</div>}
+                <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#FAF6F0]" 
+                  style={{ color: ev.type === 'done' || isIntention ? 'var(--gold)' : 'var(--text-muted)' }}>
+                  {isIntention ? <Heart size={20} fill="currentColor" /> : ev.type === 'done' ? <Check size={20} /> : <div className="text-xs font-black">{ev.day}</div>}
                 </div>
                 <div className="flex-1">
                   <p className="text-[10px] font-black uppercase tracking-tighter mb-0.5" style={{ color: 'var(--gold-dark)' }}>
-                    {ev.type === 'done' ? 'Ukończono' : `Dzień ${ev.day}`}
+                    {isIntention ? 'Intencja podjęta' : ev.type === 'done' ? 'Ukończono' : `Dzień ${ev.day}`}
                   </p>
-                  <p className="text-sm font-bold text-text-main">{p.name}</p>
+                  <p className="text-sm font-bold text-text-main">{ev.title || p?.name || 'Modlitwa wspólna'}</p>
+                  {isIntention && p && <p className="text-[10px] text-text-muted mt-0.5">Sugerowana: {p.name}</p>}
                 </div>
-                <ChevronRight size={16} className="text-text-muted" />
+                {p && <ChevronRight size={16} className="text-text-muted" />}
               </Link>
             )
           })}

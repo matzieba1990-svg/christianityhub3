@@ -82,9 +82,9 @@ export default function PrayersPage() {
             <Filter size={12} /> Filtry zaawansowane
           </div>
           
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-center gap-1.5">
             <select 
-              className="flex-1 min-w-[110px] text-[11px] p-1.5 rounded-lg border border-border bg-white outline-none text-text-main"
+              className="flex-1 min-w-[90px] text-[10px] p-1 rounded-md border border-border bg-white outline-none text-text-main"
               value={lengthFilter}
               onChange={(e) => setLengthFilter(e.target.value)}
             >
@@ -95,7 +95,7 @@ export default function PrayersPage() {
             </select>
 
             <select 
-              className="flex-1 min-w-[110px] text-[11px] p-1.5 rounded-lg border border-border bg-white outline-none text-text-main"
+              className="flex-1 min-w-[90px] text-[10px] p-1 rounded-md border border-border bg-white outline-none text-text-main"
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
             >
@@ -105,7 +105,7 @@ export default function PrayersPage() {
             </select>
 
             <select 
-              className="w-full text-[11px] p-1.5 rounded-lg border border-border bg-white outline-none text-text-main capitalize"
+              className="flex-1 min-w-[110px] text-[10px] p-1 rounded-md border border-border bg-white outline-none text-text-main capitalize"
               value={intentionFilter}
               onChange={(e) => setIntentionFilter(e.target.value)}
             >

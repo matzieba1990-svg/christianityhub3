@@ -16,6 +16,7 @@ model User {
   password      String?
   bio           String?
   parish        String?
+  role          String    @default("user")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -57,6 +58,7 @@ model PrayerRequest {
   title       String
   content     String
   category    String   @default("general")
+  suggestedPrayerId String?
   isAnonymous Boolean  @default(false)
   isPublic    Boolean  @default(true)
   createdAt   DateTime @default(now())

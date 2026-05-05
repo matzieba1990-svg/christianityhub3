@@ -76,3 +76,28 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to fetch communities' }, { status: 500 })
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const session = await auth()
+    const isAdmin = (session?.user as any)?.role === 'admin'
+    if (!isAdmin) {
+      return NextResponse.json({ error: 'Brak uprawnień administratora' }, { status: 403 })
+    }
+
+    const { searchParams } = new URL(req.url)
+    const id = searchParams.get('id')
+    if (!id) {
+      return NextResponse.json({ error: 'ID wspólnoty jest wymagane' }, { status: 400 })
+    }
+
+    await prisma.community.delete({
+      where: { id }
+    })
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Failed to delete community:', error)
+    return NextResponse.json({ error: 'Nie udało się usunąć wspólnoty' }, { status: 500 })
+  }
+}

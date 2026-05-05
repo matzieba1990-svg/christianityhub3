@@ -2,12 +2,14 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import PageHeader from '@/components/PageHeader'
+import { PRAYERS } from '@/lib/prayers'
 
 export default function NewRequestPage() {
   const router = useRouter()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [category, setCategory] = useState('inne')
+  const [suggestedPrayerId, setSuggestedPrayerId] = useState('')
   const [isAnonymous, setIsAnonymous] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -21,7 +23,7 @@ export default function NewRequestPage() {
       const res = await fetch('/api/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, content, category, isAnonymous })
+        body: JSON.stringify({ title, content, category, isAnonymous, suggestedPrayerId })
       })
       
       if (!res.ok) {
@@ -56,13 +58,23 @@ export default function NewRequestPage() {
           
           <div>
             <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Kategoria</label>
-            <select className="inp" value={category} onChange={e => setCategory(e.target.value)}>
+            <select className="inp text-sm" value={category} onChange={e => setCategory(e.target.value)}>
               <option value="zdrowie">Zdrowie</option>
               <option value="nawrocenie">Nawrócenie</option>
               <option value="dziekczynienie">Dziękczynienie</option>
               <option value="rodzina">Rodzina</option>
               <option value="praca">Praca</option>
               <option value="inne">Inne</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Sugerowana modlitwa (opcjonalnie)</label>
+            <select className="inp text-sm" value={suggestedPrayerId} onChange={e => setSuggestedPrayerId(e.target.value)}>
+              <option value="">Wspólna modlitwa (dowolna)</option>
+              {PRAYERS.map(p => (
+                <option key={p.id} value={p.id}>{p.name}</option>
+              ))}
             </select>
           </div>
           
