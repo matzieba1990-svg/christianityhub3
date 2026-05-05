@@ -193,21 +193,24 @@ export default function ProfilePage() {
             <ChevronRight size={16} className="text-text-muted" />
           </Link>
 
-          <Link href="/support" className="card prayer-card flex items-center gap-4 p-4 bg-white">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-gold" style={{ background: '#FAF6F0' }}>
-              <Heart size={18} />
+        </div>
+
+        {/* Support Link Section - Unified & Prominent */}
+        <div className="mt-8 mb-4">
+          <Link href="/support" className="card p-5 bg-white border-gold/20 flex items-center gap-4 transition-all active:scale-[0.98]">
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-gold" style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)' }}>
+              <Heart size={22} />
             </div>
             <div className="flex-1">
               <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Wesprzyj nas</p>
-              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Pomóż nam rozwijać portal</p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>Pomóż nam rozwijać portal dla wspólnoty</p>
             </div>
-            <ChevronRight size={16} className="text-text-muted" />
+            <ChevronRight size={18} className="text-gold" />
           </Link>
         </div>
 
-
-        {/* Big Logout Button */}
-        <div className="mb-4">
+        {/* Big Logout Button - Moved lower */}
+        <div className="mt-16 mb-8">
           <button onClick={() => signOut({ callbackUrl: '/login' })}
             className="w-full card p-4 flex items-center justify-center gap-2 text-sm font-bold"
             style={{ color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)', background: 'white' }}>

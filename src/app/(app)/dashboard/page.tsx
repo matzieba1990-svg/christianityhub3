@@ -99,16 +99,16 @@ export default function DashboardPage() {
       </div>
 
       {/* Support Link */}
-      <Link href="/support" className="card mt-6 p-4 flex items-center gap-3 bg-white border border-gold/20 hover:border-gold/40 transition-colors">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)' }}>
-          <Heart size={20} className="text-gold" />
+      <Link href="/support" className="card prayer-card mt-6 p-4 flex items-center gap-4 bg-white border-gold/20 hover:border-gold/40 transition-all">
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(201,162,39,0.13)', border: '1px solid rgba(201,162,39,0.25)' }}>
+          <Heart size={22} className="text-gold" />
         </div>
-        <div className="flex-1">
-          <p className="text-xs font-bold text-text-main">Wesprzyj rozwój aplikacji</p>
-          <p className="text-[10px] text-text-muted italic">Dziękujemy za każdą cegiełkę!</p>
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Wesprzyj rozwój aplikacji</p>
+          <p className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-muted)' }}>Dziękujemy za każdą cegiełkę!</p>
         </div>
-        <ChevronRight size={14} className="text-gold" />
+        <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
       </Link>
     </div>
   )
