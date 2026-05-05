@@ -30,32 +30,24 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    if (!audioRef.current && typeof window !== 'undefined') {
-        audioRef.current = new Audio('https://cdn.pixabay.com/audio/2022/05/27/audio_18087374f9.mp3')
-        audioRef.current.loop = true
-        audioRef.current.volume = 0.4
-    }
+    const audio = audioRef.current
+    if (!audio) return
     
-    const playAudio = async () => {
-        if (!audioRef.current) return
+    const handlePlay = async () => {
         try {
             if (isMusicPlaying) {
-                await audioRef.current.play()
+                console.log("Attempting to play audio...")
+                await audio.play()
             } else {
-                audioRef.current.pause()
+                audio.pause()
             }
-        } catch (e) {
-            console.error("Audio playback failed:", e)
-            // If failed, try to reset state to show it's not playing
+        } catch (err) {
+            console.error("Audio playback error:", err)
             setIsMusicPlaying(false)
         }
     }
 
-    playAudio()
-
-    return () => {
-        audioRef.current?.pause()
-    }
+    handlePlay()
   }, [isMusicPlaying])
 
   const isRosaryBased = prayerId.toLowerCase() === 'rozaniec' || prayerId.toLowerCase() === 'nowenna-pompejanska'
@@ -312,6 +304,13 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
       {/* Touch hint overlays */}
       <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black/5 to-transparent pointer-events-none" />
       <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black/5 to-transparent pointer-events-none" />
+      {/* Audio Element */}
+      <audio 
+        ref={audioRef}
+        src="https://www.chosic.com/wp-content/uploads/2021/07/Gregorian-Chant.mp3"
+        loop
+        preload="auto"
+      />
     </div>
   )
 }
