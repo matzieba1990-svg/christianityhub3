@@ -94,6 +94,18 @@ export default function DashboardPage() {
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>12:00, 18:00 i 21:00 – chwila modlitwy</p>
         </div>
       </div>
+
+      {/* Support Link */}
+      <Link href="/support" className="card mt-4 p-4 flex items-center gap-3 bg-gold/5 border-dashed border-gold/40 hover:bg-gold/10 transition-colors">
+        <div className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold">
+          <Heart size={16} fill="currentColor" />
+        </div>
+        <div className="flex-1">
+          <p className="text-xs font-bold text-text-main">Wesprzyj rozwój aplikacji</p>
+          <p className="text-[10px] text-text-muted italic">Dziękujemy za każdą cegiełkę!</p>
+        </div>
+        <ChevronRight size={14} className="text-gold" />
+      </Link>
     </div>
   )
 }

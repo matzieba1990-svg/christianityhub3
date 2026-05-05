@@ -182,26 +182,20 @@ export default function ProfilePage() {
           </Link>
         </div>
 
-        {/* Stripe Donation Section */}
+        {/* Support Link Section */}
         <div className="mt-8 mb-4">
-          <div className="card p-6 bg-white border-gold/20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-5 text-gold">
-                <Heart size={80} fill="currentColor" />
+          <Link href="/support" className="card p-6 bg-white border-gold/20 relative overflow-hidden block transition-transform active:scale-[0.98]">
+            <div className="absolute top-0 right-0 p-4 opacity-10 text-gold">
+                <Heart size={48} fill="currentColor" />
             </div>
-            <h3 className="text-sm font-bold text-text-main mb-2 font-mystic">Wesprzyj rozwój aplikacji</h3>
-            <p className="text-xs text-text-muted mb-6 leading-relaxed">
-                Twoja ofiara pomaga nam utrzymać serwery i tworzyć nowe narzędzia modlitewne dla tysięcy wiernych. Bóg zapłać za każde wsparcie!
+            <h3 className="text-sm font-bold text-text-main mb-1 font-mystic">Wesprzyj nas</h3>
+            <p className="text-xs text-text-muted leading-relaxed">
+                Pomóż nam utrzymać i rozwijać ChristianityHub dla całej wspólnoty.
             </p>
-            
-            <div className="flex justify-center min-h-[44px]">
-                <div dangerouslySetInnerHTML={{ __html: `
-                    <stripe-buy-button
-                        buy-button-id="buy_btn_1TTm6UFxZrs8CnTNkad76qEo"
-                        publishable-key="pk_live_51TAGOrFxZrs8CnTNwe1dL9P7z2lCaqTuMIE5N3cbbxxRWsb3mxxTHEBsvmhR5WnRcHgLriAsuRVSHQ2sebbIIdkD00RLzqowhh"
-                    ></stripe-buy-button>
-                ` }} />
+            <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-gold-dark uppercase tracking-widest">
+                Przejdź do wsparcia <ChevronRight size={14} />
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Big Logout Button */}
