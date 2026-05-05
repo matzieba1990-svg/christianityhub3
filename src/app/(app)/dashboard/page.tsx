@@ -3,17 +3,12 @@ import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut } from 'lucide-react'
 
-const QUOTE_OF_DAY = {
-  text: '"Proście, a będzie wam dane; szukajcie, a znajdziecie; kołaczcie, a otworzą wam."',
-  source: 'Mt 7,7'
-}
-
 const quickLinks = [
-    { href: '/requests', icon: HandHeart, label: 'Prośby o modlitwę', desc: 'Złóż prośbę lub módl się za innych', color: '#c9a227' },
-    { href: '/prayers', icon: BookOpen, label: 'Biblioteka modlitw', desc: 'Różaniec, koronka, litanie…', color: '#c9a227' },
-    { href: '/calendar', icon: Calendar, label: 'Kalendarz liturgiczny', desc: 'Patron dnia, okres roku kościelnego', color: '#c9a227' },
-    { href: '/community', icon: Users, label: 'Wspólnoty', desc: 'Grupy parafialne i dewocyjne', color: '#c9a227' },
-  ]
+  { href: '/requests', icon: HandHeart, label: 'Prośby o modlitwę', desc: 'Złóż prośbę lub módl się za innych', color: '#c9a227' },
+  { href: '/prayers', icon: BookOpen, label: 'Biblioteka modlitw', desc: 'Różaniec, koronka, litanie…', color: '#c9a227' },
+  { href: '/calendar', icon: Calendar, label: 'Kalendarz liturgiczny', desc: 'Patron dnia, okres roku kościelnego', color: '#c9a227' },
+  { href: '/community', icon: Users, label: 'Wspólnoty', desc: 'Grupy parafialne i dewocyjne', color: '#c9a227' },
+]
 
 export default function DashboardPage() {
   const { data: session } = useSession()
@@ -37,18 +32,6 @@ export default function DashboardPage() {
         >
           <LogOut size={16} />
         </button>
-      </div>
-
-      {/* Quote card */}
-      <div className="card card-gold glow-gold p-5 mb-6 relative overflow-hidden">
-        <div className="cross-bg text-8xl font-bold" style={{ top: '-10px', right: '-10px', opacity: 0.04 }}>✝</div>
-        <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: 'var(--gold)' }}>
-          Słowo na dziś
-        </p>
-        <p className="text-sm leading-relaxed italic mb-2" style={{ color: 'var(--text-main)' }}>
-          {QUOTE_OF_DAY.text}
-        </p>
-        <p className="text-xs font-bold" style={{ color: 'var(--gold)' }}>{QUOTE_OF_DAY.source}</p>
       </div>
 
       {/* Quick actions */}
