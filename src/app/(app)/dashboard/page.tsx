@@ -1,7 +1,7 @@
 'use client'
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
-import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote, Heart } from 'lucide-react'
+import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote, Heart, Clock } from 'lucide-react'
 import { getLiturgyForDate } from '@/lib/liturgy'
 
 const quickLinks = [
@@ -21,8 +21,23 @@ export default function DashboardPage() {
   const hour = now.getHours()
   const greeting = hour < 12 ? 'Dzień dobry' : hour < 18 ? 'Dobry dzień' : 'Dobry wieczór'
 
+  const angelusTimes = [12, 18, 21]
+  const nextAngelus = angelusTimes.find(t => t > hour) || angelusTimes[0]
+  const angelusLabel = hour >= 21 ? 'Jutro o 12:00' : `${nextAngelus}:00`
+
   return (
     <div className="px-4 pt-4 pb-6 animate-fade-in">
+      {/* Prayer reminder at the very top */}
+      <div className="card mb-6 p-4 flex items-center gap-3 bg-white border-gold/30 shadow-sm">
+        <div className="w-10 h-10 rounded-xl bg-gold/5 flex items-center justify-center text-gold border border-gold/10">
+          <Clock size={20} />
+        </div>
+        <div>
+          <p className="text-[10px] uppercase font-black text-gold tracking-widest mb-0.5">Przypomnienie</p>
+          <p className="text-sm font-bold text-text-main">Następny Anioł Pański: <span className="text-gold">{angelusLabel}</span></p>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="flex items-start justify-between mb-6">
         <div>
@@ -83,20 +98,8 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Prayer reminder */}
-      <div className="card mt-6 p-4 flex items-center gap-3"
-        style={{ borderColor: 'var(--gold)', background: 'white' }}>
-        <div className="w-8 h-8 rounded-full bg-[#FAF6F0] flex items-center justify-center" style={{ color: 'var(--gold)' }}>
-          <Calendar size={18} />
-        </div>
-        <div>
-          <p className="text-sm font-semibold" style={{ color: 'var(--text-main)' }}>Czas na Anioł Pański</p>
-          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>12:00, 18:00 i 21:00 – chwila modlitwy</p>
-        </div>
-      </div>
-
       {/* Support Link */}
-      <Link href="/support" className="card mt-4 p-4 flex items-center gap-3 bg-white border border-gold/20 hover:border-gold/40 transition-colors">
+      <Link href="/support" className="card mt-6 p-4 flex items-center gap-3 bg-white border border-gold/20 hover:border-gold/40 transition-colors">
         <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
           style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)' }}>
           <Heart size={20} className="text-gold" />
