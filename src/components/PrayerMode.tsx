@@ -24,10 +24,20 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const prayer = PRAYERS.find(p => p.id.toLowerCase() === prayerId.toLowerCase())
   const [currentStepIdx, setCurrentStepIdx] = useState(0)
   const [isDarkMode, setIsDarkMode] = useState(true)
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false)
+  const [isMusicPlaying, setIsMusicPlaying] = useState(true)
   const [selectedMysterySet, setSelectedMysterySet] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    // Attempt autoplay since this component is opened by a user click
+    if (audioRef.current) {
+        audioRef.current.play().catch(e => {
+            console.log("Autoplay blocked, waiting for interaction:", e)
+            setIsMusicPlaying(false)
+        })
+    }
+  }, [])
 
   const isRosaryBased = prayerId.toLowerCase() === 'rozaniec' || prayerId.toLowerCase() === 'nowenna-pompejanska'
 
@@ -299,6 +309,7 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
         ref={audioRef}
         src="/audio/meditation.mp3"
         loop
+        autoPlay
         preload="auto"
         onLoadedData={(e) => { e.currentTarget.volume = 0.4 }}
         onError={(e) => {
