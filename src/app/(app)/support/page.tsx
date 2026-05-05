@@ -13,7 +13,7 @@ export default function SupportPage() {
           
           <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-gold mx-auto mb-6"
             style={{ background: '#FAF6F0', border: '2px solid var(--gold)', boxShadow: '0 8px 30px rgba(201,162,39,0.15)' }}>
-            <Heart size={36} fill="currentColor" />
+            <Heart size={36} />
           </div>
 
           <h1 className="text-2xl font-mystic font-bold text-text-main mb-4">Budujmy wspólnie ChristianityHub</h1>
@@ -50,18 +50,19 @@ export default function SupportPage() {
                 ` }} />
             </div>
             
-            <p className="text-[10px] text-text-muted italic">
-              Bezpieczna płatność obsługiwana przez Stripe. Bóg zapłać!
+            <p className="text-[10px] text-text-muted leading-relaxed max-w-xs mx-auto">
+              Bezpieczna płatność obsługiwana przez Stripe. Twoje dane są przetwarzane zgodnie z polityką prywatności Stripe oraz ChristianityHub. Klikając przycisk, akceptujesz przekazanie darowizny na rozwój platformy.
             </p>
           </div>
         </div>
 
-        <div className="card p-6 bg-gold/5 border-dashed border-gold/30 text-center">
+        {/* Contact hidden for now as requested */}
+        {/* <div className="card p-6 bg-gold/5 border-dashed border-gold/30 text-center">
             <p className="text-xs text-text-muted">
                 Masz pytania dotyczące wsparcia lub sugestie rozwoju? <br/>
                 Napisz do nas: <span className="font-bold text-gold-dark">kontakt@christianityhub.pl</span>
             </p>
-        </div>
+        </div> */}
       </div>
     </div>
   )

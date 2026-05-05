@@ -68,16 +68,16 @@ export default function PrayerStats() {
     <div className="space-y-4 mb-6">
       <div className="grid grid-cols-2 gap-3">
         <div className="card p-4 bg-white flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
-            <Flame size={20} fill="currentColor" />
+          <div className="w-10 h-10 rounded-full bg-gold/5 flex items-center justify-center text-gold">
+            <Flame size={20} />
           </div>
           <div>
-            <p className="text-[10px] uppercase font-black text-text-muted">Streak</p>
+            <p className="text-[10px] uppercase font-black text-text-muted">Seria</p>
             <p className="text-lg font-black text-text-main">{stats.streak} dni</p>
           </div>
         </div>
         <div className="card p-4 bg-white flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500">
+          <div className="w-10 h-10 rounded-full bg-gold/5 flex items-center justify-center text-gold">
             <Award size={20} />
           </div>
           <div>
