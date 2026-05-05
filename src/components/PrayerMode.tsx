@@ -297,12 +297,13 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
       {/* Audio Element */}
       <audio 
         ref={audioRef}
-        src="https://ia800305.us.archive.org/24/items/GregorianChantMass/01Introitus-GaudeamusOmnes.mp3"
+        src="https://archive.org/download/GregorianChantMass/01Introitus-GaudeamusOmnes.mp3"
         loop
         preload="auto"
+        crossOrigin="anonymous"
         onLoadedData={(e) => { e.currentTarget.volume = 0.4 }}
-        onError={() => {
-            console.error("Audio source failed to load.")
+        onError={(e) => {
+            console.error("Audio source failed to load:", e.currentTarget.error?.code, e.currentTarget.error?.message)
             setIsMusicPlaying(false)
         }}
       />
