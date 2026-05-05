@@ -192,10 +192,8 @@ export default function ProfilePage() {
             </div>
             <ChevronRight size={16} className="text-text-muted" />
           </Link>
-        </div>
 
-        {/* Support Link Section */}
-        <div className="mt-8 mb-4">
+          {/* Support Link Section - Moved inside for consistent spacing */}
           <Link href="/support" className="card p-6 bg-white border-gold/20 relative overflow-hidden block transition-transform active:scale-[0.98]">
             <div className="absolute top-0 right-0 p-4 opacity-10 text-gold">
                 <Heart size={48} fill="currentColor" />
@@ -209,6 +207,7 @@ export default function ProfilePage() {
             </div>
           </Link>
         </div>
+
 
         {/* Big Logout Button */}
         <div className="mb-4">
