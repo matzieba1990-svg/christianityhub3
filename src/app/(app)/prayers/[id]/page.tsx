@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react'
 import { PRAYERS } from '@/lib/prayers'
 import { notFound, useRouter } from 'next/navigation'
 import PageHeader from '@/components/PageHeader'
-import { ChevronDown, ChevronUp, CheckCircle2, Circle, Clock, Calendar } from 'lucide-react'
+import { ChevronDown, ChevronUp, CheckCircle2, Circle, Clock, Calendar, Smartphone } from 'lucide-react'
 import { use } from 'react'
 import { useSession } from 'next-auth/react'
+import PrayerMode from '@/components/PrayerMode'
 
 export default function PrayerDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -21,6 +22,7 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
   const [openMystery, setOpenMystery] = useState<number | null>(null)
   const [completedDays, setCompletedDays] = useState<number[]>([])
   const [loading, setLoading] = useState(false)
+  const [showMode, setShowMode] = useState(false)
 
   // Fetch progress if logged in
   useEffect(() => {
@@ -90,8 +92,22 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
                 </span>
               )}
             </div>
+
+            {(prayer.id.toLowerCase() === 'rozaniec' || prayer.id.toLowerCase() === 'koronka') && (
+              <button 
+                onClick={() => setShowMode(true)}
+                className="btn-primary w-full mt-6 py-5 flex items-center justify-center gap-3 animate-pulse-gold"
+              >
+                <Smartphone size={22} />
+                <span className="text-lg">Rozpocznij modlitwę</span>
+              </button>
+            )}
           </div>
         </div>
+
+        {showMode && (
+            <PrayerMode prayerId={prayer.id} onClose={() => setShowMode(false)} />
+        )}
 
         {/* History & Intentions Section */}
         <div className="space-y-4 mb-8">

@@ -1,7 +1,8 @@
 'use client'
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
-import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut } from 'lucide-react'
+import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote } from 'lucide-react'
+import { getLiturgyForDate } from '@/lib/liturgy'
 
 const quickLinks = [
   { href: '/requests', icon: HandHeart, label: 'Prośby o modlitwę', desc: 'Złóż prośbę lub módl się za innych', color: '#c9a227' },
@@ -13,7 +14,11 @@ const quickLinks = [
 export default function DashboardPage() {
   const { data: session } = useSession()
   const name = session?.user?.name?.split(' ')[0] || 'Bracie/Siostro'
-  const hour = new Date().getHours()
+  const now = new Date()
+  const dateStr = now.toISOString().split('T')[0]
+  const liturgy = getLiturgyForDate(dateStr)
+  
+  const hour = now.getHours()
   const greeting = hour < 12 ? 'Dzień dobry' : hour < 18 ? 'Dobry dzień' : 'Dobry wieczór'
 
   return (
@@ -33,6 +38,32 @@ export default function DashboardPage() {
           <LogOut size={16} />
         </button>
       </div>
+
+      {/* Liturgy card */}
+      {liturgy && (
+        <div className="card card-gold glow-gold p-5 mb-6 relative overflow-hidden">
+          <div className="cross-bg text-8xl font-bold" style={{ top: '-10px', right: '-10px', opacity: 0.04 }}>✝</div>
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: 'var(--gold)' }}>
+              Liturgia Dnia
+            </p>
+            <span className="px-2 py-0.5 rounded text-[8px] font-bold uppercase" 
+              style={{ background: liturgy.color, color: liturgy.color === 'white' ? '#c9a227' : 'white', border: '1px solid var(--gold)' }}>
+              {liturgy.season}
+            </span>
+          </div>
+          <h2 className="text-sm font-bold mb-1" style={{ color: 'var(--text-main)' }}>{liturgy.saint}</h2>
+          <div className="mt-4 p-4 rounded-xl bg-white/50 border border-gold/10">
+            <div className="flex gap-2 mb-2">
+              <Quote size={14} className="text-gold flex-shrink-0" />
+              <p className="text-xs font-bold" style={{ color: 'var(--gold-dark)' }}>Ewangelia ({liturgy.gospel.source})</p>
+            </div>
+            <p className="text-sm leading-relaxed italic" style={{ color: 'var(--text-main)' }}>
+              {liturgy.gospel.text}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Quick actions */}
       <div className="space-y-3">

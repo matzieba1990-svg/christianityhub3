@@ -25,13 +25,31 @@ export const viewport: Viewport = {
 }
 
 import CookieBanner from '@/components/CookieBanner'
+import Onboarding from '@/components/Onboarding'
+import Script from 'next/script'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pl" className={`${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Onboarding />
+        </Providers>
         <CookieBanner />
+        <Script id="register-sw" strategy="afterInteractive">
+          {`
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                  console.log('SW registered');
+                }).catch(function(err) {
+                  console.log('SW failed', err);
+                });
+              });
+            }
+          `}
+        </Script>
       </body>
     </html>
   )

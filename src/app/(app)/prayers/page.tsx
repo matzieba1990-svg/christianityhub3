@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react'
 import { PRAYERS, CATEGORIES } from '@/lib/prayers'
 import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
-import { Clock, ChevronRight, Search, Filter, Calendar, Heart } from 'lucide-react'
+import { Clock, ChevronRight, Search, Filter, Calendar, Heart, Smartphone } from 'lucide-react'
 
 export default function PrayersPage() {
   const [search, setSearch] = useState('')
@@ -130,9 +130,16 @@ export default function PrayersPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
-                    <p className="font-bold text-sm leading-tight text-text-main">
-                      {prayer.name}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="font-bold text-sm leading-tight text-text-main">
+                        {prayer.name}
+                      </p>
+                      {(prayer.id === 'rozaniec' || prayer.id === 'koronka') && (
+                        <span className="text-[8px] font-black bg-gold text-white px-1.5 py-0.5 rounded-full uppercase tracking-widest flex items-center gap-1">
+                          <Smartphone size={8} /> Interaktywna
+                        </span>
+                      )}
+                    </div>
                     <ChevronRight size={16} className="text-text-muted flex-shrink-0" />
                   </div>
                   <div className="flex items-center gap-2 mt-1">

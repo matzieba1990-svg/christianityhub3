@@ -1,0 +1,17 @@
+{
+  "name": "ChristianityHub",
+  "short_name": "CHub",
+  "description": "Twoja codzienna przestrzeń modlitwy i wspólnoty.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF6F0",
+  "theme_color": "#C9A227",
+  "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
 import { LogOut, ChevronRight, BookOpen, HandHeart, Users, Settings } from 'lucide-react'
 import { PRAYERS } from '@/lib/prayers'
+import PrayerStats from '@/components/PrayerStats'
 
 export default function ProfilePage() {
   const { data: session } = useSession()
@@ -60,12 +61,6 @@ export default function ProfilePage() {
 
   const initials = session.user?.name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '✝'
 
-  const statItems = [
-    { label: 'Modlitwy', value: stats.prayers, icon: HandHeart, color: 'var(--gold)' },
-    { label: 'Prośby', value: stats.requests, icon: BookOpen, color: 'var(--gold)' },
-    { label: 'Wspólnoty', value: stats.communities, icon: Users, color: 'var(--gold)' },
-  ]
-
   return (
     <div className="pb-6" key={`profile-${instanceKey}`}>
       <PageHeader title="Profil" />
@@ -83,16 +78,8 @@ export default function ProfilePage() {
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{session.user?.email}</p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          {statItems.map(({ label, value, icon: Icon, color }) => (
-            <div key={label} className="card p-3 text-center bg-white">
-              <Icon size={16} style={{ color, margin: '0 auto 4px' }} />
-              <p className="font-black text-2xl" style={{ color }}>{loading ? '...' : value}</p>
-              <p className="text-[10px] uppercase font-bold tracking-tighter" style={{ color: 'var(--text-muted)' }}>{label}</p>
-            </div>
-          ))}
-        </div>
+        {/* New Stats Component */}
+        <PrayerStats />
 
         {/* Menu & Active Prayers Tracker */}
         <div className="space-y-2">
