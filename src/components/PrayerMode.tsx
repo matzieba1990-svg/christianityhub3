@@ -164,7 +164,7 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   // Mystery Selection
   if (isRosaryBased && selectedMysterySet === null) {
       return (
-          <div className={`fixed inset-0 z-[100] flex flex-col ${isDarkMode ? 'bg-[#0a0a0a] text-white' : 'bg-white text-text-main'}`}>
+          <div className={`fixed top-0 left-0 right-0 bottom-[72px] z-[50] flex flex-col ${isDarkMode ? 'bg-[#0a0a0a] text-white' : 'bg-white text-text-main'}`}>
               <div className="p-6 flex justify-between items-center border-b border-white/10">
                   <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5"><X size={20}/></button>
                   <h2 className="font-mystic text-xl font-bold text-gold">Wybierz Tajemnice</h2>
@@ -191,7 +191,7 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   if (!currentStep) return null
 
   return (
-    <div className={`fixed inset-0 z-[100] flex flex-col transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-text-main'}`}>
+    <div className={`fixed top-0 left-0 right-0 bottom-[72px] z-[50] flex flex-col transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-text-main'}`}>
       {/* Header */}
       <div className="relative z-10 flex items-center justify-between p-4 md:p-6">
         <div className="flex items-center gap-2">

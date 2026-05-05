@@ -15,7 +15,7 @@ export default function BottomNav() {
   const path = usePathname()
   const router = useRouter()
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-[100] safe-bottom bg-white/90 backdrop-blur-xl border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+    <nav className="fixed bottom-0 left-0 right-0 z-[1000] safe-bottom bg-white/90 backdrop-blur-xl border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
       <div className="flex items-center justify-around px-2 pt-2 pb-1" style={{ paddingBottom: 'max(8px, env(safe-area-inset-bottom))' }}>
         {nav.map(({ href, icon: Icon, label }) => {
           const active = path.startsWith(href)
