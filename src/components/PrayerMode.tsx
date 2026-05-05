@@ -220,22 +220,19 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
             else next()
         }}
       >
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 w-full max-w-2xl mx-auto my-auto py-10">
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 w-full max-w-2xl mx-auto my-auto py-10">
             {currentStep.meta && (
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-[9px] font-black uppercase tracking-widest mb-6 border border-gold/20">
                    <Smartphone size={10} /> {currentStep.meta}
                 </div>
             )}
-            <h2 className="text-2xl md:text-3xl font-mystic font-bold text-gold-gradient mb-10 leading-tight">
+            <h2 className="text-xl md:text-2xl font-mystic font-bold text-gold-gradient mb-8 leading-tight">
                 {currentStep.title}
             </h2>
             <div className="relative">
-                <p className="text-2xl md:text-4xl leading-relaxed font-serif whitespace-pre-wrap px-4 italic">
+                <p className="text-lg md:text-2xl leading-relaxed font-mystic whitespace-pre-wrap px-4 italic">
                   {currentStep.text}
                 </p>
-                {/* Decorative elements */}
-                <div className="absolute -top-8 -left-2 text-gold/10 text-6xl font-serif">“</div>
-                <div className="absolute -bottom-8 -right-2 text-gold/10 text-6xl font-serif rotate-180">“</div>
             </div>
         </div>
       </div>
