@@ -2,8 +2,9 @@
 import { useSession, signOut } from 'next-auth/react'
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
+import Script from 'next/script'
 import PageHeader from '@/components/PageHeader'
-import { LogOut, ChevronRight, BookOpen, HandHeart, Users, Settings } from 'lucide-react'
+import { LogOut, ChevronRight, BookOpen, HandHeart, Users, Settings, Heart } from 'lucide-react'
 import { PRAYERS } from '@/lib/prayers'
 import PrayerStats from '@/components/PrayerStats'
 
@@ -180,8 +181,32 @@ export default function ProfilePage() {
             <ChevronRight size={16} className="text-text-muted" />
           </Link>
         </div>
-        {/* Big Logout Button */}
+
+        {/* Stripe Donation Section */}
         <div className="mt-8 mb-4">
+          <div className="card p-6 bg-white border-gold/20 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-5 text-gold">
+                <Heart size={80} fill="currentColor" />
+            </div>
+            <h3 className="text-sm font-bold text-text-main mb-2 font-mystic">Wesprzyj rozwój aplikacji</h3>
+            <p className="text-xs text-text-muted mb-6 leading-relaxed">
+                Twoja ofiara pomaga nam utrzymać serwery i tworzyć nowe narzędzia modlitewne dla tysięcy wiernych. Bóg zapłać za każde wsparcie!
+            </p>
+            
+            <div className="flex justify-center">
+                <Script async src="https://js.stripe.com/v3/buy-button.js" strategy="afterInteractive" />
+                <div dangerouslySetInnerHTML={{ __html: `
+                    <stripe-buy-button
+                        buy-button-id="buy_btn_1TTm6UFxZrs8CnTNkad76qEo"
+                        publishable-key="pk_live_51TAGOrFxZrs8CnTNwe1dL9P7z2lCaqTuMIE5N3cbbxxRWsb3mxxTHEBsvmhR5WnRcHgLriAsuRVSHQ2sebbIIdkD00RLzqowhh"
+                    ></stripe-buy-button>
+                ` }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Big Logout Button */}
+        <div className="mb-4">
           <button onClick={() => signOut({ callbackUrl: '/login' })}
             className="w-full card p-4 flex items-center justify-center gap-2 text-sm font-bold"
             style={{ color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)', background: 'white' }}>
