@@ -16,14 +16,22 @@ export default function NewRequestPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!suggestedPrayerId) {
+      setError('Proszę wybrać konkretną modlitwę z listy.')
+      return
+    }
     setLoading(true)
     setError('')
     
     try {
+      // Find the prayer to get its category
+      const prayer = PRAYERS.find(p => p.id === suggestedPrayerId)
+      const finalCategory = prayer?.category || 'inne'
+
       const res = await fetch('/api/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, content, category, isAnonymous, suggestedPrayerId })
+        body: JSON.stringify({ title, content, category: finalCategory, isAnonymous, suggestedPrayerId })
       })
       
       if (!res.ok) {
@@ -52,26 +60,14 @@ export default function NewRequestPage() {
           </div>
           
           <div>
-            <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Treść prośby</label>
+            <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Treść prośby / Intencja</label>
             <textarea className="inp" required value={content} onChange={e => setContent(e.target.value)} rows={4} placeholder="Opisz w jakiej intencji mamy się modlić..." maxLength={500} />
           </div>
           
           <div>
-            <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Kategoria</label>
-            <select className="inp text-sm" value={category} onChange={e => setCategory(e.target.value)}>
-              <option value="zdrowie">Zdrowie</option>
-              <option value="nawrocenie">Nawrócenie</option>
-              <option value="dziekczynienie">Dziękczynienie</option>
-              <option value="rodzina">Rodzina</option>
-              <option value="praca">Praca</option>
-              <option value="inne">Inne</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Sugerowana modlitwa (opcjonalnie)</label>
-            <select className="inp text-sm" value={suggestedPrayerId} onChange={e => setSuggestedPrayerId(e.target.value)}>
-              <option value="">Wspólna modlitwa (dowolna)</option>
+            <label className="block text-xs font-semibold mb-1" style={{ color: 'var(--text-muted)' }}>Wybierz konkretną modlitwę</label>
+            <select className="inp text-sm" required value={suggestedPrayerId} onChange={e => setSuggestedPrayerId(e.target.value)}>
+              <option value="">-- Wybierz z biblioteki --</option>
               {PRAYERS.map(p => (
                 <option key={p.id} value={p.id}>{p.name}</option>
               ))}
@@ -86,7 +82,7 @@ export default function NewRequestPage() {
           {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
           
           <button type="submit" disabled={loading} className="btn-primary mt-4">
-            {loading ? 'Wysyłanie...' : 'Opublikuj prośbę'}
+            {loading ? 'Wysyłanie...' : 'Opublikuj prośbę o modlitwę'}
           </button>
         </form>
       </div>
