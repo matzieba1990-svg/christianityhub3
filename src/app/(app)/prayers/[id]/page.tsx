@@ -93,15 +93,13 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
               )}
             </div>
 
-            {(['rozaniec', 'koronka', 'litania', 'pasja'].includes(prayer.category.toLowerCase()) || prayer.id.toLowerCase() === 'aniol-panski') && (
-              <button 
-                onClick={() => setShowMode(true)}
-                className="btn-primary w-full mt-6 py-5 flex items-center justify-center gap-3 animate-pulse-gold"
-              >
+            <button 
+              onClick={() => setShowMode(true)}
+              className="btn-primary w-full mt-6 py-5 flex items-center justify-center gap-3 animate-pulse-gold"
+            >
                 <Smartphone size={22} />
                 <span className="text-lg">Rozpocznij modlitwę</span>
               </button>
-            )}
           </div>
         </div>
 
