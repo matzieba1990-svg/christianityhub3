@@ -5,10 +5,10 @@ import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote, Hear
 import { getLiturgyForDate } from '@/lib/liturgy'
 
 const quickLinks = [
-  { href: '/requests', icon: HandHeart, label: 'Wspólna Modlitwa', desc: 'Złóż intencję lub otocz innych swoją opieką', color: '#c9a227' },
-  { href: '/prayers', icon: BookOpen, label: 'Skarbiec Wiary', desc: 'Piękno modlitwy w zasięgu Twojej ręki', color: '#c9a227' },
-  { href: '/calendar', icon: Calendar, label: 'Dziennik Wiary', desc: 'Twoje codzienne spotkanie ze Słowem i Świętymi', color: '#c9a227' },
-  { href: '/community', icon: Users, label: 'Żywa Wspólnota', desc: 'Poznaj ludzi, którzy dzielą Twoje wartości', color: '#c9a227' },
+  { href: '/requests', icon: HandHeart, label: 'Wspólna Modlitwa', desc: 'Dodaj intencję. Módlcie się razem.', color: '#c9a227' },
+  { href: '/prayers', icon: BookOpen, label: 'Skarbiec Wiary', desc: 'Modlitwy i treści. Zawsze pod ręką.', color: '#c9a227' },
+  { href: '/calendar', icon: Calendar, label: 'Kalendarz Modlitwy', desc: 'Śledź i zapisuj swoje modlitwy każdego dnia', color: '#c9a227' },
+  { href: '/community', icon: Users, label: 'Wspólnota', desc: 'Wiara, która łączy ludzi', color: '#c9a227' },
 ]
 
 export default function DashboardPage() {
