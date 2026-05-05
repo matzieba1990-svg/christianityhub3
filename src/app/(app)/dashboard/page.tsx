@@ -110,5 +110,6 @@ export default function DashboardPage() {
         <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
       </Link>
     </div>
+  </div>
   )
 }
