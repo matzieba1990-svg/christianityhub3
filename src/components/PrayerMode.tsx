@@ -24,20 +24,20 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const prayer = PRAYERS.find(p => p.id.toLowerCase() === prayerId.toLowerCase())
   const [currentStepIdx, setCurrentStepIdx] = useState(0)
   const [isDarkMode, setIsDarkMode] = useState(true)
-  const [isMusicPlaying, setIsMusicPlaying] = useState(true)
+  const [activeTrack, setActiveTrack] = useState<number>(1) // 1: Cosmic, 2: Astral, 0: Off
   const [selectedMysterySet, setSelectedMysterySet] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    // Attempt autoplay since this component is opened by a user click
-    if (audioRef.current) {
+    // Attempt autoplay
+    if (audioRef.current && activeTrack !== 0) {
         audioRef.current.play().catch(e => {
-            console.log("Autoplay blocked, waiting for interaction:", e)
-            setIsMusicPlaying(false)
+            console.log("Autoplay blocked:", e)
+            setActiveTrack(0)
         })
     }
-  }, [])
+  }, [activeTrack])
 
   const isRosaryBased = prayerId.toLowerCase() === 'rozaniec' || prayerId.toLowerCase() === 'nowenna-pompejanska'
 
@@ -218,20 +218,30 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
         </div>
 
         <div className="flex items-center gap-2">
-            <button 
-              onClick={() => {
-                const audio = audioRef.current
-                if (!audio) return
-                if (isMusicPlaying) {
-                    audio.pause()
-                    setIsMusicPlaying(false)
-                } else {
-                    audio.play().then(() => setIsMusicPlaying(true)).catch(e => console.error("Play failed:", e))
-                }
-              }} 
-              className={`w-10 h-10 flex items-center justify-center rounded-full transition-all ${isMusicPlaying ? 'bg-gold/20 text-gold animate-pulse' : 'bg-white/5 text-white/40'}`}>
-              {isMusicPlaying ? <Music2 size={18} /> : <Music size={18} />}
-            </button>
+            <div className="flex flex-col items-end">
+                {activeTrack !== 0 && (
+                    <span className="text-[10px] text-gold/60 uppercase tracking-widest animate-fade-in">
+                        {activeTrack === 1 ? 'Cosmic' : 'Astral'}
+                    </span>
+                )}
+                <button 
+                onClick={() => {
+                    const audio = audioRef.current
+                    if (!audio) return
+                    const next = (activeTrack + 1) % 3
+                    setActiveTrack(next)
+                    if (next === 0) {
+                        audio.pause()
+                    } else {
+                        // Change src and play
+                        audio.src = `/audio/meditation${next}.mp3`
+                        audio.play().catch(e => console.error("Play failed:", e))
+                    }
+                }} 
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition-all ${activeTrack !== 0 ? 'bg-gold/20 text-gold animate-pulse' : 'bg-white/5 text-white/40'}`}>
+                {activeTrack !== 0 ? <Music2 size={18} /> : <Music size={18} />}
+                </button>
+            </div>
             <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
@@ -307,14 +317,14 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
       {/* Audio Element */}
       <audio 
         ref={audioRef}
-        src="/audio/meditation.mp3"
+        src="/audio/meditation1.mp3"
         loop
         autoPlay
         preload="auto"
         onLoadedData={(e) => { e.currentTarget.volume = 0.4 }}
         onError={(e) => {
             console.error("Audio source failed to load:", e.currentTarget.error?.code, e.currentTarget.error?.message)
-            setIsMusicPlaying(false)
+            setActiveTrack(0)
         }}
       />
     </div>
