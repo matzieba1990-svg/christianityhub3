@@ -1,7 +1,7 @@
 'use client'
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
-import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote } from 'lucide-react'
+import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote, Heart } from 'lucide-react'
 import { getLiturgyForDate } from '@/lib/liturgy'
 
 const quickLinks = [
