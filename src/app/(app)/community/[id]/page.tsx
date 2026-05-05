@@ -296,7 +296,7 @@ export default function CommunityDetailsPage() {
                       <input type="checkbox" checked={isAnonymous} onChange={e => setIsAnonymous(e.target.checked)} className="rounded border-border text-gold focus:ring-gold" />
                       Dodaj anonimowo
                     </label>
-                    <button type="submit" className="btn-gold text-xs py-1.5 px-4" disabled={submitLoading}>
+                    <button type="submit" className="btn-gold w-auto text-xs py-1.5 px-4" disabled={submitLoading}>
                       {submitLoading ? 'Dodawanie...' : 'Dodaj'}
                     </button>
                   </div>
