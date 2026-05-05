@@ -30,16 +30,28 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    if (!audioRef.current) {
-        audioRef.current = new Audio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_18087374f9.mp3') // Calm Ambient Meditation
+    if (!audioRef.current && typeof window !== 'undefined') {
+        audioRef.current = new Audio('https://cdn.pixabay.com/audio/2022/05/27/audio_18087374f9.mp3')
         audioRef.current.loop = true
+        audioRef.current.volume = 0.4
     }
     
-    if (isMusicPlaying) {
-        audioRef.current.play().catch(e => console.log("Audio play failed:", e))
-    } else {
-        audioRef.current.pause()
+    const playAudio = async () => {
+        if (!audioRef.current) return
+        try {
+            if (isMusicPlaying) {
+                await audioRef.current.play()
+            } else {
+                audioRef.current.pause()
+            }
+        } catch (e) {
+            console.error("Audio playback failed:", e)
+            // If failed, try to reset state to show it's not playing
+            setIsMusicPlaying(false)
+        }
     }
+
+    playAudio()
 
     return () => {
         audioRef.current?.pause()
