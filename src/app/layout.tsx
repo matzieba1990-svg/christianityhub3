@@ -37,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Onboarding />
         </Providers>
         <CookieBanner />
+        <Script async src="https://js.stripe.com/v3/buy-button.js" />
         <Script id="register-sw" strategy="afterInteractive">
           {`
             if ('serviceWorker' in navigator) {

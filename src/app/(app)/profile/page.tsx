@@ -193,8 +193,7 @@ export default function ProfilePage() {
                 Twoja ofiara pomaga nam utrzymać serwery i tworzyć nowe narzędzia modlitewne dla tysięcy wiernych. Bóg zapłać za każde wsparcie!
             </p>
             
-            <div className="flex justify-center">
-                <Script async src="https://js.stripe.com/v3/buy-button.js" strategy="afterInteractive" />
+            <div className="flex justify-center min-h-[44px]">
                 <div dangerouslySetInnerHTML={{ __html: `
                     <stripe-buy-button
                         buy-button-id="buy_btn_1TTm6UFxZrs8CnTNkad76qEo"
