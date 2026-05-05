@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
-import { X, ChevronLeft, ChevronRight, Moon, Sun, Smartphone, RotateCcw, CheckCircle2 } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, Moon, Sun, Smartphone, RotateCcw, CheckCircle2, Music, Music2 } from 'lucide-react'
 import { PRAYERS } from '@/lib/prayers'
 
 const COMMON_PRAYERS: Record<string, string> = {
@@ -24,8 +24,27 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const prayer = PRAYERS.find(p => p.id.toLowerCase() === prayerId.toLowerCase())
   const [currentStepIdx, setCurrentStepIdx] = useState(0)
   const [isDarkMode, setIsDarkMode] = useState(true)
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false)
   const [selectedMysterySet, setSelectedMysterySet] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    if (!audioRef.current) {
+        audioRef.current = new Audio('https://cdn.pixabay.com/download/audio/2022/05/27/audio_18087374f9.mp3') // Calm Ambient Meditation
+        audioRef.current.loop = true
+    }
+    
+    if (isMusicPlaying) {
+        audioRef.current.play().catch(e => console.log("Audio play failed:", e))
+    } else {
+        audioRef.current.pause()
+    }
+
+    return () => {
+        audioRef.current?.pause()
+    }
+  }, [isMusicPlaying])
 
   const isRosaryBased = prayerId.toLowerCase() === 'rozaniec' || prayerId.toLowerCase() === 'nowenna-pompejanska'
 
@@ -205,9 +224,14 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
             </div>
         </div>
 
-        <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
-          {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
+        <div className="flex items-center gap-2">
+            <button onClick={() => setIsMusicPlaying(!isMusicPlaying)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-all ${isMusicPlaying ? 'bg-gold/20 text-gold animate-pulse' : 'bg-white/5 text-white/40'}`}>
+              {isMusicPlaying ? <Music2 size={18} /> : <Music size={18} />}
+            </button>
+            <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+        </div>
       </div>
 
       {/* Main Interaction Area */}
