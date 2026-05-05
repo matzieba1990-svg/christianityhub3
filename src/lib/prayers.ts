@@ -98,8 +98,16 @@ export const PRAYERS = [
     intro: 'Litania Loretańska to rytmiczne wezwanie do Maryi, naszej Matki i Królowej.',
     parts: [
       {
-        title: 'Litania',
-        text: 'Kyrie elejson. Chryste elejson. Kyrie elejson. Chrystus usłysz nas. Chryste wysłuchaj nas. Ojcze z nieba, Boże – zmiłuj się nad nami. Synu Odkupicielu świata, Boże – zmiłuj się nad nami. Duchu Święty, Boże – zmiłuj się nad nami. Święta Trójco, jedyny Boże – zmiłuj się nad nami. Święta Maryjo – módl się za nami... (pełny tekst wezwań)'
+        title: 'Błagania',
+        text: 'Kyrie elejson. Chryste elejson. Kyrie elejson. Chrystus usłysz nas. Chryste wysłuchaj nas.'
+      },
+      {
+        title: 'Do Trójcy Świętej',
+        text: 'Ojcze z nieba, Boże – zmiłuj się nad nami. Synu Odkupicielu świata, Boże – zmiłuj się nad nami. Duchu Święty, Boże – zmiłuj się nad nami. Święta Trójco, jedyny Boże – zmiłuj się nad nami.'
+      },
+      {
+        title: 'Wezwania do Maryi',
+        text: 'Święta Maryjo – módl się za nami. Święta Boża Rodzicielko. Święta Panno nad pannami. Matko Chrystusowa. Matko Kościoła. Matko łaski Bożej. Matko nieskalana. Matko najczystsza.'
       }
     ],
     mysteries: []
@@ -133,8 +141,20 @@ export const PRAYERS = [
     days: null,
     intro: 'Przejdźmy drogą miłości, która nie cofnęła się przed krzyżem.',
     parts: [
-      { title: 'Stacja I - Jezus skazany na śmierć', text: 'Kłaniamy Ci się Chryste i błogosławimy Tobie. Żeś przez Krzyż Swój Święty świat odkupił. Wyrok został wydany. Niewinny Baranek przyjmuje śmierć za grzechy świata.' },
-      { title: 'Stacje II-XIV', text: 'Rozważaj kolejne upadki, spotkania i śmierć Pana Jezusa na Krzyżu, aż do złożenia w grobie.' }
+      { title: 'Stacja I', text: 'Jezus na śmierć skazany. Kłaniamy Ci się Chryste...' },
+      { title: 'Stacja II', text: 'Jezus bierze krzyż na swoje ramiona.' },
+      { title: 'Stacja III', text: 'Pierwszy upadek pod krzyżem.' },
+      { title: 'Stacja IV', text: 'Jezus spotyka swą Matkę.' },
+      { title: 'Stacja V', text: 'Szymon z Cyreny pomaga nieść krzyż Jezusowi.' },
+      { title: 'Stacja VI', text: 'Weronika ociera twarz Jezusowi.' },
+      { title: 'Stacja VII', text: 'Drugi upadek pod krzyżem.' },
+      { title: 'Stacja VIII', text: 'Jezus pociesza płaczące niewiasty.' },
+      { title: 'Stacja IX', text: 'Trzeci upadek pod krzyżem.' },
+      { title: 'Stacja X', text: 'Jezus z szat obnażony.' },
+      { title: 'Stacja XI', text: 'Jezus do krzyża przybity.' },
+      { title: 'Stacja XII', text: 'Jezus umiera na krzyżu.' },
+      { title: 'Stacja XIII', text: 'Jezus z krzyża zdjęty.' },
+      { title: 'Stacja XIV', text: 'Jezus do grobu złożony.' }
     ],
     mysteries: []
   },
@@ -195,7 +215,7 @@ export const PRAYERS = [
     name: 'Modlitwa do św. Rity',
     category: 'inne',
     emoji: '',
-    description: 'Błagalna modlitwa do patronki spraw beznadziejnych i najtrudniejszych. Przynosi pociechę tym, którzy czują, że ich sytuacja nie ma już ludzkiego rozwiązania.',
+    description: 'Błagalna modlitwa do patronka spraw beznadziejnych i najtrudniejszych. Przynosi pociechę tym, którzy czują, że ich sytuacja nie ma już ludzkiego rozwiązania.',
     history: 'Św. Rita z Cascii żyła w XIV wieku. Po tragicznej stracie męża i synów wstąpiła do zakonu, gdzie otrzymała stygmat ciernia na czole. Od wieków czczona jako orędowniczka w sprawach po ludzku niemożliwych.',
     intentions: ['trudne sprawy', 'beznadzieja', 'małżeństwo', 'rodzina'],
     duration: '5 min',
@@ -212,7 +232,7 @@ export const PRAYERS = [
     category: 'nowenna',
     emoji: '',
     description: 'Modlitwa o uzdrowienie i pomoc za wstawiennictwem wielkiego pustelnika z Libanu. Znana z licznych cudów medycznych i duchowych na całym świecie.',
-    history: 'Św. Charbel Makhlouf był maronickim mnichem żyjącym w Libanie w XIX wieku. Spędził 23 lata w pustelni, żyjąc w ekstremalnej ascezie. Po jego śmierci w 1898 roku, z jego grobu biło niezwykłe światło.',
+    history: 'Św. Charbel Makhlouf był maronickim mnichem żyjącym w Libaniu w XIX wieku. Spędził 23 lata w pustelni, żyjąc w ekstremalnej ascezie. Po jego śmierci w 1898 roku, z jego grobu biło niezwykłe światło.',
     intentions: ['zdrowie', 'uzdrowienie', 'spokój duszy', 'wiara'],
     duration: '10 min/dzień',
     days: 9,
@@ -309,7 +329,7 @@ export const PRAYERS = [
     category: 'nowenna',
     emoji: '',
     description: 'Dziewięciodniowe nabożeństwo do ziemskiego Opiekuna Jezusa. Wzór ojcostwa, opieki nad rodziną i godnej pracy.',
-    history: 'Św. Teresa z Avila uczyniła go swoim głównym orędownikiem, twierdząc, że Józef pomaga we wszystkich potrzebach.',
+    history: 'Św. Józef to milczący świadek Bożej miłości.',
     intentions: ['rodzina', 'praca', 'dom', 'dobra śmierć'],
     duration: '10 min/dzień',
     days: 9,
@@ -363,7 +383,13 @@ export const PRAYERS = [
     days: null,
     intro: 'Duchu Święty, natchnij nas.',
     parts: [
-      { title: 'Wezwanie 1', text: 'Przyjdź Duchu Mądrości, odciągnij nas od rzeczy ziemskich, a skłoń nas do miłowania rzeczy niebieskich.' }
+      { title: 'Dar Mądrości', text: 'Przyjdź Duchu Mądrości, odciągnij nas od rzeczy ziemskich, a skłoń nas do miłowania rzeczy niebieskich.' },
+      { title: 'Dar Rozumu', text: 'Przyjdź Duchu Rozumu, oświeć nasze umysły światłem Twojej prawdy.' },
+      { title: 'Dar Rady', text: 'Przyjdź Duchu Rady, uczyń nas uległymi Twoim natchnieniom.' },
+      { title: 'Dar Męstwa', text: 'Przyjdź Duchu Męstwa, umocnij nas w przeciwnościach.' },
+      { title: 'Dar Umiejętności', text: 'Przyjdź Duchu Umiejętności, pozwól nam poznać Boga i samych siebie.' },
+      { title: 'Dar Pobożności', text: 'Przyjdź Duchu Pobożności, uczyń naszą modlitwę miłą Bogu.' },
+      { title: 'Dar Bojaźni Bożej', text: 'Przyjdź Duchu Bojaźni Bożej, powstrzymaj nas od wszystkiego, co mogłoby Cię obrazić.' }
     ],
     mysteries: []
   },

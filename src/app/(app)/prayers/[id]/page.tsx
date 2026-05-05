@@ -10,7 +10,7 @@ import PrayerMode from '@/components/PrayerMode'
 
 export default function PrayerDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
-  const prayer = PRAYERS.find(p => p.id === id)
+  const prayer = PRAYERS.find(p => p.id.toLowerCase() === id.toLowerCase())
   if (!prayer) notFound()
 
   return <PrayerDetail prayer={prayer} />
