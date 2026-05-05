@@ -29,12 +29,12 @@ export default function Onboarding() {
     {
       title: 'Złóż intencję',
       desc: 'Potrzebujesz wsparcia? Dodaj prośbę, a inni członkowie wspólnoty podejmą modlitwę w Twoim imieniu.',
-      icon: <Heart className="text-red-500" size={40} />
+      icon: <Heart className="text-gold" size={40} />
     },
     {
       title: 'Znajdź wspólnotę',
       desc: 'Dołącz do grup modlitewnych w Twojej okolicy lub twórz własne kręgi modlitwy.',
-      icon: <Users className="text-blue-500" size={40} />
+      icon: <Users className="text-gold" size={40} />
     },
     {
       title: 'Powiadomienia',

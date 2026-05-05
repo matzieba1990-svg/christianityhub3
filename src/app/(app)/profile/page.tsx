@@ -136,12 +136,24 @@ export default function ProfilePage() {
                                   background: ap.completedDays.includes(i + 1) ? 'var(--gold)' : 'var(--bg-primary)',
                                   border: '1px solid var(--border)'
                                 }} 
-                              />
+                               />
                             ))}
                           </div>
                         </Link>
                       )
                     })}
+                    
+                    <button 
+                      onClick={async () => {
+                        if (confirm('Czy na pewno chcesz wyczyścić wszystkie aktywne modlitwy?')) {
+                          await fetch('/api/user/active-prayers', { method: 'DELETE' });
+                          setActivePrayers([]);
+                        }
+                      }}
+                      className="w-full py-2 text-[10px] font-bold text-red-500 uppercase tracking-widest hover:bg-red-50 rounded-lg transition-colors mt-2"
+                    >
+                      Resetuj postępy modlitw
+                    </button>
                   </div>
                 )}
               </div>

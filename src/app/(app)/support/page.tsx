@@ -11,9 +11,9 @@ export default function SupportPage() {
         <div className="card bg-white p-8 mb-8 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gold-gradient"></div>
           
-          <div className="w-20 h-20 rounded-3xl flex items-center justify-center text-gold mx-auto mb-6"
+          <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6"
             style={{ background: '#FAF6F0', border: '2px solid var(--gold)', boxShadow: '0 8px 30px rgba(201,162,39,0.15)' }}>
-            <Heart size={36} />
+            <Heart size={36} className="text-gold" />
           </div>
 
           <h1 className="text-2xl font-mystic font-bold text-text-main mb-4">Budujmy wspólnie ChristianityHub</h1>

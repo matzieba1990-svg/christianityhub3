@@ -12,6 +12,11 @@
   --border: #E8DFD3;
 }
 
+.text-gold { color: var(--gold); }
+.text-gold-dark { color: var(--gold-dark); }
+.bg-gold { background-color: var(--gold); }
+.bg-gold-light { background-color: var(--gold-light); }
+
 * { box-sizing: border-box; }
 
 body {

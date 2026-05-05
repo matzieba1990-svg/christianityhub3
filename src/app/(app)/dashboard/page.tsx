@@ -96,9 +96,10 @@ export default function DashboardPage() {
       </div>
 
       {/* Support Link */}
-      <Link href="/support" className="card mt-4 p-4 flex items-center gap-3 bg-gold/5 border-dashed border-gold/40 hover:bg-gold/10 transition-colors">
-        <div className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-          <Heart size={16} fill="currentColor" />
+      <Link href="/support" className="card mt-4 p-4 flex items-center gap-3 bg-white border border-gold/20 hover:border-gold/40 transition-colors">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ background: 'rgba(201,162,39,0.1)', border: '1px solid rgba(201,162,39,0.2)' }}>
+          <Heart size={20} className="text-gold" />
         </div>
         <div className="flex-1">
           <p className="text-xs font-bold text-text-main">Wesprzyj rozwój aplikacji</p>

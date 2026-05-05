@@ -31,3 +31,14 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({ activePrayers: result })
 }
+
+export async function DELETE(req: NextRequest) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+
+  await prisma.prayerProgress.deleteMany({
+    where: { userId: session.user.id }
+  })
+
+  return NextResponse.json({ success: true })
+}
