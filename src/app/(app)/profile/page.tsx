@@ -203,7 +203,6 @@ export default function ProfilePage() {
             </div>
             <div className="flex-1">
               <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Wesprzyj nas</p>
-              <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>Pomóż nam rozwijać portal dla wspólnoty</p>
             </div>
             <ChevronRight size={18} className="text-gold" />
           </Link>

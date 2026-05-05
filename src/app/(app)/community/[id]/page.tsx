@@ -334,7 +334,8 @@ export default function CommunityDetailsPage() {
             <button 
               onClick={handleDeleteCommunity}
               disabled={actionLoading}
-              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-bold transition-colors border border-text-main text-white bg-text-main hover:opacity-90 shadow-sm uppercase tracking-wider"
+              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-bold transition-all text-white shadow-sm uppercase tracking-wider active:scale-[0.98]"
+              style={{ background: 'var(--text-main)', border: '1px solid var(--text-main)' }}
             >
               Usuń wspólnotę
             </button>

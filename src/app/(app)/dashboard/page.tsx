@@ -5,10 +5,10 @@ import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote, Hear
 import { getLiturgyForDate } from '@/lib/liturgy'
 
 const quickLinks = [
-  { href: '/requests', icon: HandHeart, label: 'Wspólna Modlitwa', desc: 'Dodaj intencję. Módlcie się razem.', color: '#c9a227' },
-  { href: '/prayers', icon: BookOpen, label: 'Skarbiec Wiary', desc: 'Modlitwy i treści. Zawsze pod ręką.', color: '#c9a227' },
-  { href: '/calendar', icon: Calendar, label: 'Kalendarz Modlitwy', desc: 'Śledź i zapisuj swoje modlitwy każdego dnia', color: '#c9a227' },
-  { href: '/community', icon: Users, label: 'Wspólnota', desc: 'Wiara, która łączy ludzi', color: '#c9a227' },
+  { href: '/requests', icon: HandHeart, label: 'Wspólna Modlitwa', desc: 'Dodaj intencję i módl się razem', color: '#c9a227' },
+  { href: '/prayers', icon: BookOpen, label: 'Skarbiec Wiary', desc: 'Modlitwy zawsze w zasięgu ręki', color: '#c9a227' },
+  { href: '/calendar', icon: Calendar, label: 'Kalendarz Modlitwy', desc: 'Śledź swoją codzienną modlitwę', color: '#c9a227' },
+  { href: '/community', icon: Users, label: 'Wspólnoty', desc: 'Łącz się z innymi', color: '#c9a227' },
 ]
 
 export default function DashboardPage() {
@@ -104,8 +104,7 @@ export default function DashboardPage() {
           <Heart size={22} className="text-gold" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Dar Serca</p>
-          <p className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-muted)' }}>Wesprzyj nasze wspólne dzieło i buduj z nami portal</p>
+          <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Wesprzyj nas</p>
         </div>
         <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
       </Link>
