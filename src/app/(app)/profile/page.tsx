@@ -150,7 +150,7 @@ export default function ProfilePage() {
                           setActivePrayers([]);
                         }
                       }}
-                      className="w-full py-2 text-[10px] font-bold text-red-500 uppercase tracking-widest hover:bg-red-50 rounded-lg transition-colors mt-2"
+                      className="w-full py-2 text-[10px] font-bold text-text-muted uppercase tracking-widest hover:bg-gray-50 rounded-lg transition-colors mt-2"
                     >
                       Resetuj postępy modlitw
                     </button>
@@ -209,12 +209,11 @@ export default function ProfilePage() {
           </Link>
         </div>
 
-        {/* Big Logout Button - Moved lower */}
-        <div className="mt-16 mb-8">
+        <div className="mt-16 mb-12">
           <button onClick={() => signOut({ callbackUrl: '/login' })}
-            className="w-full card p-4 flex items-center justify-center gap-2 text-sm font-bold"
-            style={{ color: '#ef4444', border: '1px solid rgba(239,68,68,0.2)', background: 'white' }}>
-            <LogOut size={18} />
+            className="w-full card p-4 flex items-center justify-center gap-2 text-sm font-bold transition-colors active:bg-gray-50"
+            style={{ color: 'var(--text-main)', border: '1px solid var(--border)', background: 'white' }}>
+            <LogOut size={18} className="opacity-60" />
             Wyloguj się z urządzenia
           </button>
         </div>

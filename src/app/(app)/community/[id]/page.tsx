@@ -251,7 +251,7 @@ export default function CommunityDetailsPage() {
                       <div className="flex justify-end border-t border-border pt-2 mt-2">
                         <button 
                           onClick={() => handleDeleteRequest(req.id)}
-                          className="text-[10px] text-red-500 hover:text-red-700 uppercase font-bold tracking-wider"
+                          className="text-[10px] text-text-muted hover:text-text-main uppercase font-bold tracking-wider"
                         >
                           Usuń intencję
                         </button>
@@ -334,7 +334,7 @@ export default function CommunityDetailsPage() {
             <button 
               onClick={handleDeleteCommunity}
               disabled={actionLoading}
-              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-bold transition-colors border border-red-500 text-white bg-red-500 hover:bg-red-600 shadow-sm uppercase tracking-wider"
+              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-bold transition-colors border border-text-main text-white bg-text-main hover:opacity-90 shadow-sm uppercase tracking-wider"
             >
               Usuń wspólnotę
             </button>
@@ -344,7 +344,7 @@ export default function CommunityDetailsPage() {
             <button 
               onClick={toggleMembership}
               disabled={actionLoading}
-              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-semibold transition-colors border border-[rgba(239,68,68,0.2)] text-[#ef4444] bg-white hover:bg-red-50 shadow-sm"
+              className="w-full flex items-center justify-center gap-2 px-4 py-4 rounded-xl text-sm font-semibold transition-colors border border-border text-text-muted bg-white hover:bg-bg-primary shadow-sm"
             >
               <LogOut size={18} />
               Opuść wspólnotę
