@@ -43,7 +43,9 @@ export default function LoginPage() {
           ✝
         </div>
         <h1 className="text-3xl font-mystic text-gold-gradient">ChristianityHub</h1>
-        <p className="text-sm mt-2" style={{ color: 'var(--text-muted)' }}>Wspólnota Katolicka</p>
+        <p className="text-sm mt-3 text-center px-4 leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+          Twoja cyfrowa przestrzeń modlitwy i wspólnoty
+        </p>
       </div>
 
       {/* Form */}
@@ -89,9 +91,14 @@ export default function LoginPage() {
         </Link>
       </p>
 
-      <p className="text-center text-xs mt-10 opacity-50" style={{ color: 'var(--text-muted)' }}>
-        ✝ W Imię Ojca i Syna i Ducha Świętego
-      </p>
+      <div className="mt-12 text-center space-y-2">
+        <p className="text-[10px] leading-relaxed opacity-60" style={{ color: 'var(--text-muted)' }}>
+          Logując się, akceptujesz nasz Regulamin oraz potwierdzasz zapoznanie się z polityką prywatności.
+        </p>
+        <Link href="/privacy" className="text-[10px] font-bold uppercase tracking-widest text-gold hover:underline">
+          Polityka RODO & Prywatność
+        </Link>
+      </div>
       </div>
     </div>
   )
