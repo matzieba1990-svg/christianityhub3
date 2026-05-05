@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import PageHeader from '@/components/PageHeader'
-import { Users, Globe, Lock, UserPlus, LogOut, MessageCircle, Heart } from 'lucide-react'
+import { Users, Globe, Lock, UserPlus, LogOut, MessageCircle, Heart, ChevronRight } from 'lucide-react'
+import { PRAYERS } from '@/lib/prayers'
 
 export default function CommunityDetailsPage() {
   const { id } = useParams()
@@ -64,7 +65,7 @@ export default function CommunityDetailsPage() {
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [category, setCategory] = useState('inne')
+  const [suggestedPrayerId, setSuggestedPrayerId] = useState('')
   const [isAnonymous, setIsAnonymous] = useState(false)
   const [submitLoading, setSubmitLoading] = useState(false)
   const [formError, setFormError] = useState('')
@@ -77,10 +78,13 @@ export default function CommunityDetailsPage() {
     setFormError('')
 
     try {
+      const prayer = PRAYERS.find(p => p.id === suggestedPrayerId)
+      const finalCategory = prayer?.category || 'inne'
+
       const res = await fetch('/api/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, content, category, isAnonymous, communityId: id })
+        body: JSON.stringify({ title, content, category: finalCategory, isAnonymous, communityId: id, suggestedPrayerId })
       })
 
       if (res.ok) {
@@ -94,6 +98,7 @@ export default function CommunityDetailsPage() {
         setCommunity({ ...community, prayerRequests: [newRequest, ...(community.prayerRequests || [])] })
         setTitle('')
         setContent('')
+        setSuggestedPrayerId('')
         setIsAnonymous(false)
       } else {
         const data = await res.json()
@@ -235,6 +240,13 @@ export default function CommunityDetailsPage() {
                       </span>
                     </div>
                     <p className="text-xs text-text-muted leading-relaxed whitespace-pre-wrap mb-2">{req.content}</p>
+                    {req.suggestedPrayerId && (
+                      <div className="flex items-center gap-1.5 mb-2">
+                        <span className="text-[10px] font-bold text-gold uppercase bg-gold/5 px-2 py-0.5 rounded border border-gold/10">
+                          Sugerowana modlitwa: {PRAYERS.find(p => p.id === req.suggestedPrayerId)?.name || req.suggestedPrayerId}
+                        </span>
+                      </div>
+                    )}
                     {(req.userId === session?.user?.id || isAdmin) && (
                       <div className="flex justify-end border-t border-border pt-2 mt-2">
                         <button 
@@ -263,9 +275,21 @@ export default function CommunityDetailsPage() {
                   />
                   <textarea 
                     className="inp text-sm min-h-[60px] py-2" 
-                    placeholder="Opisz intencję, nowennę..." 
+                    placeholder="Opisz intencję..." 
                     value={content} onChange={e => setContent(e.target.value)} required 
                   />
+                  
+                  <select 
+                    className="inp text-sm py-2" 
+                    required 
+                    value={suggestedPrayerId} 
+                    onChange={e => setSuggestedPrayerId(e.target.value)}
+                  >
+                    <option value="">-- Wybierz konkretną modlitwę --</option>
+                    {PRAYERS.map(p => (
+                      <option key={p.id} value={p.id}>{p.name}</option>
+                    ))}
+                  </select>
                   
                   <div className="flex items-center justify-between">
                     <label className="flex items-center gap-2 text-xs text-text-muted cursor-pointer">
