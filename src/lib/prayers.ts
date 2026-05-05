@@ -84,7 +84,7 @@ export const PRAYERS = [
     parts: [
       { title: 'Kyrie elejson', text: 'Kyrie, elejson. Chryste, elejson. Kyrie, elejson. Chryste, usłysz nas. Chryste, wysłuchaj nas.' },
       { title: 'Inwokacje Trynitarne', text: 'Ojcze z nieba, Boże, zmiłuj się nad nami. Synu, Odkupicielu świata, Boże, zmiłuj się nad nami. Duchu Święty, Boże, zmiłuj się nad nami. Święta Trójco, jedyny Boże, zmiłuj się nad nami.' },
-      { title: 'Wezwania Maryjne', text: 'Święta Maryjo, módl się za nami. Święta Boża Rodzicielko. Święta Panno nad pannami. Matko Chrystusowa. Matko Kościoła. Matko łaski Bożej. Matko miłosierdzia. Matko nadziei. Matko nieskalana. Matko najczystsza. Matko dziewicza. Matko nienaruszona. Matko najmilsza. Matko przedziwna. Matko dobrej rady. Matko Stworzyciela. Matko Zbawiciela. Panno roztropna. Panno czcigodna. Panno sławna. Panno można. Panno łaskawa. Panno wierna. Zwierciadło sprawiedliwości. Stolico mądrości. Przyczyno naszej radości. Przybytku Duchowy. Przybytku chwalebny. Przybytku sławny pobożności. Różo duchowna. Wieżo Dawidowa. Wieżo z kości słoniowej. Domie złoty. Arko przymierza. Bramo niebieska. Gwiazdo zaranna. Uzdrowienie chorych. Ucieczko grzesznych. Pocieszycielko migrantów. Pocieszycielko strapionych. Wspomożenie wiernych. Królowo Aniołów. Królowo Patriarchów. Królowo Proroków. Królowo Apostołówn. Królowo Męczenników. Królowo Wyznawców. Królowo Dziewic. Królowo wszystkich Świętych. Królowo bez zmazy pierworodnej poczęta. Królowo wniebowzięta. Królowo Różańca świętego. Królowo rodzin. Królowo pokoju. Królowo Polski.' },
+      { title: 'Wezwania Maryjne', text: 'Święta Maryjo, módl się za nami. Święta Boża Rodzicielko. Święta Panno nad pannami. Matko Chrystusowa. Matko Kościoła. Matko łaski Bożej. Matko miłosierdzia. Matko nadziei. Matko nieskalana. Matko najczystsza. Matko dziewicza. Matko nienaruszona. Matko najmilsza. Matko przedziwna. Matko dobrej rady. Matko Stworzyciela. Matko Zbawiciela. Panno roztropna. Panno czcigodna. Panno sławna. Panno można. Panno łaskawa. Panno wierna. Zwierciadło sprawiedliwości. Stolico mądrości. Przyczyno naszej radości. Przybytku Duchowy. Przybytku chwalebny. Przybytku sławny pobożności. Różo duchowna. Wieżo Dawidowa. Wieżo z kości słoniowej. Domie złoty. Arko przymierza. Bramo niebieska. Gwiazdo zaranna. Uzdrowienie chorych. Ucieczko grzesznych. Pocieszycielko migrantów. Pocieszycielko strapionych. Wspomożenie wiernych. Królowo Aniołów. Królowo Patriarchów. Królowo Proroków. Królowo Apostołów. Królowo Męczenników. Królowo Wyznawców. Królowo Dziewic. Królowo wszystkich Świętych. Królowo bez zmazy pierworodnej poczęta. Królowo wniebowzięta. Królowo Różańca świętego. Królowo rodzin. Królowo pokoju. Królowo Polski.' },
       { title: 'Baranku Boży', text: 'Baranku Boży, który gładzisz grzechy świata, przepuść nam, Panie. Baranku Boży, który gładzisz grzechy świata, wysłuchaj nas, Panie. Baranku Boży, który gładzisz grzechy świata, zmiłuj się nad nami.' },
       { title: 'Modlitwa końcowa', text: 'Módl się za nami, święta Boża Rodzicielko. Abyśmy się stali godnymi obietnic Chrystusowych. Módlmy się: Panie, nasz Boże, daj nam, sługom swoim, cieszyć się trwałym zdrowiem duszy i ciała, i za wstawiennictwem Najświętszej Maryi, zawsze Dziewicy, uwolnij nas od doczesnych utrapień i obdarz wieczną radością. Przez Chrystusa, Pana naszego. Amen.' }
     ],
@@ -127,7 +127,7 @@ export const PRAYERS = [
       { day: 6, title: 'Dzień 6 - Dusze ciche i pokorne', text: 'Dziś sprowadź Mi dusze ciche i pokorne, i dusze małych dzieci, i zanurz je w miłosierdziu Moim. Dusze te są najwięcej podobne do Serca Mojego, one krzepiły Mnie w gorzkiej konania męce; widziałem je jako ziemskich aniołów, którzy będą czuwać u Moich ołtarzy. Jezu Najmiłosierniejszy, któryś sam powiedział: Uczcie się ode Mnie, żem cichy i pokornego serca – przyjmij do mieszkania najlitościwszego Serca Twego dusze ciche i pokorne.' },
       { day: 7, title: 'Dzień 7 - Czciciele Miłosierdzia', text: 'Dziś sprowadź Mi dusze, które szczególnie czczą i wysławiają miłosierdzie Moje, i zanurz je w miłosierdziu Moim. Dusze te najwięcej współczuły męce Mojej i najgłębiej wniknęły w ducha Mojego. One są żywym odbiciem najlitościwszego Serca Mojego. Jezu Najmiłosierniejszy, którego Serce jest miłością samą, przyjmij do mieszkania najlitościwszego Serca Twego dusze, które szczególnie czczą i wysławiają wielkość miłosierdzia Twego.' },
       { day: 8, title: 'Dzień 8 - Dusze czyśćcowe', text: 'Dziś sprowadź Mi dusze, które są w więzieniu czyśćcowym i zanurz je w przepaści miłosierdzia Mojego, niech strumienie krwi Mojej ochłodzą ich upalenie. Wszystkie te dusze są bardzo przeze Mnie umiłowane, wypłacają się Mojej sprawiedliwości; w Twojej mocy jest przynieść im ulgę. Jezu Najmiłosierniejszy, któryś sam powiedział, że miłosierdzia chcesz, oto sprowadzam do mieszkania najlitościwszego Serca Twego dusze czyśćcowe.' },
-      { day: 9, title: 'Dzień 9 - Dusze oziębłe', text: 'Dziś sprowadź Mi dusze oziębłe i zanurz je w przepaści miłosierdzia Mojego. Dusze te najboleśniej ranią Serce Moje. Największego obrzydzenia doznała dusza Moja w Ogrójcu od dusz oziębłych. One były powodem, żem wypowiedział te słowa: Ojcze, oddal ten kielich, jeżeli jest wola Twoja. Jezu Najmiłosierniejszy, który jesteś litością samą, wprowadzam do mieszkania najlitościwszego Serca Twego dusz oziębłe.' },
+      { day: 9, title: 'Dzień 9 - Dusze oziębłe', text: 'Dziś sprowadź Mi dusze oziębłe i zanurz je w przepaści miłosierdzia Mojego. Dusze te najboleśniej ranią Serce Moje. Największego obrzydzenia doznała dusza Moja w Ogrójcu od dusz oziębłych. One były powodem, żem wypowiedział te słowa: Ojcze, oddal ten kielich, jeżeli jest wola Twoja. Jezu Najmiłosierniejszy, który jesteś litością samą, wprowadzam do mieszkania najlitościwszego Serca Twego dusze oziębłe.' },
       { title: 'Koronka', text: 'Na zakończenie każdego dnia odmów Koronkę do Miłosierdzia Bożego jako dopełnienie prośby o miłosierdzie dla świata.' }
     ],
     mysteries: []
@@ -186,77 +186,118 @@ export const PRAYERS = [
     mysteries: []
   },
   {
-    id: 'jutrznia',
-    name: 'Jutrznia (Laudes)',
-    category: 'liturgia-godzin',
+    id: 'koronka-duch-swiety',
+    name: 'Koronka do Ducha Świętego',
+    category: 'koronka',
     emoji: '',
-    description: 'Oficjalna modlitwa poranna Kościoła, uświęcająca początek dnia. Jest to pieśń uwielbienia za dar światła i nowe życie w Chrystusie.',
-    history: 'Wywodzi się z najstarszych tradycji chrześcijańskich spotkań o świcie. Stanowi kluczowy element Liturgii Godzin, którą codziennie odmawiają kapłani, zakonnicy i coraz liczniej wierni świeccy.',
-    intentions: ['uświęcenie czasu', 'pokój na świecie', 'potrzeby Kościoła'],
-    duration: '15 min',
+    description: 'Modlitwa o siedem darów Ducha Świętego. Wołanie o ogień miłości, który przemienia serce.',
+    history: 'Zatwierdzona przez papieża Leona XIII jako sposób na ożywienie kultu Trzeciej Osoby Boskiej.',
+    intentions: ['dary Ducha', 'mądrość', 'ważne wybory'],
+    duration: '10 min',
     days: null,
-    intro: 'Panie, otwórz wargi moje, a usta moje będą głosić Twoją chwałę.',
+    intro: 'Duchu Święty, natchnij nas.',
     parts: [
-      { title: 'Hymn', text: 'O Stwórco światła, Boże nasz, Ty dniem i nocą rządzisz sam. Rozpędzasz mroki grzesznych dusz, by światłość Twoja lśniła w nas.' },
-      { title: 'Psalmodia', text: 'Boże, Tyś moim Bogiem, Ciebie szukam od rana. Ciebie pragnie moja dusza...' }
+      { title: 'Dar Mądrości', text: 'Przyjdź Duchu Mądrości, odciągnij nas od rzeczy ziemskich, a rozpal w nas pragnienie rzeczy niebieskich.' },
+      { title: 'Dar Rozumu', text: 'Przyjdź Duchu Rozumu, oświeć nasze umysły, abyśmy poznali prawdy wiary i według nich żyli.' },
+      { title: 'Dar Rady', text: 'Przyjdź Duchu Rady, uczyń nas uległymi Twoim natchnieniom, abyśmy zawsze wybierali to, co podoba się Bogu.' },
+      { title: 'Dar Męstwa', text: 'Przyjdź Duchu Męstwa, umocnij nas w przeciwnościach i daj siłę do wyznawania wiary bez lęku.' },
+      { title: 'Dar Umiejętności', text: 'Przyjdź Duchu Umiejętności, pozwól nam poznać Boga i samych siebie w świetle Jego prawdy.' },
+      { title: 'Dar Pobożności', text: 'Przyjdź Duchu Pobożności, uczyń naszą modlitwę miłą Bogu i daj nam serce kochające Ojca Niebieskiego.' },
+      { title: 'Dar Bojaźni Bożej', text: 'Przyjdź Duchu Bojaźni Bożej, powstrzymaj nas od wszystkiego złego, co mogłoby nas oddzielić od Twojej miłości.' }
     ],
     mysteries: []
   },
   {
-    id: 'nowenna-faustyno',
-    name: 'Nowenna do Miłosierdzia Bożego',
-    category: 'nowenna',
-    emoji: '',
-    description: 'Dziewięciodniowe przygotowanie do Święta Miłosierdzia. Każdy dzień to inna grupa dusz, które Jezus pragnie zanurzyć w swoim miłosierdziu.',
-    history: 'Podyktowana przez Jezusa św. Faustynie w 1937 roku. Jezus prosił, aby przez te dziewięć dni sprowadzać do Jego serca różne grupy ludzi, szczególnie tych najbardziej potrzebujących przebaczenia.',
-    intentions: ['miłosierdzie', 'grzesznicy', 'dusze czyśćcowe', 'kapłani'],
-    duration: '10 min/dzień',
-    days: 9,
-    intro: 'Nowenna zaczyna się zazwyczaj w Wielki Piątek.',
-    parts: [
-      { day: 1, title: 'Dzień 1 - Cała ludzkość', text: 'Dziś sprowadź Mi całą ludzkość, a szczególnie wszystkich grzeszników, i zanurz ich w przepaści miłosierdzia Mojego. Tym samym pocieszysz Mnie w gorzkim smutku, jaki Mi sprawia utrata dusz. Jezu Najmiłosierniejszy, którego właściwością jest nilitować się nad nami i przebaczać nam, nie patrz na grzechy nasze, ale na ufność, jaką mamy w nieskończoną dobroć Twoją.' },
-      { day: 2, title: 'Dzień 2 - Dusze kapłańskie', text: 'Dziś sprowadź Mi dusze kapłańskie i dusze zakonne, i zanurz je w niezgłębionym miłosierdziu Moim. One dały Mi moc przetrwania gorzkiej męki, przez nie, jak przez kanały, płynie na ludzkość miłosierdzie Moje. Jezu Najmiłosierniejszy, od którego wszystko, co dobre, pochodzi, pomnóż w nas łaskę, abyśmy godne uczynki miłosierdzia spełniali.' },
-      { day: 3, title: 'Dzień 3 - Dusze pobożne', text: 'Dziś sprowadź Mi wszystkie dusze pobożne i wierne, i zanurz je w morzu miłosierdzia Mojego; dusze te pocieszyły Mnie na drodze krzyżowej, były tą kroplą pociechy w morzu goryczy. Jezu Najmiłosierniejszy, który z skarbnicy miłosierdzia Twego wszystkim udzielasz łask Swych bardzo obficie, przyjmij nas do mieszkania najlitościwszego Serca Twego.' },
-      { day: 4, title: 'Dzień 4 - Poganie i nieznający Boga', text: 'Dziś sprowadź Mi pogan i tych, którzy Mnie jeszcze nie znają; i o nich myślałem w gorzkiej Swej męce, a przyszła ich gorliwość pocieszyła Serce Moje. Zanurz ich w morzu miłosierdzia Mojego. Jezu Najlitościwszy, który jesteś światłością świata całego, przyjmij do mieszkania najlitościwszego Serca Twego dusze pogan, którzy Cię jeszcze nie znają.' },
-      { day: 5, title: 'Dzień 5 - Heretycy i odszczepieńcy', text: 'Dziś sprowadź Mi dusze heretyków i odszczepieńców, i zanurz ich w morzu miłosierdzia Mojego; w gorzkiej męce rozdzierali Mi ciało i Serce, to jest Kościół Mój. Kiedy wracają do jedności z Kościołem, goją się rany Moje i tym sposobem lżą Mękę Moją. Jezu Najmiłosierniejszy, który jesteś dobrocią samą, Ty nie odmawiasz światła proszącym Cię, przyjmij do mieszkania najlitościwszego Serca Twego dusze heretyków i dusze odszczepieńców.' },
-      { day: 6, title: 'Dzień 6 - Dusze ciche i pokorne', text: 'Dziś sprowadź Mi dusze ciche i pokorne, i dusze małych dzieci, i zanurz je w miłosierdziu Moim. Dusze te są najwięcej podobne do Serca Mojego, one krzepiły Mnie w gorzkiej konania męce; widziałem je jako ziemskich aniołów, którzy będą czuwać u Moich ołtarzy. Jezu Najmiłosierniejszy, któryś sam powiedział: Uczcie się ode Mnie, żem cichy i pokornego serca – przyjmij do mieszkania najlitościwszego Serca Twego dusze ciche i pokorne.' },
-      { day: 7, title: 'Dzień 7 - Czciciele Miłosierdzia', text: 'Dziś sprowadź Mi dusze, które szczególnie czczą i wysławiają miłosierdzie Moje, i zanurz je w miłosierdziu Moim. Dusze te najwięcej współczuły męce Mojej i najgłębiej wniknęły w ducha Mojego. One są żywym odbiciem najlitościwszego Serca Mojego. Jezu Najmiłosierniejszy, którego Serce jest miłością samą, przyjmij do mieszkania najlitościwszego Serca Twego dusze, które szczególnie czczą i wysławiają wielkość miłosierdzia Twego.' },
-      { day: 8, title: 'Dzień 8 - Dusze czyśćcowe', text: 'Dziś sprowadź Mi dusze, które są w więzieniu czyśćcowym i zanurz je w przepaści miłosierdzia Mojego, niech strumienie krwi Mojej ochłodzą ich upalenie. Wszystkie te dusze są bardzo przeze Mnie umiłowane, wypłacają się Mojej sprawiedliwości; w Twojej mocy jest przynieść im ulgę. Jezu Najmiłosierniejszy, któryś sam powiedział, że miłosierdzia chcesz, oto sprowadzam do mieszkania najlitościwszego Serca Twego dusze czyśćcowe.' },
-      { day: 9, title: 'Dzień 9 - Dusze oziębłe', text: 'Dziś sprowadź Mi dusze oziębłe i zanurz je w przepaści miłosierdzia Mojego. Dusze te najboleśniej ranią Serce Moje. Największego obrzydzenia doznała dusza Moja w Ogrójcu od dusz oziębłych. One były powodem, żem wypowiedział te słowa: Ojcze, oddal ten kielich, jeżeli jest wola Twoja. Jezu Najmiłosierniejszy, który jesteś litością samą, wprowadzam do mieszkania najlitościwszego Serca Twego dusz oziębłe.' },
-      { title: 'Koronka', text: 'Na zakończenie każdego dnia odmów Koronkę do Miłosierdzia Bożego jako dopełnienie prośby o miłosierdzie dla świata.' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'rita-beznadziejne',
-    name: 'Modlitwa do św. Rity',
-    category: 'inne',
-    emoji: '',
-    description: 'Błagalna modlitwa do patronka spraw beznadziejnych i najtrudniejszych. Przynosi pociechę tym, którzy czują, że ich sytuacja nie ma już ludzkiego rozwiązania.',
-    history: 'Św. Rita z Cascii żyła w XIV wieku. Po tragicznej stracie męża i synów wstąpiła do zakonu, gdzie otrzymała stygmat ciernia na czole. Od wieków czczona jako orędowniczka w sprawach po ludzku niemożliwych.',
-    intentions: ['trudne sprawy', 'beznadzieja', 'małżeństwo', 'rodzina'],
-    duration: '5 min',
-    days: null,
-    intro: 'Święta Rita jest patronką spraw beznadziejnych.',
-    parts: [
-      { title: 'Modlitwa', text: 'O potężna i sławna święta Rito, oto u Twoich stóp nędzna dusza potrzebująca pomocy... weź do serca moją sprawę, wstaw się do Boga, aby uprosić mi łaskę (wymień prośbę). Amen.' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'charbel-uzdrowienie',
+    id: 'nowenna-charbel',
     name: 'Nowenna do św. Charbela',
     category: 'nowenna',
     emoji: '',
-    description: 'Modlitwa o uzdrowienie i pomoc za wstawiennictwem wielkiego pustelnika z Libanu. Znana z licznych cudów medycznych i duchowych na całym świecie.',
-    history: 'Św. Charbel Makhlouf był maronickim mnichem żyjącym w Libaniu w XIX wieku. Spędził 23 lata w pustelni, żyjąc w ekstremalnej ascezie. Po jego śmierci w 1898 roku, z jego grobu biło niezwykłe światło.',
-    intentions: ['zdrowie', 'uzdrowienie', 'spokój duszy', 'wiara'],
+    description: 'Modlitwa o uzdrowienie i pomoc za wstawiennictwem wielkiego pustelnika z Libanu. Znana z licznych cudów medycznych i duchowych.',
+    history: 'Św. Charbel Makhlouf (1828-1898) spędził życie w milczeniu i ascezie. Po jego śmierci z jego ciała wypływał cudowny olej, który uzdrawiał tysiące ludzi.',
+    intentions: ['uzdrowienie', 'zdrowie', 'wiara', 'trudne sytuacje'],
     duration: '10 min/dzień',
     days: 9,
-    intro: 'Św. Charbel jest potężnym orędownikiem u Boga.',
+    intro: 'Św. Charbelu, cudotwórco z Libanu, módl się za nami.',
     parts: [
-      { day: 1, title: 'Dzień 1 - O pokój serca', text: 'Święty Charbelu, Ty z wysokości nieba wstawiasz się za nami. Przychodzę do Ciebie, abyś uprosił mi u Boga łaskę (wymień prośbę).' },
-      { day: 2, title: 'Dzień 2', text: 'O święty Charbelu, naucz nas cierpliwości i zaufania Bogu w każdej chorobie.' }
+      { day: 1, title: 'Dzień 1', text: 'O cudowny święty Charbelu, Ty z wysokości nieba wstawiasz się za nami. Przychodzę do Ciebie, abyś uprosił mi u Boga łaskę zdrowia duszy i ciała.' },
+      { day: 2, title: 'Dzień 2', text: 'Święty Charbelu, naucz nas cierpliwości i zaufania Bogu w każdej chorobie i cierpieniu.' },
+      { day: 3, title: 'Dzień 3', text: 'O święty Charbelu, Tyś kochał Boga ponad wszystko, uproś nam dar prawdziwej wiary.' },
+      { day: 4, title: 'Dzień 4', text: 'Święty Charbelu, Tyś był wzorem pokory, naucz nas służyć bliźnim z miłością.' },
+      { day: 5, title: 'Dzień 5', text: 'O święty Charbelu, Tyś spędził życie na modlitwie, uczyń naszą modlitwę wytrwałą.' },
+      { day: 6, title: 'Dzień 6', text: 'Święty Charbelu, pocieszycielu strapionych, otrzyj łzy z naszych oczu.' },
+      { day: 7, title: 'Dzień 7', text: 'O święty Charbelu, Tyś był wierny Bogu do końca, pomóż nam wytrwać w dobrym.' },
+      { day: 8, title: 'Dzień 8', text: 'Święty Charbelu, orędowniku nasz, nie opuszczaj nas w potrzebie.' },
+      { day: 9, title: 'Dzień 9', text: 'O święty Charbelu, dziękujemy za Twoje wstawiennictwo i opiekę.' }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'nowenna-rita',
+    name: 'Nowenna do św. Rity',
+    category: 'nowenna',
+    emoji: '',
+    description: 'Błagalna modlitwa do patronki spraw beznadziejnych. Przynosi pociechę tym, którzy czują, że ich sytuacja nie ma już ludzkiego rozwiązania.',
+    history: 'Św. Rita z Cascii otrzymała stygmat ciernia na czole jako znak współcierpienia z Chrystusem. Jest patronką niemożliwych spraw.',
+    intentions: ['beznadzieja', 'trudne małżeństwo', 'pokój w rodzinie'],
+    duration: '10 min/dzień',
+    days: 9,
+    intro: 'Święta Rito, róża cierpliwości i miłości, módl się za nami.',
+    parts: [
+      { day: 1, title: 'Dzień 1', text: 'O potężna święta Rito, Ty, którą Bóg uczynił patronką spraw beznadziejnych, przyjdź mi z pomocą w moim smutku.' },
+      { day: 2, title: 'Dzień 2', text: 'Święta Rito, ucz nas wybaczać tym, którzy nas ranią, tak jak Ty wybaczyłaś mordercom swego męża.' },
+      { day: 3, title: 'Dzień 3', text: 'O święta Rito, Tyś była cierpliwą żoną i matką, weź w opiekę nasze rodziny.' },
+      { day: 4, title: 'Dzień 4', text: 'Święta Rito, Tyś z pokorą przyjęła stygmat ciernia, naucz nas kochać krzyż.' },
+      { day: 5, title: 'Dzień 5', text: 'O święta Rito, Tyś była wzorem posłuszeństwa, pomóż nam zawsze pełnić wolę Bożą.' },
+      { day: 6, title: 'Dzień 6', text: 'Święta Rito, Tyś nigdy nie straciła nadziei, umocnij naszą ufność w dobroć Boga.' },
+      { day: 7, title: 'Dzień 7', text: 'O święta Rito, orędowniczko nasza, uproś nam łaskę, o którą z wiarą prosimy.' },
+      { day: 8, title: 'Dzień 8', text: 'Święta Rito, pocieszycielko strapionych, niech Twoja pomoc dotrze do najbardziej potrzebujących.' },
+      { day: 9, title: 'Dzień 9', text: 'O święta Rito, dziękujemy za Twoją obecność i wsparcie w naszych trudnościach.' }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'nowenna-jozef',
+    name: 'Nowenna do św. Józefa',
+    category: 'nowenna',
+    emoji: '',
+    description: 'Dziewięciodniowe nabożeństwo do ziemskiego Opiekuna Jezusa. Wzór ojcostwa, opieki nad rodziną i godnej pracy.',
+    history: 'Św. Józef, Patron Kościoła powszechnego, jest najpotężniejszym orędownikiem po Maryi.',
+    intentions: ['rodzina', 'praca', 'dom', 'dobra śmierć'],
+    duration: '10 min/dzień',
+    days: 9,
+    intro: 'Święty Józefie, stróżu Świętej Rodziny, otocz nas swoją opieką.',
+    parts: [
+      { day: 1, title: 'Dzień 1', text: 'Święty Józefie, mężu sprawiedliwy, Tyś z wiarą przyjął Boży plan. Pomóż nam zawsze ufać Bogu ponad wszystko.' },
+      { day: 2, title: 'Dzień 2', text: 'Święty Józefie, opiekunie Jezusa, naucz nas kochać Go tak, jak Ty Go kochałeś.' },
+      { day: 3, title: 'Dzień 3', text: 'O święty Józefie, czysty oblubieńcze Maryi, uproś nam czystość serca i myśli.' },
+      { day: 4, title: 'Dzień 4', text: 'Święty Józefie, wzorze pracujących, naucz nas wykonywać nasze obowiązki z miłością do Boga.' },
+      { day: 5, title: 'Dzień 5', text: 'O święty Józefie, głowo Świętej Rodziny, weź pod swoją opiekę nasze domy i rodziny.' },
+      { day: 6, title: 'Dzień 6', text: 'Święty Józefie, najmężniejszy, daj nam odwagę w wyznawaniu wiary i bronieniu prawdy.' },
+      { day: 7, title: 'Dzień 7', text: 'O święty Józefie, nadziejo chorych, przynieś ulgę cierpiącym i umocnij ich siły.' },
+      { day: 8, title: 'Dzień 8', text: 'Święty Józefie, patronie umierających, uproś nam łaskę dobrej i świętej śmierci.' },
+      { day: 9, title: 'Dzień 9', text: 'O święty Józefie, dziękujemy za Twoje potężne wstawiennictwo i ojcowską troskę.' }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'koronka-bolesci',
+    name: 'Koronka do Siedmiu Boleści Maryi',
+    category: 'koronka',
+    emoji: '',
+    description: 'Modlitwa kontemplacyjna skupiona na współcierpieniu Maryi z Jezusem. Pomaga zrozumieć sens cierpienia i wartość ofiary.',
+    history: 'Propagowana przez zakon Serwitów od XIII wieku. Maryja w objawieniach w Kibeho prosiła o ponowne odkrycie tej modlitwy.',
+    intentions: ['nawrócenie', 'cierpienie', 'pokój w sercu', 'rodzina'],
+    duration: '20 min',
+    days: null,
+    intro: 'W tej modlitwie rozważamy siedem mieczy boleści, które przeniknęły serce Maryi.',
+    parts: [
+      { title: 'Boleść 1', text: 'Proroctwo Symeona. Maryjo, współczuję Ci w Twoim bólu, gdy usłyszałaś, że Twoją duszę miecz przeniknie.' },
+      { title: 'Boleść 2', text: 'Ucieczka do Egiptu. Maryjo, współczuję Ci w Twoim lęku i trudzie wygnania, gdy chroniłaś Dziecię przed Herodem.' },
+      { title: 'Boleść 3', text: 'Zgubienie Jezusa w Świątyni. Maryjo, współczuję Ci w Twoim trwodze, gdy przez trzy dni szukałaś Syna z bólem serca.' },
+      { title: 'Boleść 4', text: 'Spotkanie Jezusa na Drodze Krzyżowej. Maryjo, współczuję Ci w Twoim rozdarciu, gdy widziałaś Syna niosącego ciężki krzyż.' },
+      { title: 'Boleść 5', text: 'Stanie pod Krzyżem. Maryjo, współczuję Ci w Twojej agonii, gdy patrzyłaś na konanie i śmierć swojego ukochanego Syna.' },
+      { title: 'Boleść 6', text: 'Zdjęcie Jezusa z Krzyża. Maryjo, współczuję Ci w Twoim milczącym bólu, gdy martwe ciało Jezusa spoczęło na Twoich kolanach.' },
+      { title: 'Boleść 7', text: 'Złożenie Jezusa do Grobu. Maryjo, współczuję Ci w Twojej samotności i nadziei, która przetrwała nawet noc grobu.' }
     ],
     mysteries: []
   },
@@ -278,147 +319,13 @@ export const PRAYERS = [
     mysteries: []
   },
   {
-    id: 'ekspedyt-pilne',
-    name: 'Nowenna do św. Ekspedyta',
-    category: 'nowenna',
-    emoji: '',
-    description: 'Modlitwa do patrona spraw pilnych i niecierpiących zwłoki. Idealna, gdy potrzebujemy natychmiastowej interwencji Bożej.',
-    history: 'Św. Ekspedyt był rzymskim centurionem. Kiedy diabeł kazał mu odłożyć nawrócenie na "jutro", święty podeptał kruka i wybrał "dzisiaj".',
-    intentions: ['pilne sprawy', 'egzaminy', 'kryzysy'],
-    duration: '5 min/dzień',
-    days: 9,
-    intro: 'Św. Ekspedyt nie lubi zwłoki.',
-    parts: [
-      { day: 1, title: 'Modlitwa codzienna', text: 'Święty Ekspedycie, Ty, który jesteś patronem spraw pilnych, przyjdź mi z pomocą. Moja sprawa jest bardzo nagląca: (wymień sprawę).' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'peregryn-choroba',
-    name: 'Modlitwa do św. Peregryna',
-    category: 'inne',
-    emoji: '',
-    description: 'Specjalna modlitwa dla osób chorych na nowotwory. Św. Peregryn jest uznawany za patrona w najcięższych zmaganiach o zdrowie.',
-    history: 'Św. Peregryn Laziosi sam cierpiał na raka nogi. Po żarliwej modlitwie przed krzyżem został całkowicie uzdrowiony.',
-    intentions: ['zdrowie', 'choroba nowotworowa', 'operacja'],
-    duration: '5 min',
-    days: null,
-    intro: 'Święty Peregrynie, Ty sam doświadczyłeś cierpienia i cudownego uzdrowienia.',
-    parts: [
-      { title: 'Modlitwa', text: 'O święty Peregrynie, spójrz na nas i wstaw się u Pana za wszystkimi chorymi, których Ci polecamy.' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'michal-ochrona',
-    name: 'Modlitwa do św. Michała Archanioła',
-    category: 'inne',
-    emoji: '',
-    description: 'Potężna modlitwa o ochronę przed wpływem zła. Jest to egzorcyzm prywatny, który każdy wierny może odmawiać w chwilach pokusy.',
-    history: 'Zatwierdzona przez papieża Leona XIII w 1884 roku jako tarcza dla wiernych przeciwko atakom duchowym.',
-    intentions: ['ochrona', 'walka duchowa', 'pokusa', 'lęk'],
-    duration: '1 min',
-    days: null,
-    intro: 'Święty Michał Archanioł to wódz niebieskich zastępów.',
-    parts: [
-      { title: 'Modlitwa', text: 'Święty Michale Archaniele, wspomagaj nas w walce, a przeciw niegodziwości i zasadzkom złego ducha bądź naszą obroną...' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'antoni-zguba',
-    name: 'Koronka do św. Antoni',
-    category: 'koronka',
-    emoji: '',
-    description: 'Modlitwa do patrona rzeczy zagubionych, ale przede wszystkim patrona odnajdywania drogi do Boga.',
-    history: 'Św. Antoni z Padwy był wybitnym kaznodzieją XIII wieku. Pomaga odnaleźć nie tylko przedmioty, ale i spokój serca.',
-    intentions: ['rzeczy zagubione', 'zagubienie duchowe', 'ubodzy'],
-    duration: '10 min',
-    days: null,
-    intro: 'Święty Antoni, orędowniku nasz.',
-    parts: [
-      { title: 'Wezwania', text: 'Święty Antoni, któryś dostąpił przywileju odnajdywania rzeczy zgubionych, spraw bym odnalazł to, czego szukam.' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'nowenna-jozef-rodzina',
-    name: 'Nowenna do św. Józefa',
-    category: 'nowenna',
-    emoji: '',
-    description: 'Dziewięciodniowe nabożeństwo do ziemskiego Opiekuna Jezusa. Wzór ojcostwa, opieki nad rodziną i godnej pracy.',
-    history: 'Św. Józef to milczący świadek Bożej miłości.',
-    intentions: ['rodzina', 'praca', 'dom', 'dobra śmierć'],
-    duration: '10 min/dzień',
-    days: 9,
-    intro: 'Św. Józef to milczący świadek Bożej miłości.',
-    parts: [
-      { day: 1, title: 'Dzień 1', text: 'Święty Józefie, mężu sprawiedliwy i pokorny, weź w opiekę moją rodzinę i moją pracę.' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'koronka-siedem-bolesci',
-    name: 'Koronka do Siedmiu Boleści Maryi',
-    category: 'koronka',
-    emoji: '',
-    description: 'Głęboka modlitwa kontemplacyjna skupiona na współcierpieniu Maryi z Jezusem. Pomaga zrozumieć sens cierpienia.',
-    history: 'Propagowana przez zakon Serwitów od XIII wieku. Maryja w objawieniach w Kibeho prosiła o ponowne odkrycie tej modlitwy.',
-    intentions: ['nawrócenie', 'cierpienie', 'pokój w sercu'],
-    duration: '20 min',
-    days: null,
-    intro: 'W tej modlitwie rozważamy siedem mieczy boleści Maryi.',
-    parts: [
-      { title: 'Boleść 1', text: 'Proroctwo Symeona. Maryjo, współczuję Ci w Twoim bólu, gdy usłyszałaś, że Twoją duszę miecz przeniknie.' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'nowenna-tereska-roze',
-    name: 'Nowenna do św. Teresy (Róż)',
-    category: 'nowenna',
-    emoji: '',
-    description: 'Słynna nowenna o "deszcz róż" – czyli konkretne znaki Bożej łaski. Mała Tereska obiecała czynić dobrze na ziemi.',
-    history: 'Św. Teresa od Dzieciątka Jezus obiecała, że po śmierci będzie zsyłać na ziemię deszcz łask miłości.',
-    intentions: ['znaki łaski', 'pokora', 'zaufanie'],
-    duration: '5 min/dzień',
-    days: 9,
-    intro: 'Proś o łaskę z dziecięcą ufnością.',
-    parts: [
-      { day: 1, title: 'Modlitwa', text: 'Święta Tereso od Dzieciątka Jezus, ześlij na moją duszę deszcz róż Twojej miłości. Amen.' }
-    ],
-    mysteries: []
-  },
-  {
-    id: 'koronka-duch-swiety',
-    name: 'Koronka do Ducha Świętego',
-    category: 'koronka',
-    emoji: '',
-    description: 'Modlitwa o siedem darów Ducha Świętego. Wołanie o ogień miłości, który przemienia serce.',
-    history: 'Zatwierdzona przez papieża Leona XIII jako sposób na ożywienie kultu Trzeciej Osoby Boskiej.',
-    intentions: ['dary Ducha', 'mądrość', 'ważne wybory'],
-    duration: '10 min',
-    days: null,
-    intro: 'Duchu Święty, natchnij nas.',
-    parts: [
-      { title: 'Dar Mądrości', text: 'Przyjdź Duchu Mądrości, odciągnij nas od rzeczy ziemskich...' },
-      { title: 'Dar Rozumu', text: 'Przyjdź Duchu Rozumu, oświeć nasze umysły...' },
-      { title: 'Dar Rady', text: 'Przyjdź Duchu Rady, uczyń nas uległymi Twoim natchnieniom.' },
-      { title: 'Dar Męstwa', text: 'Przyjdź Duchu Męstwa, umocnij nas w przeciwnościach.' },
-      { title: 'Dar Umiejętności', text: 'Przyjdź Duchu Umiejętności, pozwól nam poznać Boga.' },
-      { title: 'Dar Pobożności', text: 'Przyjdź Duchu Pobożności, uczyń naszą modlitwę miłą Bogu.' },
-      { title: 'Dar Bojaźni Bożej', text: 'Przyjdź Duchu Bojaźni Bożej, powstrzymaj nas od wszystkiego złego.' }
-    ],
-    mysteries: []
-  },
-  {
     id: 'litania-serce',
     name: 'Litania do Najświętszego Serca Pana Jezusa',
     category: 'litania',
     emoji: '',
-    description: 'Błagalna modlitwa do Bożego Serca.',
-    history: 'Zatwierdzona przez Leona XIII.',
-    intentions: ['miłość Boża'],
+    description: 'Błagalna modlitwa do Bożego Serca, źródła wszelkiej pociechy i miłości.',
+    history: 'Zatwierdzona przez Leona XIII w 1899 roku.',
+    intentions: ['miłość Boża', 'wynagrodzenie', 'pokój'],
     duration: '12 min',
     days: null,
     intro: 'Serce Jezusa, domie Boży i bramo niebios.',
@@ -436,9 +343,9 @@ export const PRAYERS = [
     name: 'Litania do Ducha Świętego',
     category: 'litania',
     emoji: '',
-    description: 'Modlitwa o wylanie darów Ducha Świętego.',
-    history: 'Tradycyjna modlitwa Kościoła.',
-    intentions: ['światło Ducha'],
+    description: 'Modlitwa o wylanie darów Ducha Świętego i przemianę życia.',
+    history: 'Tradycyjna modlitwa Kościoła, szczególnie odmawiana przed Zesłaniem Ducha Świętego.',
+    intentions: ['światło Ducha', 'odnowa serca', 'wiara'],
     duration: '10 min',
     days: null,
     intro: 'Duchu Święty, Boże, zmiłuj się nad nami.',
@@ -489,6 +396,38 @@ export const PRAYERS = [
       { title: 'Akt żalu', text: 'Ach, żałuję za me złości jedynie dla Twej miłości. Bądź miłościw mnie grzesznemu, do poprawy dążącemu.' },
       { title: 'Pod Twoją obronę', text: 'Pod Twoją obronę uciekamy się, święta Boża Rodzicielko, naszymi prośbami racz nie gardzić w potrzebach naszych, ale od wszelakich złych przygód racz nas zawsze wybawiać, Panno chwalebna i błogosławiona. Amen.' },
       { title: 'Modlitwa o spokojny sen', text: 'W ręce Twoje, Panie, polecam ducha mojego. Strzeż nas, Panie, jak źrenicy oka, w cieniu Twych skrzydeł ukryj nas. Amen.' }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'michal-ochrona',
+    name: 'Modlitwa do św. Michała Archanioła',
+    category: 'inne',
+    emoji: '',
+    description: 'Potężna modlitwa o ochronę przed wpływem zła i walkę duchową.',
+    history: 'Zatwierdzona przez papieża Leona XIII.',
+    intentions: ['ochrona', 'walka duchowa', 'bezpieczeństwo'],
+    duration: '1 min',
+    days: null,
+    intro: 'Święty Michale Archaniele, broń nas w walce.',
+    parts: [
+      { title: 'Modlitwa', text: 'Święty Michale Archaniele, wspomagaj nas w walce, a przeciw niegodziwości i zasadzkom złego ducha bądź naszą obroną. Oby go Bóg pogromić raczył, pokornie o to prosimy, a Ty, Wodzu niebieskich zastępów, szatana i inne duchy złe, które na zgubę dusz ludzkich po tym świecie krążą, mocą Bożą strąć do piekła. Amen.' }
+    ],
+    mysteries: []
+  },
+  {
+    id: 'peregryn-choroba',
+    name: 'Modlitwa do św. Peregryna',
+    category: 'inne',
+    emoji: '',
+    description: 'Patron chorych na raka i choroby ciężkie.',
+    history: 'Św. Peregryn Laziosi sam został uzdrowiony z nowotworu nogi.',
+    intentions: ['zdrowie', 'rak', 'operacja'],
+    duration: '5 min',
+    days: null,
+    intro: 'Święty Peregrynie, uproś nam łaskę zdrowia.',
+    parts: [
+      { title: 'Modlitwa', text: 'O święty Peregrynie, Ty, któryś sam doświadczył cierpienia i cudownego uzdrowienia, wstaw się za nami u Pana. Uproś nam siłę do niesienia krzyża i przywróć zdrowie tym, którzy z wiarą o to proszą. Amen.' }
     ],
     mysteries: []
   }
