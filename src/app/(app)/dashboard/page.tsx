@@ -5,10 +5,10 @@ import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote, Hear
 import { getLiturgyForDate } from '@/lib/liturgy'
 
 const quickLinks = [
-  { href: '/requests', icon: HandHeart, label: 'Prośby o modlitwę', desc: 'Złóż prośbę lub módl się za innych', color: '#c9a227' },
-  { href: '/prayers', icon: BookOpen, label: 'Biblioteka modlitw', desc: 'Różaniec, koronka, litanie…', color: '#c9a227' },
-  { href: '/calendar', icon: Calendar, label: 'Kalendarz liturgiczny', desc: 'Patron dnia, okres roku kościelnego', color: '#c9a227' },
-  { href: '/community', icon: Users, label: 'Wspólnoty', desc: 'Grupy parafialne i dewocyjne', color: '#c9a227' },
+  { href: '/requests', icon: HandHeart, label: 'Świadectwo Intencji', desc: 'Podziel się prośbą lub otocz innych braterską modlitwą', color: '#c9a227' },
+  { href: '/prayers', icon: BookOpen, label: 'Skarbiec Modlitw', desc: 'Odkryj piękno tradycji – od Różańca po ciche litanie', color: '#c9a227' },
+  { href: '/calendar', icon: Calendar, label: 'Rytm Roku Świętego', desc: 'Twój przewodnik po uroczystościach i wspomnieniach świętych', color: '#c9a227' },
+  { href: '/community', icon: Users, label: 'Kręgi Wspólnoty', desc: 'Znajdź swoje miejsce wśród ludzi, którzy wierzą tak jak Ty', color: '#c9a227' },
 ]
 
 export default function DashboardPage() {
@@ -104,8 +104,8 @@ export default function DashboardPage() {
           <Heart size={22} className="text-gold" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Wesprzyj rozwój aplikacji</p>
-          <p className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-muted)' }}>Dziękujemy za każdą cegiełkę!</p>
+          <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Dar Serca</p>
+          <p className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-muted)' }}>Wesprzyj nasze wspólne dzieło i buduj z nami portal</p>
         </div>
         <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
       </Link>
