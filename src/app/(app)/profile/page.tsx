@@ -193,18 +193,15 @@ export default function ProfilePage() {
             <ChevronRight size={16} className="text-text-muted" />
           </Link>
 
-          {/* Support Link Section - Moved inside for consistent spacing */}
-          <Link href="/support" className="card p-6 bg-white border-gold/20 relative overflow-hidden block transition-transform active:scale-[0.98]">
-            <div className="absolute top-0 right-0 p-4 opacity-10 text-gold">
-                <Heart size={48} fill="currentColor" />
+          <Link href="/support" className="card prayer-card flex items-center gap-4 p-4 bg-white">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-gold" style={{ background: '#FAF6F0' }}>
+              <Heart size={18} />
             </div>
-            <h3 className="text-sm font-bold text-text-main mb-1 font-mystic">Wesprzyj nas</h3>
-            <p className="text-xs text-text-muted leading-relaxed">
-                Pomóż nam utrzymać i rozwijać ChristianityHub dla całej wspólnoty.
-            </p>
-            <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-gold-dark uppercase tracking-widest">
-                Przejdź do wsparcia <ChevronRight size={14} />
+            <div className="flex-1">
+              <p className="font-semibold text-sm" style={{ color: 'var(--text-main)' }}>Wesprzyj nas</p>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Pomóż nam rozwijać portal</p>
             </div>
+            <ChevronRight size={16} className="text-text-muted" />
           </Link>
         </div>
 
