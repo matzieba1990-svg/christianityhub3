@@ -78,13 +78,21 @@ export default function CommunityDetailsPage() {
     setFormError('')
 
     try {
-      const prayer = PRAYERS.find(p => p.id === suggestedPrayerId)
+      const finalPrayerId = suggestedPrayerId || 'ogolna'
+      const prayer = PRAYERS.find(p => p.id === finalPrayerId)
       const finalCategory = prayer?.category || 'inne'
 
       const res = await fetch('/api/requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, content, category: finalCategory, isAnonymous, communityId: id, suggestedPrayerId })
+        body: JSON.stringify({ 
+          title, 
+          content, 
+          category: finalCategory, 
+          isAnonymous, 
+          communityId: id, 
+          suggestedPrayerId: finalPrayerId 
+        })
       })
 
       if (res.ok) {
@@ -281,11 +289,10 @@ export default function CommunityDetailsPage() {
                   
                   <select 
                     className="inp text-sm py-2" 
-                    required 
                     value={suggestedPrayerId} 
                     onChange={e => setSuggestedPrayerId(e.target.value)}
                   >
-                    <option value="">-- Wybierz konkretną modlitwę --</option>
+                    <option value="">Ogólna (Domyślna)</option>
                     {PRAYERS.map(p => (
                       <option key={p.id} value={p.id}>{p.name}</option>
                     ))}
