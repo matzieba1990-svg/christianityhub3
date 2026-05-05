@@ -104,7 +104,11 @@ function PrayerDetail({ prayer }: { prayer: (typeof PRAYERS)[0] }) {
         </div>
 
         {showMode && (
-            <PrayerMode prayerId={prayer.id} onClose={() => setShowMode(false)} />
+            <PrayerMode 
+              prayerId={prayer.id} 
+              day={completedDays.length < (prayer.days || 0) ? completedDays.length + 1 : prayer.days || 1}
+              onClose={() => setShowMode(false)} 
+            />
         )}
 
         {/* History & Intentions Section */}

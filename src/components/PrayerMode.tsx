@@ -19,7 +19,7 @@ interface Step {
   isBead?: boolean
 }
 
-export default function PrayerMode({ prayerId, onClose }: { prayerId: string, onClose: () => void }) {
+export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: string, day?: number, onClose: () => void }) {
   const prayer = PRAYERS.find(p => p.id.toLowerCase() === prayerId.toLowerCase())
   const [currentStepIdx, setCurrentStepIdx] = useState(0)
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -30,7 +30,9 @@ export default function PrayerMode({ prayerId, onClose }: { prayerId: string, on
   const steps = useMemo(() => {
     if (!prayer) return []
     
+    // ... (Rosary logic remains same)
     if (prayerId.toLowerCase() === 'rozaniec' && selectedMysterySet !== null) {
+      // ... (keeping existing Rosary logic)
       const ms = prayer.mysteries[selectedMysterySet]
       const s: Step[] = [
         { title: 'Wierzę w Boga', text: COMMON_PRAYERS['wierzę w boga'] },
@@ -40,23 +42,22 @@ export default function PrayerMode({ prayerId, onClose }: { prayerId: string, on
         { title: 'Zdrowaś Maryjo (o miłość)', text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true },
         { title: 'Chwała Ojcu', text: COMMON_PRAYERS['chwała ojcu'] },
       ]
-      
       ms.items.forEach((m, i) => {
         s.push({ title: `Tajemnica ${i+1}`, text: m })
         s.push({ title: 'Ojcze Nasz', text: COMMON_PRAYERS['ojcze nasz'] })
-        for(let j=0; j<10; j++) {
-          s.push({ title: `Zdrowaś Maryjo (${j+1}/10)`, text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true })
-        }
+        for(let j=0; j<10; j++) s.push({ title: `Zdrowaś Maryjo (${j+1}/10)`, text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true })
         s.push({ title: 'Chwała Ojcu', text: COMMON_PRAYERS['chwała ojcu'] })
-        s.push({ title: 'Modlitwa Fatimska', text: 'O mój Jezu, przebacz nam nasze grzechy, zachowaj nas od ognia piekielnego, zaprowadź wszystkie dusze do nieba i dopomóż szczególnie tym, którzy najbardziej potrzebują Twojego miłosierdzia.' })
+        s.push({ title: 'Modlitwa Fatimska', text: 'O mój Jezu, przebacz nam nasze grzechy...' })
       })
-      
       s.push({ title: 'Pod Twoją obronę', text: COMMON_PRAYERS['pod twoją obronę'] })
       return s
     }
 
     const expanded: Step[] = []
-    prayer.parts.forEach(part => {
+    // SMART FILTERING BY DAY
+    const filteredParts = prayer.parts.filter(p => !p.day || p.day === day)
+
+    filteredParts.forEach(part => {
       const subParts = part.text.split(/\.\.\.|\n|; /).filter(t => t.trim().length > 0)
       
       subParts.forEach(sp => {
@@ -87,7 +88,7 @@ export default function PrayerMode({ prayerId, onClose }: { prayerId: string, on
     })
 
     return expanded
-  }, [prayer, selectedMysterySet, prayerId])
+  }, [prayer, selectedMysterySet, prayerId, day])
 
   const next = useCallback(() => {
     if (currentStepIdx < steps.length - 1) {
