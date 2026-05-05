@@ -96,10 +96,9 @@ export default function DashboardPage() {
             <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
           </Link>
         ))}
-      </div>
 
       {/* Support Link */}
-      <Link href="/support" className="card prayer-card mt-6 p-4 flex items-center gap-4 bg-white border-gold/20 hover:border-gold/40 transition-all">
+      <Link href="/support" className="card prayer-card p-4 flex items-center gap-4 bg-white border-gold/20 hover:border-gold/40 transition-all">
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
           style={{ background: 'rgba(201,162,39,0.13)', border: '1px solid rgba(201,162,39,0.25)' }}>
           <Heart size={22} className="text-gold" />
