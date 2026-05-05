@@ -29,27 +29,6 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const scrollRef = useRef<HTMLDivElement>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-    
-    const handlePlay = async () => {
-        try {
-            if (isMusicPlaying) {
-                console.log("Attempting to play audio...")
-                await audio.play()
-            } else {
-                audio.pause()
-            }
-        } catch (err) {
-            console.error("Audio playback error:", err)
-            setIsMusicPlaying(false)
-        }
-    }
-
-    handlePlay()
-  }, [isMusicPlaying])
-
   const isRosaryBased = prayerId.toLowerCase() === 'rozaniec' || prayerId.toLowerCase() === 'nowenna-pompejanska'
 
   // Advanced Expansion Logic
@@ -229,7 +208,18 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
         </div>
 
         <div className="flex items-center gap-2">
-            <button onClick={() => setIsMusicPlaying(!isMusicPlaying)} className={`w-10 h-10 flex items-center justify-center rounded-full transition-all ${isMusicPlaying ? 'bg-gold/20 text-gold animate-pulse' : 'bg-white/5 text-white/40'}`}>
+            <button 
+              onClick={() => {
+                const audio = audioRef.current
+                if (!audio) return
+                if (isMusicPlaying) {
+                    audio.pause()
+                    setIsMusicPlaying(false)
+                } else {
+                    audio.play().then(() => setIsMusicPlaying(true)).catch(e => console.error("Play failed:", e))
+                }
+              }} 
+              className={`w-10 h-10 flex items-center justify-center rounded-full transition-all ${isMusicPlaying ? 'bg-gold/20 text-gold animate-pulse' : 'bg-white/5 text-white/40'}`}>
               {isMusicPlaying ? <Music2 size={18} /> : <Music size={18} />}
             </button>
             <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
@@ -307,9 +297,14 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
       {/* Audio Element */}
       <audio 
         ref={audioRef}
-        src="https://www.chosic.com/wp-content/uploads/2021/07/Gregorian-Chant.mp3"
+        src="https://ia800305.us.archive.org/24/items/GregorianChantMass/01Introitus-GaudeamusOmnes.mp3"
         loop
         preload="auto"
+        onLoadedData={(e) => { e.currentTarget.volume = 0.4 }}
+        onError={() => {
+            console.error("Audio source failed to load.")
+            setIsMusicPlaying(false)
+        }}
       />
     </div>
   )
