@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
-import { X, ChevronLeft, ChevronRight, Moon, Sun, Smartphone, RotateCcw } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, Moon, Sun, Smartphone, RotateCcw, CheckCircle2 } from 'lucide-react'
 import { PRAYERS } from '@/lib/prayers'
 
 const COMMON_PRAYERS: Record<string, string> = {
@@ -8,8 +8,8 @@ const COMMON_PRAYERS: Record<string, string> = {
   'zdrowaś maryjo': 'Zdrowaś Maryjo, łaski pełna, Pan z Tobą, błogosławionaś Ty między niewiastami i błogosławiony owoc żywota Twojego, Jezus. Święta Maryjo, Matko Boża, módl się za nami grzesznymi teraz i w godzinę śmierci naszej. Amen.',
   'wierzę w boga': 'Wierzę w Boga, Ojca wszechmogącego, Stworzyciela nieba i ziemi. I w Jezusa Chrystusa, Syna Jego jedynego, Pana naszego, który się począł z Ducha Świętego, narodził się z Maryi Panny, umęczon pod Ponckim Piłatem, ukrzyżowan, umarł i pogrzebion. Zstąpił do piekieł, trzeciego dnia zmartwychwstał. Wstąpił na niebiosa, siedzi po prawicy Boga Ojca wszechmogącego. Stamtąd przyjdzie sądzić żywych i umarłych. Wierzę w Ducha Świętego, święty Kościół powszechny, świętych obcowanie, grzechów odpuszczenie, ciała zmartwychwstanie, żywot wieczny. Amen.',
   'chwała ojcu': 'Chwała Ojcu i Synowi, i Duchowi Świętemu. Jak była na początku, teraz i zawsze, i na wieki wieków. Amen.',
-  'wieczny odpoczynek': 'Wieczny odpoczynek racz im dać Panie, a światłość wiekuista niechaj im sweci. Niech odpoczywają w pokoju wiecznym. Amen.',
-  'pod twoją obronę': 'Pod Twoją obronę uciekamy się, święta Boża Rodzicielko, naszymi prośbami racz nie gardzić w potrzebach naszych, ale od wszelakich złych przygód racz nas zawsze wybawiać, Panno chwalebna i błogosławiona. O Pani nasza, Orędowniczko nasza, Pośredniczko nasza, Pocieszycielko nasza. Z Synem swoim nas pojednaj, Synowi swojemu nas polecaj, swojemu Synowi nas oddawaj. Amen.',
+  'wieczny odpoczynek': 'Wieczny odpoczynek racz im dać Panie, a światłość wiekuista niechaj im świeci. Niech odpoczywają w pokoju wiecznym. Amen.',
+  'pod twoją obronę': 'Pod Twoją obronę uciekamy się, święta Boża Rodzicielko, naszymi prośbami racz nie gardzić w potrzebach naszych, ale od wszelakich złych przygód racz nas zawsze wybawiać, Panno chwalebna i błogosławiona. O Pani nasza, Orędowniczko nasza, Pośredniczko nasza, Pocieszierko nasza. Z Synem swoim nas pojednaj, Synowi swojemu nas polecaj, swojemu Synowi nas oddawaj. Amen.',
   'aniele boży': 'Aniele Boży, stróżu mój, Ty zawsze przy mnie stój. Rano, wieczór, we dnie, w nocy, bądź mi zawsze ku pomocy. Strzeż duszy, ciała mego i doprowadź mnie do żywota wiecznego. Amen.'
 }
 
@@ -17,6 +17,7 @@ interface Step {
   title: string
   text: string
   isBead?: boolean
+  meta?: string
 }
 
 export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: string, day?: number, onClose: () => void }) {
@@ -26,43 +27,65 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const [selectedMysterySet, setSelectedMysterySet] = useState<number | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
 
+  const isRosaryBased = prayerId.toLowerCase() === 'rozaniec' || prayerId.toLowerCase() === 'nowenna-pompejanska'
+
   // Advanced Expansion Logic
   const steps = useMemo(() => {
     if (!prayer) return []
     
-    // ... (Rosary logic remains same)
-    if (prayerId.toLowerCase() === 'rozaniec' && selectedMysterySet !== null) {
-      // ... (keeping existing Rosary logic)
-      const ms = prayer.mysteries[selectedMysterySet]
-      const s: Step[] = [
-        { title: 'Wierzę w Boga', text: COMMON_PRAYERS['wierzę w boga'] },
-        { title: 'Ojcze Nasz', text: COMMON_PRAYERS['ojcze nasz'] },
-        { title: 'Zdrowaś Maryjo (o wiarę)', text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true },
-        { title: 'Zdrowaś Maryjo (o nadzieję)', text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true },
-        { title: 'Zdrowaś Maryjo (o miłość)', text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true },
-        { title: 'Chwała Ojcu', text: COMMON_PRAYERS['chwała ojcu'] },
-      ]
+    // Custom logic for Rosary/Pompeian
+    if (isRosaryBased && selectedMysterySet !== null) {
+      const ms = prayerId.toLowerCase() === 'nowenna-pompejanska' 
+        ? PRAYERS.find(p => p.id === 'rozaniec')!.mysteries[selectedMysterySet]
+        : prayer.mysteries[selectedMysterySet]
+
+      const s: Step[] = []
+      
+      // Pompeian intro
+      if (prayerId.toLowerCase() === 'nowenna-pompejanska') {
+          const isPetition = day <= 27
+          s.push({ 
+              title: isPetition ? 'Modlitwa Błagalna' : 'Modlitwa Dziękczynna', 
+              text: isPetition ? prayer.parts[0].text : prayer.parts[1].text 
+          })
+      }
+
+      s.push({ title: 'Wierzę w Boga', text: COMMON_PRAYERS['wierzę w boga'] })
+      s.push({ title: 'Ojcze Nasz', text: COMMON_PRAYERS['ojcze nasz'] })
+      for(let j=0; j<3; j++) s.push({ title: `Zdrowaś Maryjo (${j+1}/3)`, text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true })
+      s.push({ title: 'Chwała Ojcu', text: COMMON_PRAYERS['chwała ojcu'] })
+      
       ms.items.forEach((m, i) => {
-        s.push({ title: `Tajemnica ${i+1}`, text: m })
+        s.push({ title: `Tajemnica ${i+1}`, text: m, meta: 'Rozważanie' })
         s.push({ title: 'Ojcze Nasz', text: COMMON_PRAYERS['ojcze nasz'] })
-        for(let j=0; j<10; j++) s.push({ title: `Zdrowaś Maryjo (${j+1}/10)`, text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true })
+        for(let j=0; j<10; j++) {
+          s.push({ title: `Zdrowaś Maryjo (${j+1}/10)`, text: COMMON_PRAYERS['zdrowaś maryjo'], isBead: true, meta: `Dziesiątka ${i+1}` })
+        }
         s.push({ title: 'Chwała Ojcu', text: COMMON_PRAYERS['chwała ojcu'] })
         s.push({ title: 'Modlitwa Fatimska', text: 'O mój Jezu, przebacz nam nasze grzechy...' })
       })
+      
       s.push({ title: 'Pod Twoją obronę', text: COMMON_PRAYERS['pod twoją obronę'] })
+      
+      // Pompeian outro
+      if (prayerId.toLowerCase() === 'nowenna-pompejanska') {
+          s.push({ title: 'Królowo Różańca Świętego', text: 'Królowo Różańca Świętego z Pompei, módl się za nami!' })
+      }
       return s
     }
 
     const expanded: Step[] = []
-    // SMART FILTERING BY DAY
     const filteredParts = prayer.parts.filter(p => !p.day || p.day === day)
 
     filteredParts.forEach(part => {
-      const subParts = part.text.split(/\.\.\.|\n|; /).filter(t => t.trim().length > 0)
+      // Split by common delimiters and handle repetitions
+      const lines = part.text.split(/\n|; /).filter(t => t.trim().length > 0)
       
-      subParts.forEach(sp => {
-        const lower = sp.toLowerCase().trim()
+      lines.forEach(line => {
+        const lower = line.toLowerCase().trim()
         let matched = false
+        
+        // Check for common prayers
         for (const [key, full] of Object.entries(COMMON_PRAYERS)) {
           if (lower.includes(key)) {
             expanded.push({ title: key.charAt(0).toUpperCase() + key.slice(1), text: full })
@@ -72,30 +95,35 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
         }
         
         if (!matched) {
-          if (lower.includes('10 razy') || lower.includes('10x')) {
-              for(let k=0; k<10; k++) {
-                  expanded.push({ title: `${part.title} (${k+1}/10)`, text: sp, isBead: true })
-              }
-          } else if (lower.includes('3 razy') || lower.includes('3x')) {
-              for(let k=0; k<3; k++) {
-                  expanded.push({ title: `${part.title} (${k+1}/3)`, text: sp })
-              }
+          // Check for repetitions like (10x), (10 razy), (3x)
+          const repMatch = line.match(/\((\d+)\s*(x|razy)\)/i) || line.match(/(\d+)\s*(x|razy)/i)
+          if (repMatch) {
+            const count = parseInt(repMatch[1])
+            const baseText = line.replace(repMatch[0], '').trim() || part.title
+            for(let k=0; k<count; k++) {
+              expanded.push({ 
+                title: `${part.title} (${k+1}/${count})`, 
+                text: baseText, 
+                isBead: count >= 10,
+                meta: count >= 10 ? 'Dziesiątka' : ''
+              })
+            }
           } else {
-              expanded.push({ title: part.title, text: sp })
+            expanded.push({ title: part.title, text: line })
           }
         }
       })
     })
 
     return expanded
-  }, [prayer, selectedMysterySet, prayerId, day])
+  }, [prayer, selectedMysterySet, prayerId, day, isRosaryBased])
 
   const next = useCallback(() => {
     if (currentStepIdx < steps.length - 1) {
       setCurrentStepIdx(s => s + 1)
-      scrollRef.current?.scrollTo(0, 0)
+      scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
       if (typeof window !== 'undefined' && window.navigator.vibrate) {
-        window.navigator.vibrate(50)
+        window.navigator.vibrate(currentStepIdx % 10 === 0 ? [100, 50, 100] : 40)
       }
     } else {
       onClose()
@@ -105,13 +133,13 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   const prev = useCallback(() => {
     if (currentStepIdx > 0) {
       setCurrentStepIdx(s => s - 1)
-      scrollRef.current?.scrollTo(0, 0)
+      scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }, [currentStepIdx])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === 'Space') { e.preventDefault(); next(); }
+      if (e.code === 'Space' || e.code === 'Enter') { e.preventDefault(); next(); }
       if (e.code === 'ArrowLeft' || e.code === 'Backspace') { e.preventDefault(); prev(); }
       if (e.code === 'ArrowRight') { e.preventDefault(); next(); }
     }
@@ -121,18 +149,26 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
 
   if (!prayer) return null
 
-  if (prayerId.toLowerCase() === 'rozaniec' && selectedMysterySet === null) {
+  // Mystery Selection
+  if (isRosaryBased && selectedMysterySet === null) {
       return (
-          <div className={`fixed inset-0 z-[100] flex flex-col ${isDarkMode ? 'bg-black text-white' : 'bg-[#FAF6F0] text-text-main'}`}>
-              <div className="p-4 flex justify-between items-center">
-                  <button onClick={onClose}><X /></button>
-                  <h2 className="font-mystic font-bold">Wybierz Tajemnice</h2>
-                  <div />
+          <div className={`fixed inset-0 z-[100] flex flex-col ${isDarkMode ? 'bg-[#0a0a0a] text-white' : 'bg-white text-text-main'}`}>
+              <div className="p-6 flex justify-between items-center border-b border-white/10">
+                  <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5"><X size={20}/></button>
+                  <h2 className="font-mystic text-xl font-bold text-gold">Wybierz Tajemnice</h2>
+                  <div className="w-10" />
               </div>
-              <div className="flex-1 flex flex-col items-center justify-center p-6 gap-4 overflow-y-auto">
-                  {prayer.mysteries.map((m, i) => (
+              <div className="flex-1 flex flex-col items-center justify-center p-8 gap-4 overflow-y-auto">
+                  <div className="text-center mb-6">
+                      <p className="text-sm opacity-60 mb-1">{prayer.name}</p>
+                      <p className="text-gold font-bold uppercase tracking-widest text-[10px]">Dzień {day}</p>
+                  </div>
+                  {PRAYERS.find(p => p.id === 'rozaniec')?.mysteries.map((m, i) => (
                       <button key={i} onClick={() => setSelectedMysterySet(i)}
-                        className="btn-primary py-6 w-full max-w-xs">{m.name}</button>
+                        className="w-full max-w-sm p-6 rounded-3xl border border-gold/20 bg-gold/5 hover:bg-gold/10 hover:border-gold/50 transition-all text-left flex items-center justify-between group">
+                        <span className="font-bold text-sm">{m.name}</span>
+                        <ChevronRight size={18} className="text-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </button>
                   ))}
               </div>
           </div>
@@ -143,71 +179,106 @@ export default function PrayerMode({ prayerId, day = 1, onClose }: { prayerId: s
   if (!currentStep) return null
 
   return (
-    <div className={`fixed inset-0 z-[100] flex flex-col transition-colors duration-500 ${isDarkMode ? 'bg-black text-white' : 'bg-[#FAF6F0] text-text-main'}`}>
-      {/* Top bar */}
-      <div className="flex items-center justify-between p-4 bg-black/10">
-        <div className="flex items-center gap-1">
-            <button onClick={onClose} className="p-2 rounded-full hover:bg-white/10">
-                <X size={24} />
+    <div className={`fixed inset-0 z-[100] flex flex-col transition-colors duration-700 ${isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-text-main'}`}>
+      {/* Header */}
+      <div className="relative z-10 flex items-center justify-between p-4 md:p-6">
+        <div className="flex items-center gap-2">
+            <button onClick={onClose} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+                <X size={20} />
             </button>
             {currentStepIdx > 0 && (
-                <button onClick={prev} className="p-2 rounded-full hover:bg-white/10 text-gold">
-                    <ChevronLeft size={24} />
+                <button onClick={prev} className="w-10 h-10 flex items-center justify-center rounded-full bg-gold/10 text-gold hover:bg-gold/20 transition-colors">
+                    <ChevronLeft size={20} />
                 </button>
             )}
         </div>
-        <div className="text-center">
-            <p className="text-[10px] font-black uppercase tracking-widest opacity-60">{prayer.name}</p>
-            <p className="text-[8px] opacity-40">Etap {currentStepIdx + 1} z {steps.length}</p>
+        
+        <div className="text-center absolute left-1/2 -translate-x-1/2">
+            <div className="flex items-center justify-center gap-1.5 mb-0.5">
+                <span className="text-[9px] font-black uppercase tracking-widest text-gold">{prayer.name}</span>
+                {day > 1 && <span className="text-[9px] font-black text-text-muted">• DZIEŃ {day}</span>}
+            </div>
+            <div className="flex items-center justify-center gap-1">
+                <p className="text-[10px] font-bold opacity-40 uppercase">Krok {currentStepIdx + 1}</p>
+                <span className="opacity-20 text-[10px]">/</span>
+                <p className="text-[10px] font-bold opacity-40 uppercase">{steps.length}</p>
+            </div>
         </div>
-        <button onClick={() => setIsDarkMode(!isDarkMode)} className="p-2 rounded-full hover:bg-white/10">
-          {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+
+        <button onClick={() => setIsDarkMode(!isDarkMode)} className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 transition-colors">
+          {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
         </button>
       </div>
 
-      {/* Main Content Area - Scrollable */}
+      {/* Main Interaction Area */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto px-8 py-12 flex flex-col items-center justify-start text-center cursor-pointer"
+        className="flex-1 overflow-y-auto px-6 py-12 flex flex-col items-center justify-start text-center cursor-pointer select-none"
         onClick={(e) => {
             const width = window.innerWidth
-            if (e.clientX < width / 3) prev()
+            if (e.clientX < width * 0.25) prev()
             else next()
         }}
       >
-        <div className="animate-in fade-in zoom-in duration-300 w-full max-w-2xl mx-auto my-auto">
-            <h2 className="text-xl font-mystic font-bold text-gold mb-8">{currentStep.title}</h2>
-            <p className="text-xl md:text-3xl leading-relaxed font-serif whitespace-pre-wrap">
-              {currentStep.text}
-            </p>
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 w-full max-w-2xl mx-auto my-auto py-10">
+            {currentStep.meta && (
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold text-[9px] font-black uppercase tracking-widest mb-6 border border-gold/20">
+                   <Smartphone size={10} /> {currentStep.meta}
+                </div>
+            )}
+            <h2 className="text-2xl md:text-3xl font-mystic font-bold text-gold-gradient mb-10 leading-tight">
+                {currentStep.title}
+            </h2>
+            <div className="relative">
+                <p className="text-2xl md:text-4xl leading-relaxed font-serif whitespace-pre-wrap px-4 italic">
+                  {currentStep.text}
+                </p>
+                {/* Decorative elements */}
+                <div className="absolute -top-8 -left-2 text-gold/10 text-6xl font-serif">“</div>
+                <div className="absolute -bottom-8 -right-2 text-gold/10 text-6xl font-serif rotate-180">“</div>
+            </div>
         </div>
       </div>
 
-      {/* Navigation Dots / Progress */}
-      <div className="px-8 pb-6 space-y-4">
-          <div className="flex flex-wrap justify-center gap-1.5 max-w-xs mx-auto opacity-60">
-              {steps.map((s, i) => (
-                  <div 
-                    key={i} 
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                        i === currentStepIdx ? 'w-4 bg-gold' : 
-                        i < currentStepIdx ? 'w-1 bg-gold/40' : 
-                        'w-1 bg-white/10'
-                    }`} 
-                  />
-              ))}
+      {/* Bottom Navigation & Progress */}
+      <div className="relative z-10 px-6 pb-8 md:pb-12 bg-gradient-to-t from-black/20 to-transparent">
+          {/* Beaded Progress - Much more visible */}
+          <div className="flex flex-wrap justify-center gap-2 mb-8 max-w-md mx-auto">
+              {steps.map((s, i) => {
+                  const isCurrent = i === currentStepIdx
+                  const isPast = i < currentStepIdx
+                  if (steps.length > 50 && !isCurrent && Math.abs(i - currentStepIdx) > 5) return null
+                  
+                  return (
+                      <div 
+                        key={i} 
+                        className={`h-2 rounded-full transition-all duration-500 ${
+                            isCurrent ? 'w-8 bg-gold shadow-[0_0_15px_rgba(201,162,39,0.5)]' : 
+                            isPast ? 'w-2 bg-gold/40' : 
+                            'w-2 bg-white/10'
+                        }`} 
+                      />
+                  )
+              })}
+              {steps.length > 50 && (
+                  <span className="text-[8px] font-bold opacity-30 uppercase tracking-tighter self-center">...</span>
+              )}
           </div>
 
-          <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-              <div className="h-full bg-gold transition-all duration-300" 
-                style={{ width: `${((currentStepIdx + 1) / steps.length) * 100}%` }} />
+          <div className="max-w-xs mx-auto text-center space-y-4">
+              <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden border border-white/5">
+                  <div className="h-full bg-gold-gradient shadow-[0_0_10px_rgba(201,162,39,0.3)] transition-all duration-500 ease-out" 
+                    style={{ width: `${((currentStepIdx + 1) / steps.length) * 100}%` }} />
+              </div>
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] opacity-30 animate-pulse">
+                Dotknij aby kontynuować
+              </p>
           </div>
       </div>
 
-      {/* Footer Hint */}
-      <div className="p-4 text-center opacity-20 text-[8px] font-bold uppercase tracking-[0.2em]">
-        L: Wstecz | P: Dalej | Spacja: Dalej
-      </div>
+      {/* Touch hint overlays */}
+      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black/5 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black/5 to-transparent pointer-events-none" />
     </div>
   )
 }
