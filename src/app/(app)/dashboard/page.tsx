@@ -5,10 +5,10 @@ import { HandHeart, BookOpen, Calendar, Users, ChevronRight, LogOut, Quote, Hear
 import { getLiturgyForDate } from '@/lib/liturgy'
 
 const quickLinks = [
-  { href: '/requests', icon: HandHeart, label: 'Świadectwo Intencji', desc: 'Podziel się prośbą lub otocz innych braterską modlitwą', color: '#c9a227' },
-  { href: '/prayers', icon: BookOpen, label: 'Skarbiec Modlitw', desc: 'Odkryj piękno tradycji – od Różańca po ciche litanie', color: '#c9a227' },
-  { href: '/calendar', icon: Calendar, label: 'Rytm Roku Świętego', desc: 'Twój przewodnik po uroczystościach i wspomnieniach świętych', color: '#c9a227' },
-  { href: '/community', icon: Users, label: 'Kręgi Wspólnoty', desc: 'Znajdź swoje miejsce wśród ludzi, którzy wierzą tak jak Ty', color: '#c9a227' },
+  { href: '/requests', icon: HandHeart, label: 'Wspólna Modlitwa', desc: 'Złóż intencję lub otocz innych swoją opieką', color: '#c9a227' },
+  { href: '/prayers', icon: BookOpen, label: 'Skarbiec Wiary', desc: 'Piękno modlitwy w zasięgu Twojej ręki', color: '#c9a227' },
+  { href: '/calendar', icon: Calendar, label: 'Dzień ze Świętymi', desc: 'Przewodnik po Liturgii i Słowie na dziś', color: '#c9a227' },
+  { href: '/community', icon: Users, label: 'Żywa Wspólnota', desc: 'Poznaj ludzi, którzy dzielą Twoje wartości', color: '#c9a227' },
 ]
 
 export default function DashboardPage() {
